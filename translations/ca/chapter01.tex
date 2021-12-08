@@ -1,0 +1,998 @@
+\chapter{Introducció}
+
+La programació competitiva combina dos temes:
+(1) el disseny d'algorismes i (2) la implementació d'algorismes.
+
+El \key{disseny d'algorismes} consisteix en la resolució de problemes
+i el pensament matemàtic.
+Fan falta habilitats per analitzar problemes i resoldre'ls
+creativament.
+Un algorisme per resoldre un problema
+ha de ser correcte i eficient,
+i la dificultat consisteix sovint
+sobre inventar un algorisme eficient.
+
+Els coneixements teòrics d'algorismes
+s\'on important per als programadors competitius.
+Normalment, una solució a un problema és
+una combinació de tècniques conegudes i
+noves idees.
+Les tècniques que apareixen en la programació competitiva
+també constitueixen la base per a la investigació científica
+d'algorismes.
+
+La \key{implementació d'algorismes} requereix bones
+habilitats de programació.
+En la programació competitiva, les solucions
+es classifiquen provant un algorisme implementat
+fent servir un conjunt de casos de prova.
+Per tant, no n'hi ha prou que la idea del
+l'algoritme sigui correcte, la implementació també
+ha de ser correcte.
+
+L'estil correcte de programaci\'o en els concursos és
+ser directe i concís.
+Els programes s'han d'escriure ràpidament,
+perquè no hi ha gaire temps disponible.
+A diferència de l'enginyeria de software tradicional,
+els programes són curts (normalment com a molt uns pocs
+centenars de línies de codi) i no cal mantenir el
+codi un cop acabat el concurs.
+
+\section{Llenguatges de programació}
+
+\index{llenguatge de programacio}
+
+En l'actualitat, els llenguatges de programaci\'o que
+es fan servir més als concursos s\'on
+el C++, el Python i el Java.
+Per exemple, a Google Code Jam 2017,
+entre els 3.000 millors participants,
+el 79 \% va fer servir C++,
+el 16 \% Python i
+el 8 \% Java \cite{goo17}.
+Alguns participants també utilitzaven varis llenguatges.
+
+Molta gent pensa que el C++ és la millor opció
+per a un programador competitiu,
+i el C++ gairebé sempre està disponible en els
+sistemes de concurs.
+Els avantatges d'utilitzar C++ són que
+és un llenguatge de programaci\'o molt eficient i
+que la seva biblioteca estàndard conté un
+gran col·lecció d'estructures de dades i algorismes.
+
+D'altra banda, és bo
+dominar diversos llenguatges de programaci\'o i comprendre
+els seus punts forts.
+Per exemple, si es necessiten nombres enters grans
+en el problema,
+Python pot ser una bona opció, perquè aquest
+llenguatge
+conté operacions integrades per
+càlculs amb nombres enters grans.
+Tot i així, la majoria dels problemes en els concursos de programació
+s'intenten preparar per a que
+fer servir un llenguatge de programació específic
+no sigui un avantatge injust.
+
+Tots els programes d'exemple d'aquest llibre estan escrits en C++,
+i sovint es fa servir les estructures de dades i algorismes de
+la llibreria estàndard.
+Els programes segueixen l'estàndard C++11,
+que es pot fer servir en la majoria dels concursos actuals.
+Si encara no podeu programar en C++,
+ara és un bon moment per començar a aprendre.
+
+\subsubsection{plantilla de codi C++}
+
+Aquesta \'es una plantilla de codi C++ típica per a la
+programació competitiva:
+
+\begin{lstlisting}
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  // Aqu\'i va el codi.
+}
+\end{lstlisting}
+
+La línia \texttt{\#include} al principi
+del codi és una característica del compilador \texttt{g++}
+que ens permet incloure tota la biblioteca estàndard.
+Per tant, no cal incloure per separat
+biblioteques com ara \texttt{iostream},
+\texttt{vector} i \texttt{algorithm},
+sinó que estan disponibles automàticament.
+
+La línia \texttt{using} declara
+que les classes i funcions
+de la biblioteca estàndard es poden fer servir directament
+al codi.
+Sense la línia \texttt{using} tindríem
+que escriure, per exemple, \texttt{std::cout},
+però ara n'hi ha prou amb escriure \texttt{cout}.
+
+El codi es pot compilar mitjançant l'ordre següent:
+
+\begin{lstlisting}
+g++ -std=c++11 -O2 -Wall test.cpp -o test
+\end{lstlisting}
+
+Aquesta ordre produeix un fitxer binari \texttt{test}
+a partir del codi font \texttt{test.cpp}.
+El compilador segueix l'estàndard C++11
+(\texttt{-std=c++11}),
+optimitza el codi (\texttt{-O2})
+i mostra avisos sobre possibles errors (\texttt{-Wall}).
+
+\section{Entrada i sortida}
+
+\index{entrada i sortida}
+
+A la majoria de concursos es fan servir els canals estàndard
+per a la lectura d'entrada i l'escriptura de sortida.
+En C++, els canals estàndard són
+\texttt{cin} per a l'entrada i \texttt{cout} per a la sortida.
+Tamb\'e es poden fer servir les funcions de C
+\texttt{scanf} i \texttt{printf}.
+
+L'entrada per al programa normalment consisteix en
+nombres i cadenes de text que es separen amb
+espais i salts de l\'inia.
+Es poden llegir des del canal \texttt{cin}
+com segueix:
+
+\begin{lstlisting}
+int a, b;
+string x;
+cin >> a >> b >> x;
+\end{lstlisting}
+
+Aquest tipus de codi sempre funciona,
+suposant que hi ha almenys un espai
+o salt de línia entre cada element de l'entrada.
+Per exemple, el codi anterior pot llegir les dues entrades
+següents:
+\begin{lstlisting}
+123 456 monkey
+\end{lstlisting}
+\begin{lstlisting}
+123 456
+monkey
+\end{lstlisting}
+El canal \texttt{cout} es fa servir per a la sortida:
+\begin{lstlisting}
+int a = 123, b = 456;
+string x = "monkey";
+cout << a << " " << b << " " << x << "\n";
+\end{lstlisting}
+
+L'entrada i la sortida són de vegades
+un coll d'ampolla en el programa.
+Les línies següents al principi del codi
+fan que l'entrada i la sortida siguin
+més eficients:
+
+\begin{lstlisting}
+ios::sync_with_stdio(0);
+cin.tie(0);
+\end{lstlisting}
+
+Tingueu en compte que el salt de línia \texttt{"\textbackslash n"}
+funciona més ràpid que \texttt{endl},
+perquè \texttt{endl} sempre provoca
+una operació de buidat del buffer.
+
+Les funcions C \texttt{scanf}
+i \texttt{printf} són una alternativa
+als canals estàndard de C++.
+Normalment són una mica més ràpides,
+però també són més difícils d'utilitzar.
+El codi següent llegeix dos nombres enters de l'entrada:
+\begin{lstlisting}
+int a, b;
+scanf("%d %d", &a, &b);
+\end{lstlisting}
+El codi següent imprimeix dos nombres enters:
+\begin{lstlisting}
+int a = 123, b = 456;
+printf("%d %d\n", a, b);
+\end{lstlisting}
+
+De vegades, el programa hauria de llegir una línia sencera
+de l'entrada, possiblement amb espais.
+Això es pot aconseguir mitjançant l'ús de
+la funci\'o \texttt{getline}:
+
+\begin{lstlisting}
+string s;
+getline(cin, s);
+\end{lstlisting}
+
+Si es desconeix la quantitat de dades, podem fer servir el
+següent bucle:
+\begin{lstlisting}
+while (cin >> x) {
+    // codi
+}
+\end{lstlisting}
+Aquest bucle llegeix elements de l'entrada
+un rere l'altre, fins que no n'hi ha
+hagi més dades disponibles.
+
+En alguns sistemes de concurs es fa servir fitxers per
+a l'entrada i la sortida.
+Una solució fàcil per a això és escriure
+el codi com de costum utilitzant canals estàndard,
+però afegint les línies següents al començament del codi:
+\begin{lstlisting}
+freopen("entrada.txt", "r", stdin);
+freopen("output.txt", "w", stdout);
+\end{lstlisting}
+Després d'això, el programa llegeix l'entrada del fitxer
+''input.txt'' i escriu la sortida al fitxer
+''output.txt''.
+
+\section{Treballar amb nombres}
+
+\index{enter}
+
+\subsubsection{Nombres enters}
+
+El tipus enter més utilitzat en la programació competitiva
+és el tipus \texttt{int}, que és un tipus de 32 bits amb
+un rang de valors de $-2^{31} \ldots 2^{31}-1$
+o aproximadament $-2 \cdot 10^9 \ldots 2 \cdot 10^9$.
+Si el tipus \texttt{int} no és suficient,
+es pot fer servir el tipus de 64 bits \texttt{long long}.
+Té un rang de valors de $-2^{63} \ldots 2^{63}-1$
+o aproximadament $-9 \cdot 10^{18} \ldots 9 \cdot 10^{18}$.
+
+El codi següent defineix una
+variable de tipus \texttt{long long}:
+\begin{lstlisting}
+long long x = 123456789123456789LL;
+\end{lstlisting}
+El sufix \texttt{LL} significa que el
+el tipus del nombre és \texttt{long long}.
+
+Un error comú quan es fa servir el tipus \texttt{long long}
+és fer servir algun tipus \texttt{int} en algun lloc
+al codi.
+Per exemple, el codi següent conté
+un error subtil:
+
+\begin{lstlisting}
+int a = 123456789;
+long long b = a*a;
+cout << b << "\n"; // -1757895751
+\end{lstlisting}
+
+Tot i que la variable \texttt{b} és del tipus \texttt{long long},
+els dos nombres de l'expressió \texttt{a*a}
+són del tipus \texttt{int} i el resultat és
+també del tipus \texttt{int}.
+Per això, la variable \texttt{b} tindrà
+un resultat incorrecte.
+El problema es pot resoldre fent que el tipus
+de \texttt{a} sigui \texttt{long long} o
+canviant l'expressi\'o a \texttt{(long long)a*a}.
+
+Normalment els problemes de concurs es plantegen de manera que
+amb el tipus \texttt{long long} n'hi ha prou.
+Tot i així, és bo saber que el compilador \texttt{g++} també proporciona
+un tipus de 128 bits \texttt{\_\_int128\_t}
+amb un rang de valors de
+$-2^{127} \ldots 2^{127}-1$ o aproximadament $-10^{38} \ldots 10^{38}$.
+Tanmateix, aquest tipus no està disponible en tots els sistemes de concurs.
+
+\subsubsection{Aritmètica modular}
+
+\index{residu}
+\index{aritmètica modular}
+
+Denotem per $x \bmod m$ el residu
+de dividir $x$ per $m$.
+Per exemple, $17 \bmod 5 = 2$,
+perquè $17 = 3 \cdot 5 + 2$.
+
+De vegades, la resposta a un problema és a
+nombre molt gran però es demana que s'escrigui
+la soluci\'o ''mòdul $m$'', és a dir,
+el residu quan es divideix la resposta per $m$
+(per exemple, ''mòdul $10^9+7$'').
+D'aquesta manera, encara que la resposta real
+sigui molt gran,
+n'hi ha prou amb utilitzar els tipus
+\texttt{int} i \texttt{long long}.
+
+Una propietat important del residu és que
+en la suma, la resta i la multiplicació,
+el residu es pot prendre abans de l'operació:
+
+\[
+\begin{matrix}{rcr}
+(a+b) \bmod m & = & (a \bmod m + b \bmod m) \bmod m \\
+(a-b) \bmod m & = & (a \bmod m - b \bmod m) \bmod m \\
+(a \cdot b) \bmod m & = & (a \bmod m \cdot b \bmod m) \bmod m
+\end{matrix}
+\]
+
+Així, podem agafar el residu després de cada operació
+i les xifres mai seran massa grans.
+
+Per exemple, el codi següent calcula $n!$,
+el factorial de $n$, mòdul $m$:
+\begin{lstlisting}
+long long x = 1;
+per (int i = 2; i <= n; i++) {
+    x = (x*i)%m;
+}
+cout << x%m << "\n";
+\end{lstlisting}
+
+Normalment volem que el residu estigui sempre
+en $0\ldots m-1$.
+Tanmateix, en el C++ i altres llenguatges,
+el residu d'un nombre negatiu
+és zero o negatiu.
+Una manera fàcil d'assegurar-s'hi que no tenim
+residus negatius es cal calcular primer
+el residu com de costum i després afegeix $m$
+si el resultat és negatiu:
+\begin{lstlisting}
+x = x%m;
+if (x < 0) x += m;
+\end{lstlisting}
+Això només és necessari quan hi ha
+restes en el codi i el
+el residu pot arribar a ser negatiu.
+
+\subsubsection{Nombres de coma flotant}
+
+\index{nombre de coma flotant}
+
+Els tipus de coma flotant en la
+programació competitiva són
+el \texttt{double} de 64 bits
+i, com a extensió al compilador \texttt{g++},
+el \texttt{long double} de 80 bits.
+En la majoria dels casos, \texttt{double} és suficient,
+però \texttt{long double} és més precís.
+
+La precisió requerida de la resposta
+normalment es dóna a l'enunciat del problema.
+Una manera fàcil d'emetre la resposta és fer servir
+la funció \texttt{printf}
+i donar el nombre de decimals
+a la cadena de text que especifica el format.
+Per exemple, el codi següent escriu
+el valor de $x$ amb 9 decimals:
+
+\begin{lstlisting}
+printf("%.9f\n", x);
+\end{lstlisting}
+
+Una dificultat quan s'utilitzen nombres de coma flotant
+és que alguns nombres no es poden representar
+amb precisió com a nombres de coma flotant,
+i hi haurà errors d'arrodoniment.
+Per exemple, el resultat del codi següent
+és sorprenent:
+
+\begin{lstlisting}
+double x = 0.3*3+0.1;
+printf("%.20f\n", x); // 0.9999999999999988898
+\end{lstlisting}
+
+El valor de \texttt{x} és una mica més petit que 1 degut
+als errors d'arrodoniment, quan el valor correcte seria 1.
+
+És arriscat comparar nombres de coma flotant
+amb l'operador \texttt{==},
+perquè és possible que, encara els valors haurien de
+ser iguals, en realitat no ho s\'on degut
+a errors de precisió.
+Una millor manera de comparar nombres de coma flotant
+és suposar que dos nombres són iguals
+si la diferència entre ells és menor que $\varepsilon$,
+on $\varepsilon$ és un nombre petit.
+
+A la pràctica, els nombres es poden comparar
+de la següent manera ($\varepsilon=10^{-9}$):
+
+\begin{lstlisting}
+if (abs(a-b) < 1e-9) {
+    // a i b son iguals
+}
+\end{lstlisting}
+
+Tingueu en compte que, tot i que els nombres de coma flotant són inexactes,
+els enters fins a un cert límit encara es poden
+representar amb precisió.
+Per exemple, fent servir \texttt{double},
+és possible representar amb precisió
+nombres enters el valor absolut dels quals és com a màxim $2^{53}$.
+
+\section{Escurçar el codi}
+
+El codi curt és ideal en programació competitiva,
+perquè els programes s'han d'escriure
+el més ràpid possible.
+Per això, els programadors competitius sovint defineixen
+noms més curts per a tipus de dades i altres parts del codi.
+
+\subsubsection{Noms dels tipus}
+\index{tuppdef@\texttt{typedef}}
+Fent servir l'ordre \texttt{typedef}
+és possible donar un nom més curt
+a un tipus de dades.
+Per exemple, com que el nom \texttt{long long} és llarg,
+podem definir un nom més curt \texttt{ll} d'aquesta manera:
+\begin{lstlisting}
+typedef long long ll;
+\end{lstlisting}
+Després d'això, el codi
+\begin{lstlisting}
+long long a = 123456789;
+long long b = 987654321;
+cout << a*b << "\n";
+\end{lstlisting}
+es pot escurçar de la següent manera:
+\begin{lstlisting}
+ll a = 123456789;
+ll b = 987654321;
+cout << a*b << "\n";
+\end{lstlisting}
+
+L'ordre \texttt{typedef}
+també es pot fer servir amb tipus més complexos.
+Per exemple, el codi següent dóna
+el nom \texttt{vi} per a un vector de nombres enters
+i el nom \texttt{pi} per a una parella
+que conté dos nombres enters.
+\begin{lstlisting}
+typedef vector<int> vi;
+typedef pair<int,int> pi;
+\end{lstlisting}
+
+\subsubsection{Macros}
+\index{macro}
+Una altra manera d'escurçar el codi és definir
+\key{macros}.
+Una macro significa que hi ha determinades cadenes
+de text que el codi es canviarà abans de la compilació.
+En C++, les macros es defineixen mitjançant la paraula
+clau \texttt{\#define}.
+
+Per exemple, podem definir les macros següents:
+\begin{lstlisting}
+#define F primer
+#define S segon
+#define PB push_back
+#define MP make_pair
+\end{lstlisting}
+Després d'això, el codi
+\begin{lstlisting}
+v.push_back(make_pair(y1,x1));
+v.push_back(make_pair(y2,x2));
+int d = v[i].primer+v[i].segon;
+\end{lstlisting}
+esdev\'e:
+\begin{lstlisting}
+v.PB(MP(y1,x1));
+v.PB(MP(y2,x2));
+int d = v[i].F+v[i].S;
+\end{lstlisting}
+
+Una macro també pot tenir paràmetres,
+la qual cosa fa possible escurçar bucles i altres
+estructures.
+Per exemple, podem definir la macro següent:
+\begin{lstlisting}
+#definir REP(i,a,b) for (int i = a; i <= b; i++)
+\end{lstlisting}
+Després d'això, el codi
+\begin{lstlisting}
+for (int i = 1; i <= n; i++) {
+    cerca(i);
+}
+\end{lstlisting}
+esdev\'e:
+\begin{lstlisting}
+REP(i,1,n) {
+    cerca(i);
+}
+\end{lstlisting}
+
+De vegades, les macros provoquen errors que poden ser difícils
+per detectar. Per exemple, considereu la macro següent
+que calcula el quadrat d'un nombre:
+\begin{lstlisting}
+#define SQ(a) a*a
+\end{lstlisting}
+Aquesta macro \emph{no} sempre funciona com s'esperava.
+Per exemple, el codi
+\begin{lstlisting}
+cout << SQ(3+3) << "\n";
+\end{lstlisting}
+correspon al codi
+\begin{lstlisting}
+cout << 3+3*3+3 << "\n"; // 15
+\end{lstlisting}
+
+Una versió millor de la macro és la següent:
+\begin{lstlisting}
+#definir SQ(a) (a)*(a)
+\end{lstlisting}
+Ara el codi
+\begin{lstlisting}
+cout << SQ(3+3) << "\n";
+\end{lstlisting}
+correspon al codi
+\begin{lstlisting}
+cout << (3+3)*(3+3) << "\n"; // 36
+\end{lstlisting}
+
+
+\section{Matemàtiques}
+
+Les matemàtiques tenen un paper important en la competició
+programació, i no és possible arribar a ser
+un programador competitiu exitós sense
+tenir bones habilitats matemàtiques.
+En aquesta secció es discuteixen alguns conceptes
+i fórmules matemàtiques que són necess\`aries
+més endavant al llibre.
+
+\subsubsection{Fórmules de suma}
+
+Cada suma de la forma
+\[\sum_{x=1}^n x^k = 1^k+2^k+3^k+\ldots+n^k,\]
+on $k$ és un nombre enter positiu,
+té una fórmula tancada que és un
+polinomi de grau $k+1$.
+Per exemple\footnote{\index{fórmula de Faulhaber}
+Fins i tot hi ha una fórmula general per a aquestes sumes,
+anomenada \key{fórmula de Faulhaber},
+però és massa complexa per a presentar-la aquí.},
+\[\sum_{x=1}^n x = 1+2+3+\ldots+n = \frac{n(n+1)}{2}\]
+i
+\[\sum_{x=1}^nx^2 = 1^2+2^2+3^2+\ldots+n^2 = \frac{n(n+1)(2n+1)}{ }.\]
+
+Una \key{progressió aritmètica} és una \index{progressió aritmètica}
+seqüència de nombres
+on la diferència entre dos nombres consecutius 
+és una constant.
+Per exemple,
+\[3, 7, 11, 15\]
+és una progressió aritmètica amb constant 4.
+Es pot calcular la suma d'una progressió aritmètica
+fent servir la fórmula
+\[\underbrace{a + \cdots + b}_{n \,\, \textrm{nombres}} = \frac{n(a+b)}{2}\]
+on $a$ és el primer nombre,
+$b$ és l'últim nombre i
+$n$ és la quantitat de nombres.
+Per exemple,
+\[3+7+11+15=\frac{4 \cdot (3+15)}{2} = 36.\]
+La fórmula es basa en el fet
+que la suma consta de $n$ nombres i
+el valor de cada nombre és $(a+b)/2$ de mitjana.
+
+\index{progressió geomètrica}
+Una \key{progressió geomètrica} és una seqüència
+de nombres
+on el rati entre dos consecutius qualsevol
+nombres és una constant.
+Per exemple,
+\[3,6,12,24\]
+és una progressió geomètrica amb constant 2.
+Es pot calcular la suma d'una progressió geomètrica
+fent servir la fórmula
+\[a + ak + ak^2 + \cdots + b = \frac{bk-a}{k-1}\]
+on $a$ és el primer nombre,
+$b$ és l'últim nombre i el
+la rati entre nombres consecutius és $k$.
+Per exemple,
+\[3+6+12+24=\frac{24 \cdot 2 - 3}{2-1} = 45.\]
+
+Aquesta fórmula es pot derivar de la següent manera. Sigui
+\[ S = a + ak + ak^2 + \cdots + b .\]
+Quan multipliquem els dos costats per $k$, obtenim
+\[ kS = ak + ak^2 + ak^3 + \cdots + bk,\]
+i resolent l'equació
+\[ kS-S = bk-a\]
+ens dóna la fórmula.
+
+Un cas especial de la suma d'una progressió geomètrica és la fórmula
+\[1+2+4+8+\ldots+2^{n-1}=2^n-1.\]
+
+\index{suma harmònica}
+
+Una \key{suma harmònica} és una suma de la forma
+\[ \sum_{x=1}^n \frac{1}{x} = 1+\frac{1}{2}+\frac{1}{3}+\ldots+\frac{1}{n} .\]
+
+Un límit superior per a una suma harmònica és $\log_2(n)+1$.
+En concret, podem
+modificar cada terme $1/k$ de manera $k$ es converteixi en
+la potència més propera de dos que no superi $k$.
+Per exemple, quan $n=6$, podem estimar
+la suma de la següent manera:
+\[ 1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\frac{1}{6} \le
+1+\frac{1}{2}+\frac{1}{2}+\frac{1}{4}+\frac{1}{4}+\frac{1}{4}.\]
+Aquest límit superior consta de $\log_2(n)+1$ parts
+($1$, $2 \cdot 1/2$, $4 \cdot 1/4$, etc.),
+i el valor de cada part és com a màxim 1.
+
+\subsubsection{Teoria de conjunts}
+
+\index{teoria de conjunts}
+\index{conjunt}
+
+Un \key{conjunt} és una col·lecció d'elements.
+Per exemple, el conjunt
+\[X=\{2,4,7\}\]
+conté els elements 2, 4 i 7.
+El símbol $\emptyset$ denota un conjunt buit,
+i $|S|$ denota la mida d'un conjunt $S$,
+és a dir, el nombre d'elements del conjunt.
+Per exemple, en el conjunt anterior, $|X|=3$.
+
+Si un conjunt $S$ conté un element $x$,
+escrivim $x \in S$,
+i en cas contrari escrivim $x \notin S$.
+Per exemple, en el conjunt anterior
+\[4 \in X \hspace{10px}\textrm{i}\hspace{10px} 5 \notin X.\]
+
+\begin{samepage}
+Es poden construir nous conjunts mitjançant operacions de conjunts:
+\begin{itemize}
+\index{intersecció}
+\item La \key{intersecció} $A \cap B$ \'es el conjunt dels
+elements que estan tant en $A$ i en $B$.
+Per exemple, si $A=\{1,2,5\}$ i $B=\{2,4\}$,
+llavors $A \cap B = \{2\}$.
+\index{unió}
+\item La \key{union} $A \cup B$ \'es el conjunt dels
+elements que estan en $A$ o en $B$ o en tots dos.
+Per exemple, si $A=\{3,7\}$ i $B=\{2,3,8\}$,
+llavors $A \cup B = \{2,3,7,8\}$.
+\index{complement}
+\index{conjunt universal}
+\item El \key{complement} $\bar A$ \'es el conjunt dels
+elements que no estan en $A$.
+\index{conjunt universal}
+La interpretació d'un complement depèn de
+el \key{conjunt universal}, que \'es el conjunt que conté
+tots els elements possibles.
+Per exemple, si $A=\{1,2,5,7\}$ i el conjunt universal és
+$\{1,2,\ldots,10\}$, aleshores $\bar A = \{3,4,6,8,9,10\}$.
+\index{diferència}
+\item La \key{diferència} $A \setminus B = A \cap \bar B$
+\'es el conjunt dels elements que estan en $A$ però no en $B$.
+Tingueu en compte que $B$ pot contenir elements que no es troben a $A$.
+Per exemple, si $A=\{2,3,7,8\}$ i $B=\{3,5,8\}$,
+aleshores $A \setminus B = \{2,7\}$.
+\end{itemize}
+\end{samepage}
+
+\index{subconjunt}
+Si cada element de $A$ també pertany a $S$,
+diem que $A$ és un \key{subconjunt} de $S$,
+i ho denotem $A \subset S$.
+Un conjunt $S$ sempre té $2^{|S|}$ subconjunts,
+inclòs el conjunt buit.
+Per exemple, els subconjunts del conjunt $\{2,4,7\}$ són
+\begin{centre}
+$\emptyset$,
+$\{2\}$, $\{4\}$, $\{7\}$, $\{2,4\}$, $\{2,7\}$, $\{4,7 \}$ i $\{2,4,7\}$.
+\end{centre}
+
+Alguns conjunts fets servir sovint són
+$\mathbb{N}$ (nombres naturals),
+$\mathbb{Z}$ (nombres enters),
+$\mathbb{Q}$ (nombres racionals) i
+$\mathbb{R}$ (nombres reals).
+El conjunt $\mathbb{N}$
+es pot definir de dues maneres, segons
+la situació:
+o $\mathbb{N}=\{0,1,2,\ldots\}$
+o $\mathbb{N}=\{1,2,3,...\}$.
+
+També podem construir un conjunt utilitzant una expressi\'o de la forma
+\[\{f(n): n \in S\},\]
+on $f(n)$ és una funció.
+Aquest conjunt conté tots els elements de la forma $f(n)$,
+on $n$ és un element de $S$.
+Per exemple, el conjunt
+\[X=\{2n : n \in \mathbb{Z}\}\]
+conté tots els nombres enters parells.
+
+\subsubsection{Lògica}
+
+\index{lògica}
+\index{negació}
+\index{conjunció}
+\index{disjunció}
+\index{implicació}
+\index{equivalència}
+
+El valor d'una expressió lògica és
+\key{cert} (1) o \key{fals} (0).
+Les operacions lògiques més importants són
+$\lnot$ (\key{negació}),
+$\land$ (\key{conjunció}),
+$\lor$ (\key{disjunció}),
+$\Rightarrow$ (\key{implicació}) i
+$\Leftrightarrow$ (\key{equivalència}).
+La taula següent mostra el significat d'aquestes operacions:
+
+\begin{centre}
+\begin{tabular}{rr|rrrrrrr}
+$A$ & $B$ & $\lnot A$ & $\lnot B$ & $A \land B$ & $A \lor B$ & $A \Rightarrow B$ & $A \Leftrightarrow B$ \\
+\hline
+0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{tabular}
+\end{centre}
+
+L'expressió $\lnot A$ té el valor oposat de $A$.
+L'expressió $A \land B$ és certa si $A$ i $B$
+són certes,
+i l'expressió $A \lor B$ és certa si $A$ o $B$ o tots dos
+són certes.
+L'expressió $A \Rightarrow B$ és certa
+si sempre que $A$ és cert, $B$ també ho és.
+L'expressió $A \Leftrightarrow B$ és certa
+quan $A$ i $B$ són les dues certes o les dues falses.
+
+\index{predicat}
+
+Un \key{predicat} és una expressió que és certa o falsa
+en funció dels seus paràmetres.
+Els predicats solen indicar-se amb majúscules.
+Per exemple, considerem el predicat $P(x)$
+que és cert exactament quan $x$ és un nombre primer.
+Amb aquesta definició, $P(7)$ és cert però $P(8)$ és fals.
+
+\index{quantificador}
+
+Un \key{quantificador} connecta una expressió lògica
+als elements d'un conjunt.
+Els quantificadors més importants són
+$\forall$ (\key{per a tots}) i $\exists$ (\key{existeix un}).
+Per exemple,
+\[\forall x (\exists y (y <x))\]
+significa que per a cada element $x$ del conjunt,
+existeix un element $y$ al conjunt
+que compleix que $y$ és més petit que $x$.
+Això és cert en el conjunt de nombres enters,
+però fals en el conjunt dels nombres naturals.
+
+Utilitzant la notació descrita anteriorment,
+podem expressar molts tipus de proposicions lògiques.
+Per exemple,
+\[\forall x ((x>1 \land \lnot P(x)) \Rightarrow (\exists a (\exists b (a > 1 \land b > 1 \land x = ab))))\]
+significa que si un nombre $x$ és més gran que 1
+i no és un nombre primer,
+aleshores hi ha els nombres $a$ i $b$
+que s\'on més grans que $1$ i el producte dels quals \'es $x$.
+Aquesta proposició és certa en el conjunt dels nombres enters.
+
+\subsubsection{Funcions}
+
+La funció $\lfloor x \rfloor$ arrodoneix (cap avall) el nombre $x$
+fins a un nombre enter, i la funció
+$\lceil x \rceil$ arrodoneix (cap amunt) el nombre $x$
+fins a un nombre enter. Per exemple,
+\[ \lfloor 3/2 \rfloor = 1 \hspace{10px} \textrm{i} \hspace{10px} \lceil 3/2 \rceil = 2.\]
+
+Les funcions $\min(x_1,x_2,\ldots,x_n)$
+i $\max(x_1,x_2,\ldots,x_n)$
+donen el valor més petit i més gran dels valors
+$x_1,x_2,\ldots,x_n$.
+Per exemple,
+\[ \min(1,2,3)=1 \hspace{10px} \textrm{i} \hspace{10px} \max(1,2,3)=3.\]
+
+\index{factorial}
+
+El \key{factorial} $n!$ es pot definir
+\[\prod_{x=1}^n x = 1 \cdot 2 \cdot 3 \cdot \ldots \cdot n\]
+o, recursivament,
+\[
+\begin{matrix}{lcl}
+0! & = & 1 \\
+n! & = & n \cdot (n-1)! \\
+\end{matrix}
+\]
+
+\index{Nombres de Fibonacci}
+
+Els \key{nombres de Fibonacci}
+%\footnote{Fibonacci (c. 1175--1250) va ser un matemàtic italià.}
+sorgeixen en moltes situacions.
+Es poden definir recursivament de la següent manera:
+\[
+\begin{matrix}{lcl}
+f(0) & = & 0 \\
+f(1) & = & 1 \\
+f(n) & = & f(n-1)+f(n-2) \\
+\end{matrix}
+\]
+Els primers nombres de Fibonacci són
+\[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \ldots\]
+També hi ha una fórmula tancada
+per calcular els nombres de Fibonacci, que de vegades s'anomena
+\index{Fórmula de Binet} \key{fórmula de Binet}:
+\[f(n)=\frac{(1 + \sqrt{5})^n - (1-\sqrt{5})^n}{2^n \sqrt{5}}.\]
+
+\subsubsection{Logaritmes}
+
+\index{logaritme}
+
+El \key{logaritme} d'un nombre $x$
+es denota per $\log_k(x)$, on $k$ és la base
+del logaritme.
+Segons la definició,
+$\log_k(x)=a$ exactament quan $k^a=x$.
+
+Una propietat útil dels logaritmes és
+que $\log_k(x)$ és igual al nombre de vegades
+hem de dividir $x$ per $k$ abans d'arribar
+el nombre 1.
+Per exemple, $\log_2(32)=5$
+perquè calen 5 divisions per 2:
+
+\[32 \rightarrow 16 \rightarrow 8 \rightarrow 4 \rightarrow 2 \rightarrow 1 \]
+
+Els logaritmes s'utilitzen sovint en l'anàlisi de
+algorismes, perquè molts algorismes eficients
+redueixen alguna cosa a la meitat a cada pas.
+Per tant, podem estimar l'eficiència d'aquests algorismes
+fent servir logaritmes.
+
+El logaritme d'un producte és
+\[\log_k(ab) = \log_k(a)+\log_k(b),\]
+i en conseqüència,
+\[\log_k(x^n) = n \cdot \log_k(x).\]
+A més, el logaritme d'un quocient és
+\[\log_k\Big(\frac{a}{b}\Big) = \log_k(a)-\log_k(b).\]
+Una altra fórmula útil és
+\[\log_u(x) = \frac{\log_k(x)}{\log_k(u)},\]
+i amb això, és possible calcular
+logaritmes a qualsevol base si hi ha una manera de
+calcular logaritmes en una base fixa.
+
+\index{logaritme natural}
+
+El \key{logaritme natural} $\ln(x)$ d'un nombre $x$
+és el logaritme la base del qual és $e \approx 2.71828$.
+Una altra propietat dels logaritmes és que
+el nombre de dígits d'un enter $x$ en base $b$ és
+$\lfloor \log_b(x)+1 \rfloor$.
+Per exemple, la representació de
+$ 123 $ en base $ 2 $ és 1111011 i
+$\lfloor \log_2(123)+1 \rfloor = 7$.
+
+\section{Concursos i recursos}
+
+\subsubsection{IOI}
+
+L'Olimpíada Internacional d'Informàtica (IOI,
+International Olympiad in Informatics)
+és un concurs de programació anual per a
+alumnes de secundària.
+Cada país pot enviar un equip de
+quatre alumnes al concurs.
+Normalment hi ha uns 300 participants
+de 80 països.
+
+L'IOI consta de dos concursos de cinc hores de durada.
+En ambdós concursos, es demana als participants
+resoldre tres tasques algor\'ismiques de diferent dificultat.
+Les tasques es divideixen en subtasques,
+cadascuna dels quals té una puntuació assignada.
+Encara que els concursants estiguin dividits en equips,
+competeixen com a individus.
+
+El pla d'estudis de l'IOI \cite{iois} regula els temes
+que poden aparèixer a les tasques IOI.
+Gairebé tots els temes del temari de l'IOI
+són coberts per aquest llibre.
+
+Els participants de l'IOI es seleccionen mitjançant
+concursos nacionals.
+Abans de l'IOI, s'organitzen molts concursos regionals,
+com l'Olimpíada Bàltica d'Informàtica (BOI),
+Olimpíada Centro-Europea d'Informàtica (CEOI)
+i l'Olimpíada d'Informàtica Àsia-Pacífic (APIO).
+
+Alguns països organitzen concursos de pràctiques on-line
+per als futurs participants de l'IOI,
+com el Concurs Obert d'Informàtica de Croàcia \cite{coci}
+i l'Olimpíada d'Informàtica dels EUA \cite{usaco}.
+A més, hi ha una gran col·lecció de problemes dels concursos polonesos
+disponibles on-line línia \cite{main}.
+
+\subsubsection{ICPC}
+
+El Concurs Internacional de Programació Col·legial (ICPC,
+International Collegiate Programming Contest)
+és un concurs de programació anual per a estudiants universitaris.
+Cada equip del concurs està format per tres estudiants,
+i a diferència de l'IOI, els alumnes treballen conjuntament;
+només hi ha un ordinador disponible per a cada equip.
+
+L'ICPC consta de diverses fases, i nom\'es els millors
+equips estan convidats a la fase final (World Finals).
+Tot i que hi ha desenes de milers de participants
+al concurs, només hi ha un petit nombre\footnote{El nombre exacte d'equips
+a la fase final varia d'un any a un altre; el 2017, hi havia
+133 equips.} d'espais per equips, de manera que fins i tot avançar a
+la final ja és un gran èxit en algunes regions.
+
+En cada concurs de l'ICPC, els equips disposen de cinc hores de temps
+per a resoldre uns deu problemes algor\'ismics.
+La solució d'un problema només s'accepta si es resolen
+tots els casos de prova de manera eficient.
+Durant el concurs, els competidors poden veure els resultats d'altres equips,
+però durant l'última hora el marcador està congelat i no \'es
+possible veure els resultats dels últims enviaments.
+
+Els temes que poden aparèixer a l'ICPC no estan tan bé
+especificats com els de l'IOI.
+En tot cas, és evident que calen més coneixements
+a l'ICPC, sobretot més habilitats matemàtiques.
+
+\subsubsection{Concursos on-line}
+
+També hi ha molts concursos on-line oberts a tothom.
+En l'actualitat, la p\`agina web amb més concursos actius és Codeforces,
+que organitza concursos de forma setmanal.
+A Codeforces, els participants es divideixen en dues divisions:
+els principiants competeixen a la Div2 i els programadors més experimentats a
+la Div1.
+Altres llocs de concurs inclouen AtCoder, CS Academy, HackerRank i Topcoder.
+
+Algunes empreses organitzen concursos on-line amb finals presencials.
+Exemples d'aquests concursos són Facebook Hacker Cup,
+Google Code Jam i Yandex.Algorithm.
+Per descomptat, les empreses també utilitzen aquests concursos per a reclutar
+programadors:
+tenir un bon resultat en un concurs és una bona manera de demostrar les teves habilitats.
+
+\subsubsection{Llibres}
+
+Existeixen alguns llibres (a més d'aquest llibre) que
+es centren en la programació competitiva i la resolució de problemes
+algorísmics:
+
+\begin{itemize}
+\item S. S. Skiena i M. A. Revilla:
+\emph{Programming Challenges: The Programming Contest Training Manual} \cite{ski03}
+\item S. Halim i F. Halim:
+\emph{Competitive Programming 3: The New Lower Bound of Programming Contests} \cite{hal13}
+\item K. Diks et al.: \emph{Looking for a Challenge? The Ultimate Problem Set from
+the University of Warsaw Programming Competitions} \cite{dik12}
+\end{itemize}
+
+Els dos primers llibres estan pensats per a principiants,
+mentre que l'últim llibre conté material avançat.
+
+Per descomptat, els llibres generals d'algorismia també són adequats
+per als programadors competitius.
+Alguns llibres populars són:
+
+\begin{itemize}
+\item T. H. Cormen, C. E. Leiserson, R. L. Rivest i C. Stein:
+\emph{Introduction to Algorithms} \cite{cor09}
+\item J. Kleinberg i É. Tardes:
+\emph{Algorithm Design} \cite{kle05}
+\item S. S. Skiena:
+\emph{The Algorithm Design Manual} \cite{ski08}
+\end{itemize}

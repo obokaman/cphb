@@ -1,0 +1,795 @@
+\chapter{Estructures de dades}
+
+\index{estructura de dades}
+
+Una \key{estructura de dades} és una manera d'emmagatzemar
+dades a la memòria d'un ordinador.
+És important escollir l'estructura
+de dades adequada per a un problema,
+perquè cada estructura de dades té els seus
+avantatges i inconvenients.
+La pregunta crucial és: quines operacions
+són eficients en l'estructura de dades escollida?
+
+Aquest capítol presenta les estructures de dades
+més importants a la biblioteca estàndard de C++.
+És molt bona idea fer servir la biblioteca estàndard
+sempre que sigui possible,
+perquè ens estalviarà molt de temps.
+Més endavant parlarem d'estructures de dades més sofisticades
+no estan disponibles a la biblioteca estàndard.
+
+\section{Vectors dinàmics}
+
+\index{vector dinàmic}
+\index{vector}
+\index{array}
+
+Un \key{vector dinàmic} és un vector la mida
+del qual pot canviar durant l'execució
+del programa.
+El vector dinàmic més popular en C++ és
+l'estructura \texttt{vector},
+que també pot fer-se servir gairebé com un array de C normal.
+
+El codi següent crea un vector buit i
+hi afegeix tres elements:
+
+\begin{lstlisting}
+vector<int> v;
+v.push_back(3); // [3]
+v.push_back(2); // [3,2]
+v.push_back(5); // [3,2,5]
+\end{lstlisting}
+
+Després d'això, podem accedir als elements com si fos un array de C
+normal:
+
+\begin{lstlisting}
+cout << v[0] << "\n"; // 3
+cout << v[1] << "\n"; // 2
+cout << v[2] << "\n"; // 5
+\end{lstlisting}
+
+La funció \texttt{size} retorna el nombre d'elements del vector.
+El codi següent itera
+el vector i escriu tots els elements:
+
+\begin{lstlisting}
+for (int i = 0; i < v.size(); i++) {
+    cout << v[i] << "\n";
+}
+\end{lstlisting}
+
+Una manera més concisa d'iterar un vector és la següent:
+
+\begin{lstlisting}
+for (auto x : v) {
+    cout << x << "\n";
+}
+\end{lstlisting}
+
+La funció \texttt{back} retorna l'últim element
+en el vector, i la funció \texttt{pop\_back} elimina l'últim element:
+
+\begin{lstlisting}
+vector<int> v;
+v.push_back(5);
+v.push_back(2);
+cout << v.back() << "\n"; // 2
+v.pop_back();
+cout << v.back() << "\n"; // 5
+\end{lstlisting}
+
+El codi següent crea un vector de cinc elements:
+
+\begin{lstlisting}
+vector<int> v = {2,4,2,5,1};
+\end{lstlisting}
+
+Una altra manera de crear un vector és donar el nombre
+d'elements i el valor inicial de cada element:
+
+\begin{lstlisting}
+// mida 10, valor inicial 0
+vector<int> v(10);
+\end{lstlisting}
+\begin{lstlisting}
+// mida 10, valor inicial 5
+vector<int> v(10, 5);
+\end{lstlisting}
+
+La implementació interna d'un vector
+fa servir un array ordinari.
+Si la mida del vector augmenta i
+l'espai reservat es massa petit,
+es crea un nou array i tot
+els elements es mouen al nou espai
+Però això no passa sovint, i la
+complexitat temporal promig de fer un
+\texttt{push\_back} és $O(1)$.
+
+\index{string}
+\index{cadena}
+
+L'estructura cadena (\texttt{string})
+és un vector dinàmic de caràcters.
+A més, hi ha una sintaxi especial per a les cadenes
+que no està disponible en les altres estructures de dades.
+Les cadenes es poden concatenar fent servir el símbol \texttt{+}.
+La funció $\texttt{substr}(k,x)$ retorna la subcadena
+que comença a la posició $k$ i té longitud $x$,
+i la funció $\texttt{find}(\texttt{t})$ troba la posició
+de la primera ocurrència d'una subcadena \texttt{t}.
+
+El codi següent presenta algunes operacions de cadenes:
+
+\begin{lstlisting}
+string a = "hatti";
+string b = a+a;
+cout << b << "\n"; // hattihatti
+b[5] = 'v';
+cout << b << "\n"; // hattivatti
+string c = b.substr(3,4);
+cout << c << "\n"; // tiva
+\end{lstlisting}
+
+\section{Estructures conjunt}
+
+\index{set}
+\index{unordered_set}
+\index{conjunt}
+
+Un \key{conjunt} és una estructura de dades que
+manté una col·lecció d'elements.
+Les operacions bàsiques dels conjunts són
+inserir, cercar i eliminar.
+
+La biblioteca estàndard de C++ conté dues implementacions:
+L'estructura \texttt{set} es basa en arbres binari
+equilibrats i les seves operacions triguen $O(\log n)$ en cas pitjor.
+L'estructura \texttt{unordered\_set} fa serving hashing,
+i les seves operacions triguen $O(1)$ en mitjana.
+
+Quina implementació triar és
+sovint qüestió de gustos.
+El benefici de l'estructura \texttt{set}
+és que manté l'ordre dels elements
+i ofereix funcions que no estan disponibles
+a \texttt{unordered\_set}.
+D'altra banda, \texttt{unordered\_set}
+pot ser més eficient.
+
+El codi següent crea un conjunt
+que conté nombres enters,
+i mostra algunes de les operacions.
+La funció \texttt{insert} afegeix un element al conjunt,
+la funció \texttt{count} retorna el nombre d'ocurrències
+d'un element del conjunt,
+i la funció \texttt{erase} elimina un element del conjunt.
+
+\begin{lstlisting}
+set<int> s;
+s.insert(3);
+s.insert(2);
+s.insert(5);
+cout << s.count(3) << "\n"; // 1
+cout << s.count(4) << "\n"; // 0
+s.erase(3);
+s.insert(4);
+cout << s.count(3) << "\n"; // 0
+cout << s.count(4) << "\n"; // 1
+\end{lstlisting}
+
+Un conjunt es pot fer servir com un vector,
+però no es pot accedir
+als elements fent servir la notació \texttt{[]}.
+El codi següent crea un conjunt,
+escriu el nombre d'elements, i
+itera per tots els elements:
+\begin{lstlisting}
+set<int> s = {2,5,6,8};
+cout << s.size() << "\n"; // 4
+for (auto x : s) {
+    cout << x << "\n";
+}
+\end{lstlisting}
+
+Una propietat important dels conjunts és
+que tots els seus elements són \emph{diferents}.
+Així, la funció \texttt{count} sempre retorna
+o 0 (l'element no està al conjunt)
+o 1 (l'element és al conjunt),
+i la funció \texttt{insert} no s'afegeix mai
+un element al conjunt si ja hi és.
+Això es pot veure al codi següent:
+
+\begin{lstlisting}
+set<int> s;
+s.insert(5);
+s.insert(5);
+s.insert(5);
+cout << s.count(5) << "\n"; // 1
+\end{lstlisting}
+
+C++ també conté les estructures
+\texttt{multiset} i \texttt{unordered\_multiset},
+que funcionen com \texttt{set}
+i \texttt{unordered\_set}
+excepte que poden contenir vàries instàncies d'un element.
+Per exemple, al codi següent afegeix tres instàncies
+del número 5 a un multiconjunt:
+
+\begin{lstlisting}
+multiset<int> s;
+s.insert(5);
+s.insert(5);
+s.insert(5);
+cout << s.count(5) << "\n"; // 3
+\end{lstlisting}
+La funció \texttt{erase} elimina
+totes les instàncies d'un element
+d'un multiconjunt:
+\begin{lstlisting}
+s.erase(5);
+cout << s.count(5) << "\n"; // 0
+\end{lstlisting}
+Sovint només volem eliminar una instància,
+que podem fer de la següent manera:
+\begin{lstlisting}
+s.erase(s.find(5));
+cout << s.count(5) << "\n"; // 2
+\end{lstlisting}
+
+\section{Estructures mapa}
+
+\index{mapa}
+\index{map}
+\index{unordered_map}
+
+Un \key{mapa} és un vector que consisteix
+de parells clau-valor.
+Mentre que les claus d'un vector normal sempre
+són els nombres enters consecutius $0,1,\ldots,n-1$,
+on $n$ és la mida del vector,
+les claus d'un mapa poden ser de qualsevol tipus de dades i
+no tenen perquè ser consecutius.
+
+La biblioteca estàndard de C++ conté dos implementacions
+de mapa que es corresponen amb les implmentacions de
+conjunts: l'estructura
+\texttt{map} es basa en un arbre binari
+equilibrat i accedir als elements triga $O(\log n)$,
+mentre que l'estructura
+\texttt{unordered\_map} fa servir hashing
+i accedir als elements triga $O(1)$ de mitjana.
+
+El codi següent crea un mapa
+on les claus són cadenes i els valors són nombres enters:
+
+\begin{lstlisting}
+map<string,int> m;
+m["monkey"] = 4;
+m["banana"] = 3;
+m["harpsichord"] = 9;
+cout << m["banana"] << "\n"; // 3
+\end{lstlisting}
+
+Si es demana el valor d'una clau
+però el mapa no la conté,
+la clau s'afegeix automàticament al mapa amb
+un valor per defecte.
+Per exemple, en el codi següent,
+la clau ''aybabtu'' s'afegeix al mapa
+amb valor 0.
+
+\begin{lstlisting}
+map<string,int> m;
+cout << m["aybabtu"] << "\n"; // 0
+\end{lstlisting}
+La funció \texttt{count} comprova
+si el mapa conté una clau:
+\begin{lstlisting}
+if (m.count("aybabtu")) {
+    // la clau existeix
+}
+\end{lstlisting}
+El codi següent escriu totes les claus i valors
+d'un mapa:
+\begin{lstlisting}
+for (auto x : m) {
+    cout << x.first << " " << x.second << "\n";
+}
+\end{lstlisting}
+
+\section{Iteradors i intervals}
+
+\index{iterador}
+
+Moltes funcions de la biblioteca estàndard de C++
+operen amb iteradors.
+Un \key{iterador} (\texttt{iterator}) és una variable que
+apunta a un element d'una estructura de dades.
+
+Els iteradors \texttt{begin}
+i \texttt{end} defineixen un interval que conté
+tots els elements d'una estructura de dades.
+L'iterador \texttt{begin} apunta
+al primer element de l'estructura de dades,
+i l'iterador \texttt{end} apunta
+a la posició \emph{després de} l'últim element.
+Per exemple:
+
+\begin{center}
+\begin{tabular}{llllllllll}
+\{ & 3, & 4, & 6, & 8, & 12, & 13, & 14, & 17 & \} \\
+& $\uparrow$ & & & & & & & & $\uparrow$ \\
+& \multicolumn{3}{l}{\texttt{s.begin()}} & & & & & & \texttt{s.end()} \\
+\end{tabular}
+\end{center}
+
+Observeu l'asimetria dels iteradors:
+\texttt{s.begin()} apunta a un element de l'estructura de dades,
+mentre que \texttt{s.end()} apunta fora de l'estructura de dades.
+És a dir, l'interval definit pels iteradors és \emph{semi-obert}.
+
+\subsubsection{Treballar amb intervals}
+
+Els iteradors es fan servir en la biblioteca estàndard de C++
+per a passar intervals d'elements en una estructura de dades.
+Normalment, volem processar tots els elements d'una
+estructura de dades, i per tant fem servir els iteradors
+\texttt{begin} i \texttt{end}.
+
+Per exemple, el codi següent ordena un vector
+fent servir la funció \texttt{sort},
+després inverteix l'ordre dels elements fent servir la funció
+\texttt{reverse}, i finalment barreja l'ordre de
+els elements fent servir la funció \texttt{random\_shuffle}.
+
+\index{sort@\texttt{sort}}
+\index{reverse@\texttt{reverse}}
+\index{random\_shuffle@\texttt{random\_shuffle}}
+
+\begin{lstlisting}
+sort(v.begin(), v.end());
+reverse(v.begin(), v.end());
+random_shuffle(v.begin(), v.end());
+\end{lstlisting}
+
+Aquestes funcions també es poden fer servir
+amb arrays ordinaris de C. En aquest cas, les funcions reben
+punters a l'array en lloc d'iteradors:
+
+\begin{lstlisting}
+sort(a, a+n);
+reverse(a, a+n);
+random_shuffle(a, a+n);
+\end{lstlisting}
+
+\subsubsection{Iteradors de conjunts}
+
+Els iteradors es fan servir sovint per a accedir als
+elements d'un conjunt.
+El codi següent crea un iterador
+\texttt{it} que assenyala a l'element més petit d'un conjunt:
+
+\begin{lstlisting}
+set<int>::iterator it = s.begin();
+\end{lstlisting}
+També es pot escriure així:
+\begin{lstlisting}
+auto it = s.begin();
+\end{lstlisting}
+Per a accedir a l'element que l'iterador assenyala es
+fa servir el símbol \texttt{*}.
+Per exemple, el següent codi imprimeix
+el primer element del conjunt:
+
+\begin{lstlisting}
+auto it = s.begin();
+cout << *it << "\n";
+\end{lstlisting}
+
+Els iteradors es poden moure mitjançant els operadors
+\texttt{++} (endavant) i \texttt{--} (enrere),
+és a dir, moure l'iterador a l'element següent
+o l'element anterior.
+
+El codi següent escriu tots els elements
+en ordre creixent:
+\begin{lstlisting}
+for (auto it = s.begin(); it != s.end(); it++) {
+    cout << *it << "\n";
+}
+\end{lstlisting}
+El codi següent escriu l'element més gran del conjunt:
+\begin{lstlisting}
+auto it = s.end(); it--;
+cout << *it << "\n";
+\end{lstlisting}
+
+La funció $\texttt{find}(x)$ retorna un iterador
+que apunta a un element el valor del qual és $x$.
+Si el conjunt no conté $x$,
+l'iterador retornat serà \texttt{end}.
+
+\begin{lstlisting}
+auto it = s.find(x);
+if (it == s.end()) {
+    // no trobem x
+}
+\end{lstlisting}
+
+La funció $\texttt{lower\_bound}(x)$ retorna
+un iterador al primer element del conjunt
+el valor del qual és \emph{almenys} $x$, i
+la funció $\texttt{upper\_bound}(x)$
+retorna un iterador al primer element del conjunt
+el valor del qual és \emph{més gran que} $x$.
+En ambdos casos, si aquest primer element del conjunt
+no existeix, retornen \texttt{end}.\footnote{N. del T.: És a dir,
+$[\texttt{lower\_bound}(x), \texttt{upper\_bound}(x))$ és l'interval
+semi-obert que assenyala als elements amb valor $x$.}
+Aquestes funcions no són compatibles amb
+l'estructura \texttt{unordered\_set} perquè aquesta
+no manté l'ordre dels elements.
+
+Per exemple, el codi següent troba l'element
+més proper a $x$:
+
+\begin{lstlisting}
+auto it = s.lower_bound(x);
+if (it == s.begin()) {
+    cout << *it << "\n";
+} else if (it == s.end()) {
+    it--;
+    cout << *it << "\n";
+} else {
+    int a = *it; it--;
+    int b = *it;
+    if (x-b < a-x) cout << b << "\n";
+    else cout << a << "\n";
+}
+\end{lstlisting}
+
+El codi suposa que el conjunt no està buit,
+i repassa tots els casos possibles
+utilitzant un iterador \texttt{it}.
+L'iterador apunta al valor més petit
+el valor del qual és almenys $x$.
+Si \texttt{it} és igual a \texttt{begin},
+l'element corresponent és el més proper a $x$.
+Si \texttt{it} és igual a \texttt{end},
+l'element més gran del conjunt és el més proper a $x$.
+Si no es compleix cap dels dos casos anteriors,
+l'element més proper a $x$ és o bé l'element assenyalat
+per \texttt{it} o bé l'element anterior.
+
+\section{Altres estructures}
+
+\subsubsection{Conjunt de bits}
+
+\index{set de bits}
+
+Un conjunt de bits, o \key{bitset}, és un vector
+on cada valor és 0 o 1.
+El codi següent crea un conjunt de bits amb 10 elements:
+\begin{lstlisting}
+bitset<10> s;
+s[1] = 1;
+s[3] = 1;
+s[4] = 1;
+s[7] = 1;
+cout << s[4] << "\n"; // 1
+cout << s[5] << "\n"; // 0
+\end{lstlisting}
+
+L'avantatge de fer servir conjunts de bits és
+que requereixen menys memòria que els vectors normals,
+perquè cada element només fa servir un únic bit de memòria.
+Per exemple,
+si emmagatzemèssim $n$ bits en un vector de tipus \texttt{int},
+necessitaríem $32n$ bits de memòria,
+però en un conjunt de bits només fan falta $n$ bits de memòria.
+A més, els valors d'un conjunt de bits
+es poden manipular de manera eficient fent servir
+operadors de bits, amb la qual cosa encara és possible
+optimitzar més alguns algorismes.
+
+El codi següent mostra una altra manera de crear el conjunt de bits
+anterior:
+\begin{lstlisting}
+bitset<10> s(string("0010011010")); // de dreta a esquerra
+cout << s[4] << "\n"; // 1
+cout << s[5] << "\n"; // 0
+\end{lstlisting}
+
+La funció \texttt{count} retorna el nombre
+d'uns en el conjunt de bits:
+
+\begin{lstlisting}
+bitset<10> s(string("0010011010"));
+cout << s.count() << "\n"; // 4
+\end{lstlisting}
+
+El codi següent mostra exemples d'operacions de bits:
+\begin{lstlisting}
+bitset<10> a(string("0010110110"));
+bitset<10> b(string("1011011000"));
+cout << (a&b) << "\n"; // 0010010000
+cout << (a|b) << "\n"; // 1011111110
+cout << (a^b) << "\n"; // 1001101110
+\end{lstlisting}
+
+\subsubsection{Deque}
+
+\index{deque}
+
+Una \key{deque} és un vector dinàmic
+la mida del qual es pot canviar eficientment
+a ambdós extrems del vector.
+Al igual que els vectors, un deque proporciona les funcions
+\texttt{push\_back} i \texttt{pop\_back}, però
+també inclou les funcions
+\texttt{push\_front} i \texttt{pop\_front}
+que no estan disponibles en un vector normal.
+
+Un deque es pot fer servir de la manera següent:
+\begin{lstlisting}
+deque<int> d;
+d.push_back(5); // [5]
+d.push_back(2); // [5,2]
+d.push_front(3); // [3,5,2]
+d.pop_back(); // [3,5]
+d.pop_front(); // [5]
+\end{lstlisting}
+
+La implementació interna d'un deque
+és més complexa que el d'un vector,
+i per aquest motiu, un deque és més lent que un vector.
+Tot i així, afegir o eliminar
+elements per qualsevol dels dos extrems triga $O(1)$ de mitjana.
+
+\subsubsection{Pila}
+
+\index{pila}
+
+Una \key{pila} (\texttt{stack})
+és una estructura de dades que proporciona dos
+operacions que triguen $O(1)$:
+afegint un element a la part superior,
+i retirar l'element de la part superior.
+
+El codi següent mostra com fer servir una pila:
+\begin{lstlisting}
+stack<int> s;
+s.push(3);
+s.push(2);
+s.push(5);
+cout << s.top(); // 5
+s.pop();
+cout << s.top(); // 2
+\end{lstlisting}
+
+\subsubsection{Queue}
+
+\index{queue}
+
+Una \key{queue} també
+ofereix dos operacions de temps $O(1)$:
+afegir un element al final de la cua,
+i treure el primer element de la cua.
+Només és possible accedir al primer i al darrer element de la cua.
+
+El codi següent mostra com fer servir una cua:
+\begin{lstlisting}
+queue<int> q;
+q.push(3);
+q.push(2);
+q.push(5);
+cout << q.front(); // 3
+q.pop();
+cout << q.front(); // 2
+\end{lstlisting}
+
+\subsubsection{Cua de prioritats}
+
+\index{cua de prioritats}
+\index{heap}
+
+Una \key{cua de prioritats}
+manté un conjunt d'elements.
+S'ofereixen les operacions d'inserció i,
+depenent del tipus de cua,
+recuperar o eliminar
+l'element mínim o màxim (només un dels dos).
+Inserir i eliminar elements triga $O(\log n)$,
+mentre que obtenir l'element mínim o màxim triga $O(1)$.
+
+En principi, es podria fer servir un conjunt ordenat per
+a implementar una cua de prioritats, però l'avantatge de fer
+servir una cua de prioritats és que els factors constants són més
+petits.
+Les cues de prioritats s'implementen fent servir una estructura
+de \texttt{heap} que és molt més senzilla que els arbres binaris
+balancejats dels conjunts ordenats.
+
+Per defecte, els elements en una cua de prioritats
+de C++ s'ordenen en ordre decreixent,
+i només podem trobar i eliminar l'element més gran de la cua.
+Per exemple:
+
+\begin{lstlisting}
+priority_queue<int> q;
+q.push(3);
+q.push(5);
+q.push(7);
+q.push(2);
+cout << q.top() << "\n"; // 7
+q.pop();
+cout << q.top() << "\n"; // 5
+q.pop();
+q.push(6);
+cout << q.top() << "\n"; // 6
+q.pop();
+\end{lstlisting}
+
+Si volem crear una cua de prioritat
+que permeti trobar i eliminar
+l'element més petit,
+podem fer el següent:
+
+\begin{lstlisting}
+priority_queue<int,vector<int>,greater<int>> q;
+\end{lstlisting}
+
+\subsubsection{Estructures de dades ``policy-based''}
+
+El compilador \texttt{g++} també ofereix algunes
+estructures de dades que no formen part
+de la biblioteca estàndard C++.
+Aquestes estructures s'anomenen \emph{policy-based}.
+Per a fer-les servir, hem d'afegir les línies següents:
+\begin{lstlisting}
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+\end{lstlisting}
+Després d'això, podem fer servir una estructura de dades
+\texttt{indexed\_set} que
+és un \texttt{set} que es pot indexar com un vector.
+La definició per a valors de tipus \texttt{int} és la següent:
+\begin{lstlisting}
+typedef tree<int,null_type,less<int>,rb_tree_tag,
+             tree_order_statistics_node_update> indexed_set; 
+\end{lstlisting}
+Ara podem crear un conjunt de la manera següent:
+\begin{lstlisting}
+indexed_set s;
+s.insert(2);
+s.insert(3);
+s.insert(7);
+s.insert(9);
+\end{lstlisting}
+L'especialitat d'aquest conjunt és que tenim accés
+els índexs que tindrien els elements en un vector ordenat.
+La funció $\texttt{find\_by\_order}$ retorna
+un iterador a l'element que ocupa una posició determinada:
+\begin{lstlisting}
+auto x = s.find_by_order(2);
+cout << *x << "\n"; // 7
+\end{lstlisting}
+I la funció $\texttt{order\_of\_key}$
+retorna la posició d'un element donat:
+\begin{lstlisting}
+cout << s.order_of_key(7) << "\n"; // 2
+\end{lstlisting}
+Si l'element no apareix al conjunt,
+obtenim la posició que tindria l'element
+al conjunt:
+\begin{lstlisting}
+cout << s.order_of_key(6) << "\n"; // 2
+cout << s.order_of_key(8) << "\n"; // 3
+\end{lstlisting}
+Ambdues funcions funcionen en temps logarítmic.
+
+\section{Comparació amb l'ordenació}
+
+Sovint és possible resoldre un problema
+fent servir estructures de dades o ordenació.
+De vegades hi ha diferències notables
+en l'eficiència real d'aquests enfocaments,
+que poden quedar amagats en les seves complexitats temporals.
+
+Considerem un problema on
+se'ns donen dues llistes $A$ i $B$, ambdues de
+$n$ elements.
+La nostra tasca és calcular el nombre d'elements
+que pertanyen a les dues llistes.
+Per exemple, per a les llistes
+\[A = [5,2,8,9] \hspace{10px} \textrm{i} \hspace{10px} B = [3,2,9,5],\]
+la resposta és 3 perquè els números 2, 5
+i 9 pertanyen a les dues llistes.
+
+La solució directa al problema és
+recórrer tots els parells d'elements en temps $O(n^2)$,
+però a continuació ens centrarem
+en els algorismes més eficients.
+
+\subsubsection{Algorisme 1}
+
+Construïm un conjunt amb els elements que apareixen a $A$,
+i després d'això, iterem a través dels elements
+de $B$ i comprovem si cadascun dels elements també
+pertanyen a $A$.
+Això és eficient perquè els elements de $A$
+estan en un conjunt.
+Utilitzant l'estructura \texttt{set},
+la complexitat temporal de l'algorisme és $O(n \log n)$.
+
+\subsubsection{Algorisme 2}
+
+No necessitem mantenir un conjunt ordenat per a $A$,
+per tant, en lloc d'un \texttt{set}
+fem servir un \texttt{unordered\_set}.
+Aquesta és una manera fàcil de fer l'algorisme
+més eficient, perquè només hem de canviar
+l'estructura de dades, sense canviar l'algorisme.
+La complexitat temporal del nou algorisme és $O(n)$.
+
+\subsubsection{Algorisme 3}
+
+Ordenem en lloc de fer servir estructures de dades.
+Primer, ordenem les dues llistes $A$ i $B$.
+Després d'això, recorrem les dues llistes
+alhora i trobem els elements comuns.
+El cost de l'ordenació és $O(n \log n)$,
+i la resta de l'algorisme triga $O(n)$,
+per tant, la complexitat total és $O(n \log n)$.
+
+\subsubsection{Comparació d'eficiència}
+
+La taula següent mostra l'eficiència
+els algorismes anteriors quan $n$ varia i
+els elements de les llistes són nombres enters
+aleatoris entre $1 \ldots 10^9$:
+
+\begin{centre}
+\begin{tabular}{rrrr} 
+$n$ & Algorisme 1 & Algorisme 2 & Algorisme 3 \\
+\hline
+$10^6$ & $1,5$ s & $0,3$ s & $0,2$ s \\
+$2 \cdot 10^6$ & $3,7$ s & $0,8$ s & $0,3$ s \\
+$3 \cdot 10^6$ & $5,7$ s & $1,3$ s & $0,5$ s \\
+$4 \cdot 10^6$ & $7,7$ s & $1,7$ s & $0,7$ s \\
+$5 \cdot 10^6$ & $10.0$ s & $2.3$ s & $0.9$ s \\
+\end{tabular}
+\end{centre}
+
+Els Algorismes 1 i 2 són iguals excepte que fem servir
+diferents estructures de conjunt.
+En aquest problema, aquesta elecció té un efecte important
+en el temps d'execució, perquè l'Algorisme 2
+és de 4 a 5 vegades més ràpid que l'Algorisme 1.
+
+Tanmateix, l'algorisme més eficient és el que fa servir l'ordenació,
+l'Algorisme 3.
+Només triga la meitat del temps que triga l'Algorisme 2.
+Curiosament, la complexitat temporal tant de
+l'Algorisme 1 com de l'Algorisme 3 és $O(n \log n)$
+però, malgrat això, l'Algorisme 3 és deu vegades més ràpid.
+Això es pot explicar pel fet que
+ordenar és un procediment senzill i només s'executa
+una vegada al començament de l'Algorisme 3,
+i la resta de l'algorisme triga temps lineal.
+Per altra banda,
+l'Algorisme 1 manté un arbre binari equilibrat complex
+durant tot l'algorisme.\footnote{N. del T.: L'Algorisme 2 triga
+$O(n)$, però també és més lent a la pràctica que
+l'Algorisme 3, que triga temps $O(n\log n)$. En
+principi, valors cada cops més grans de $n$ haurien d'afavorir
+l'Algorisme 2, fins a ser un nombre arbitràriament gran de vegades
+més ràpid que l'Algorisme 3. A la pràctica, $O(\log n)$ creix molt
+lentament; a més a més, algunes operacions, com ara fer servir memòria
+addicional, poden ser més costoses com més gran sigui la $n$
+i això pot negar l'avantatge teòric de ser $O(\log n)$ cops més ràpid.}
