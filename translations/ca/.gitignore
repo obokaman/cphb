@@ -4,3 +4,6 @@
 *.out
 *.idx
 *~
+\#*\#
+*.trans.tex
+*.unfill.tex
