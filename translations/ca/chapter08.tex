@@ -1,4 +1,4 @@
-y\chapter{Anàlisi amortitzada}
+\chapter{Anàlisi amortitzada}
 
 \index{anàlisi amortitzada}
 
@@ -32,9 +32,36 @@ un subvector la suma del qual és $x$ o informar que no hi ha aquesta
 subvector.
 
 Per exemple, el vector
-[[[[1]]]]
-conté un subvecor la suma del qual és 8:
-[[[[2]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+\end{tikzpicture}
+\end{center}
+conté un subvector la suma del qual és 8:
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (2,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+\end{tikzpicture}
+\end{center}
 
 
 Aquest problema es pot resoldre en temps $O(n)$ fent servir el mètode
@@ -45,13 +72,43 @@ que la suma del subvector resultant sigui com a màxim $x$. Si la suma
 es converteix exactament en $x$, s'ha trobat una solució.
 
 Com a exemple, considereu el vector següent i una suma objectiu $x=8$:
-[[[[3]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+\end{tikzpicture}
+\end{center}
 
 
 El subvector inicial conté els valors 1, 3 i 2 la suma dels quals és 6:
 
 
-[[[[4]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (0,0) rectangle (3,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+
+\draw[thick,->] (0.5,-0.7) -- (0.5,-0.1);
+\draw[thick,->] (2.5,-0.7) -- (2.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 Aleshores, el punter esquerre es mou un pas cap a la dreta. El punter
@@ -59,7 +116,24 @@ dret no es mou, perquè, en cas contrari, la suma del subvector
 superaria $x$.
 
 
-[[[[5]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (1,0) rectangle (3,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+
+\draw[thick,->] (1.5,-0.7) -- (1.5,-0.1);
+\draw[thick,->] (2.5,-0.7) -- (2.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 De nou, el punter esquerre es mou un pas cap a la dreta, i aquesta
@@ -68,7 +142,24 @@ subvector és $2+5+1=8$, de manera que s'ha trobat un subvector la suma
 del qual és $x$.
 
 
-[[[[6]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (2,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$2$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$1$};
+\node at (5.5,0.5) {$1$};
+\node at (6.5,0.5) {$2$};
+\node at (7.5,0.5) {$3$};
+
+\draw[thick,->] (2.5,-0.7) -- (2.5,-0.1);
+\draw[thick,->] (4.5,-0.7) -- (4.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 El temps d'execució de l'algorisme depèn del nombre de passos que es
@@ -99,14 +190,45 @@ dret és com a màxim $x$. Si la suma és exactament $x$, s'ha trobat una
 solució.
 
 Per exemple, considereu el vector següent i una suma objectiu $x=12$:
-[[[[7]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$4$};
+\node at (2.5,0.5) {$5$};
+\node at (3.5,0.5) {$6$};
+\node at (4.5,0.5) {$7$};
+\node at (5.5,0.5) {$9$};
+\node at (6.5,0.5) {$9$};
+\node at (7.5,0.5) {$10$};
+\end{tikzpicture}
+\end{center}
 
 
 Les posicions inicials dels punters són les següents. La suma dels
 valors és $1+10=11$ que és més petit que $x$.
 
 
-[[[[8]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (0,0) rectangle (1,1);
+\fill[color=lightgray] (7,0) rectangle (8,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$4$};
+\node at (2.5,0.5) {$5$};
+\node at (3.5,0.5) {$6$};
+\node at (4.5,0.5) {$7$};
+\node at (5.5,0.5) {$9$};
+\node at (6.5,0.5) {$9$};
+\node at (7.5,0.5) {$10$};
+
+\draw[thick,->] (0.5,-0.7) -- (0.5,-0.1);
+\draw[thick,->] (7.5,-0.7) -- (7.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 A continuació, el punter esquerre es mou un pas cap a la dreta. El
@@ -114,14 +236,50 @@ punter dret es mou tres passos cap a l'esquerra i la suma es
 converteix en $4+7=11$.
 
 
-[[[[9]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (1,0) rectangle (2,1);
+\fill[color=lightgray] (4,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$4$};
+\node at (2.5,0.5) {$5$};
+\node at (3.5,0.5) {$6$};
+\node at (4.5,0.5) {$7$};
+\node at (5.5,0.5) {$9$};
+\node at (6.5,0.5) {$9$};
+\node at (7.5,0.5) {$10$};
+
+\draw[thick,->] (1.5,-0.7) -- (1.5,-0.1);
+\draw[thick,->] (4.5,-0.7) -- (4.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 Després d'això, el punter esquerre torna a moure's un pas cap a la
 dreta. El punter dret no es mou i s'ha trobat una solució $5+7=12$.
 
 
-[[[[10]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (2,0) rectangle (3,1);
+\fill[color=lightgray] (4,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$4$};
+\node at (2.5,0.5) {$5$};
+\node at (3.5,0.5) {$6$};
+\node at (4.5,0.5) {$7$};
+\node at (5.5,0.5) {$9$};
+\node at (6.5,0.5) {$9$};
+\node at (7.5,0.5) {$10$};
+
+\draw[thick,->] (2.5,-0.7) -- (2.5,-0.1);
+\draw[thick,->] (4.5,-0.7) -- (4.5,-0.1);
+\end{tikzpicture}
+\end{center}
 
 
 El temps d'execució de l'algorisme és $O(n \log n)$, perquè primer
@@ -169,37 +327,172 @@ buida, l'element no existeix. Finalment, afegim l'element actual a la
 pila.
 
 Com a exemple, considereu el vector següent:
-[[[[11]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+\end{tikzpicture}
+\end{center}
 
 
 En primer lloc, els elements 1, 3 i 4 s'afegeixen a la pila, perquè
 cada element és més gran que l'element anterior. Així, l'element menor
 més proper de 4 és 3 i l'element menor més proper de 3 és 1.
-[[[[12]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (2,0) rectangle (3,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+
+\draw (0.2,0.2-1.2) rectangle (0.8,0.8-1.2);
+\draw (1.2,0.2-1.2) rectangle (1.8,0.8-1.2);
+\draw (2.2,0.2-1.2) rectangle (2.8,0.8-1.2);
+
+\node at (0.5,0.5-1.2) {$1$};
+\node at (1.5,0.5-1.2) {$3$};
+\node at (2.5,0.5-1.2) {$4$};
+
+\draw[->,thick] (0.8,0.5-1.2) -- (1.2,0.5-1.2);
+\draw[->,thick] (1.8,0.5-1.2) -- (2.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 El següent element 2 és menor que els dos elements superiors de la
 pila. Així, els elements 3 i 4 s'eliminen de la pila i, a continuació,
 s'afegeix l'element 2 a la pila. El seu element menor més proper
 és 1:
-[[[[13]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (3,0) rectangle (4,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+
+\draw (0.2,0.2-1.2) rectangle (0.8,0.8-1.2);
+\draw (3.2,0.2-1.2) rectangle (3.8,0.8-1.2);
+
+\node at (0.5,0.5-1.2) {$1$};
+\node at (3.5,0.5-1.2) {$2$};
+
+\draw[->,thick] (0.8,0.5-1.2) -- (3.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Aleshores, l'element 5 és més gran que l'element 2, de manera que
 s'afegirà a la pila i el seu element menor més proper és 2:
-[[[[14]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (4,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+
+\draw (0.2,0.2-1.2) rectangle (0.8,0.8-1.2);
+\draw (3.2,0.2-1.2) rectangle (3.8,0.8-1.2);
+\draw (4.2,0.2-1.2) rectangle (4.8,0.8-1.2);
+
+\node at (0.5,0.5-1.2) {$1$};
+\node at (3.5,0.5-1.2) {$2$};
+\node at (4.5,0.5-1.2) {$5$};
+
+\draw[->,thick] (0.8,0.5-1.2) -- (3.2,0.5-1.2);
+\draw[->,thick] (3.8,0.5-1.2) -- (4.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Després d'això, l'element 5 s'elimina de la pila i els elements 3 i 4
 s'afegeixen a la pila:
-[[[[15]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (6,0) rectangle (7,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+
+\draw (0.2,0.2-1.2) rectangle (0.8,0.8-1.2);
+\draw (3.2,0.2-1.2) rectangle (3.8,0.8-1.2);
+\draw (5.2,0.2-1.2) rectangle (5.8,0.8-1.2);
+\draw (6.2,0.2-1.2) rectangle (6.8,0.8-1.2);
+
+\node at (0.5,0.5-1.2) {$1$};
+\node at (3.5,0.5-1.2) {$2$};
+\node at (5.5,0.5-1.2) {$3$};
+\node at (6.5,0.5-1.2) {$4$};
+
+\draw[->,thick] (0.8,0.5-1.2) -- (3.2,0.5-1.2);
+\draw[->,thick] (3.8,0.5-1.2) -- (5.2,0.5-1.2);
+\draw[->,thick] (5.8,0.5-1.2) -- (6.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Finalment, tots els elements excepte l'1 s'eliminen de la pila i
 l'últim element 2 s'afegeix a la pila:
 
 
-[[[[16]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (7,0) rectangle (8,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$1$};
+\node at (1.5,0.5) {$3$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$2$};
+\node at (4.5,0.5) {$5$};
+\node at (5.5,0.5) {$3$};
+\node at (6.5,0.5) {$4$};
+\node at (7.5,0.5) {$2$};
+
+\draw (0.2,0.2-1.2) rectangle (0.8,0.8-1.2);
+\draw (7.2,0.2-1.2) rectangle (7.8,0.8-1.2);
+
+\node at (0.5,0.5-1.2) {$1$};
+\node at (7.5,0.5-1.2) {$2$};
+
+\draw[->,thick] (0.8,0.5-1.2) -- (7.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 L'eficiència de l'algorisme depèn del nombre total d'operacions fets a
@@ -235,37 +528,159 @@ de la nova finestra al final de la cua.
 Com a exemple, considereu el vector següent:
 
 
-[[[[17]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+\end{tikzpicture}
+\end{center}
 
 
 Suposem que la mida de la finestra lliscant és 4. A la primera posició
 de la finestra, el valor més petit és 1:
-[[[[18]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (0,0) rectangle (4,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+
+\draw (1.2,0.2-1.2) rectangle (1.8,0.8-1.2);
+\draw (2.2,0.2-1.2) rectangle (2.8,0.8-1.2);
+\draw (3.2,0.2-1.2) rectangle (3.8,0.8-1.2);
+
+\node at (1.5,0.5-1.2) {$1$};
+\node at (2.5,0.5-1.2) {$4$};
+\node at (3.5,0.5-1.2) {$5$};
+
+\draw[->,thick] (1.8,0.5-1.2) -- (2.2,0.5-1.2);
+\draw[->,thick] (2.8,0.5-1.2) -- (3.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Aleshores, la finestra es mou un pas cap a la dreta. El nou element 3
 és més petit que els elements 4 i 5 de la cua, de manera que els
 elements 4 i 5 s'eliminen de la cua i l'element 3 s'afegeix a la
 cua. El valor més petit segueix sent 1.
-[[[[19]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (1,0) rectangle (5,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+
+\draw (1.2,0.2-1.2) rectangle (1.8,0.8-1.2);
+\draw (4.2,0.2-1.2) rectangle (4.8,0.8-1.2);
+
+\node at (1.5,0.5-1.2) {$1$};
+\node at (4.5,0.5-1.2) {$3$};
+
+\draw[->,thick] (1.8,0.5-1.2) -- (4.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Després d'això, la finestra es mou de nou i l'element més petit 1 ja
 no pertany a la finestra. Així, s'elimina de la cua i el valor més
 petit és ara 3. També s'afegeix el nou element 4 a la cua.
-[[[[20]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (2,0) rectangle (6,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+
+\draw (4.2,0.2-1.2) rectangle (4.8,0.8-1.2);
+\draw (5.2,0.2-1.2) rectangle (5.8,0.8-1.2);
+
+\node at (4.5,0.5-1.2) {$3$};
+\node at (5.5,0.5-1.2) {$4$};
+
+\draw[->,thick] (4.8,0.5-1.2) -- (5.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 El següent element nou 1 és més petit que tots els elements de la
 cua. Així, tots els elements s'eliminen de la cua i aquesta només
 contindrà l'element 1:
-[[[[21]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (3,0) rectangle (7,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+
+\draw (6.2,0.2-1.2) rectangle (6.8,0.8-1.2);
+
+\node at (6.5,0.5-1.2) {$1$};
+\end{tikzpicture}
+\end{center}
 
 
 Finalment la finestra arriba a la seva última posició. L'element 2
 s'afegeix a la cua, però el valor més petit dins de la finestra
 segueix sent 1.
-[[[[22]]]]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[color=lightgray] (4,0) rectangle (8,1);
+\draw (0,0) grid (8,1);
+
+\node at (0.5,0.5) {$2$};
+\node at (1.5,0.5) {$1$};
+\node at (2.5,0.5) {$4$};
+\node at (3.5,0.5) {$5$};
+\node at (4.5,0.5) {$3$};
+\node at (5.5,0.5) {$4$};
+\node at (6.5,0.5) {$1$};
+\node at (7.5,0.5) {$2$};
+
+\draw (6.2,0.2-1.2) rectangle (6.8,0.8-1.2);
+\draw (7.2,0.2-1.2) rectangle (7.8,0.8-1.2);
+
+\node at (6.5,0.5-1.2) {$1$};
+\node at (7.5,0.5-1.2) {$2$};
+
+\draw[->,thick] (6.8,0.5-1.2) -- (7.2,0.5-1.2);
+\end{tikzpicture}
+\end{center}
 
 
 Com que cada element del vector s'afegeix a la cua exactament una
