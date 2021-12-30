@@ -121,7 +121,7 @@ de final, troba un scheduling
 que inclogui tants esdeveniments com sigui possible.
 No és permet seleccionar un esdeveniment parcialment.
 Per exemple, considerem els esdeveniments següents:
-\begin{centre}
+\begin{center}
 \begin{tabular}{lll}
 esdeveniment & hora d'inici & hora final \\
 \hline
@@ -130,7 +130,7 @@ $B$ & 2 & 5 \\
 $C$ & 3 & 9 \\
 $D$ & 6 & 8 \\
 \end{tabular}
-\end{centre}
+\end{center}
 En aquest cas, el nombre màxim d'esdeveniments és dos.
 Per exemple, podem seleccionar els esdeveniments $B$ i $D$
 com segueix:
@@ -278,7 +278,7 @@ Quina és la puntuació total més gran
 que podem obtenir?
 
 Per exemple, suposem que les tasques són les següents:
-\begin{centre}
+\begin{center}
 \begin{tabular}{lll}
 tasca & durada & termini \\
 \hline
@@ -287,7 +287,7 @@ $B$ & 3 & 5 \\
 $C$ & 2 & 7 \\
 $D$ & 4 & 5 \\
 \end{tabular}
-\end{centre}
+\end{center}
 En aquest cas, aquesta és una assignació òptima:
 \begin{center}
 \begin{tikzpicture}[scale=.4]
@@ -451,7 +451,7 @@ seu codi corresponent.
 Per exemple, la següent codificació assigna aquests
 codis als caràcters:
 \texttt{A}–\texttt{D}:
-\begin{centre}
+\begin{center}
 \begin{tabular}{rr}
 caràcter & codi \\
 \hline
@@ -460,7 +460,7 @@ caràcter & codi \\
 \texttt{C} & 10 \\
 \texttt{D} & 11 \\
 \end{tabular}
-\end{centre}
+\end{center}
 Aquesta codificació té \key{longitud constant}
 perquè cada codi té la mateixa mida.
 Fent servir aquesta codificació, la cadena
@@ -475,7 +475,7 @@ a caràcters que apareixen sovint
 i codis llargs per a caràcters que apareixen poques vegades.
 Es dóna que la següent codificació és \key{òptima}
 per a la cadena anterior:
-\begin{centre}
+\begin{center}
 \begin{tabular}{rr}
 caràcter & codi \\
 \hline
@@ -484,7 +484,7 @@ caràcter & codi \\
 \texttt{C} & 10 \\
 \texttt{D} & 111 \\
 \end{tabular}
-\end{centre}
+\end{center}
 Una codificació òptima comprimeix la cadena en el mínim
 espai possible.
 En aquest cas, es genera la cadena comprimida
@@ -503,7 +503,7 @@ a partir de la cadena comprimida.
 Si un codi pogués ser prefix d'un altre
 això no sempre seria possible.
 Per exemple, la codificació següent \emph{no} és vàlida:
-\begin{centre}
+\begin{center}
 \begin{tabular}{rr}
 caràcter & codi \\
 \hline
@@ -512,7 +512,7 @@ caràcter & codi \\
 \texttt{C} & 1011 \\
 \texttt{D} & 111 \\
 \end{tabular}
-\end{centre}
+\end{center}
 Amb aquesta codificació, no sabem si $1011$ és la compressió
 de \texttt{AB} o de \texttt{C}.
 
@@ -649,7 +649,7 @@ Finalment, combinen els dos nodes restants:
 
 Ara tenim tots els nodes estan connectats en un arbre, i
 podem recuperar la codificació llegint l'arbre:
-\begin{centre}
+\begin{center}
 \begin{tabular}{rr}
 caràcter & codi \\
 \hline
@@ -658,7 +658,7 @@ caràcter & codi \\
 \texttt{C} & 10 \\
 \texttt{D} & 111 \\
 \end{tabular}
-\end{centre}
+\end{center}
 
 %% L'autor no discuteix l'optimalitat de Huffman. Afegeixo una
 %% explicació.

@@ -8,22 +8,20 @@ fan servir l'ordenació com a subrutina,
 perquè sovint és més fàcil de processar
 dades si els elements estan ordenats.
 
-Per exemple, el problema de ''té un vector
-dos elements iguals?'' és fàcil de resoldre mitjançant l'ordenació.
-Si el vector matriu conté dos elements iguals,
-després d'ordenar-los estaran l'un al costat de l'altre,
-de manera que és fàcil trobar-los.
-Tanmateix, el problema ''quin és l'element més freqüent
-d'un vector?'' es pot resoldre de la mateixa manera.
+Per exemple, el problema de ``té un vector dos elements iguals?'' és
+fàcil de resoldre mitjançant l'ordenació.  Si el vector conté dos
+elements iguals, després d'ordenar-los estaran l'un al costat de
+l'altre, de manera que és fàcil trobar-los.  El problema ``quin és
+l'element més freqüent d'un vector?'' es pot resoldre de la mateixa
+manera.
 
 Hi ha molts algorismes per ordenar, i aquests són
 també bons exemples de com aplicar
 diferents tècniques del disseny d'algoritmes.
 Els algorismes d'ordenació general eficients
-treballar en $O(n \log n)$ temps,
+treballar en temps $O(n \log n)$,
 i molts algorismes que utilitzen l'ordenació
-també com a subrutina
-tenen aquesta complexitat temporal.
+com a subrutina tenen també aquesta complexitat temporal.
 
 \section{Teoria de l'ordenació}
 
@@ -35,7 +33,7 @@ ordena els elements en ordre creixent.
 \end{framed}
 \noindent
 Per exemple, el vector
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -47,9 +45,9 @@ Per exemple, el vector
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$6$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 queda de la manera següent després d'ordenar-lo:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -61,14 +59,14 @@ queda de la manera següent després d'ordenar-lo:
 \node at (6.5,0.5) {$8$};
 \node at (7.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 \subsubsection{Algorismes $O(n^2)$}
 
 \index{ordenació amb bombolla}
 
 Alguns algorismes senzills per ordenar un vector
-treballen en $O(n^2)$ temps.
+treballen en temps $O(n^2)$.
 Aquests algorismes són curts i generalment
 consten de dos bucles niats.
 Un algorisme famós amb complexitat $O(n^2)$
@@ -86,8 +84,8 @@ L'algorisme es pot implementar de la següent manera:
 \begin{lstlisting}
 for (int i = 0; i < n; i++) {
     for (int j = 0; j < n-1; j++) {
-        if (vector[j] > vector[j+1]) {
-            swap(vector[j],vector[j+1]);
+        if (v[j] > v[j+1]) {
+            swap(v[j],v[j+1]);
         }
     }
 }
@@ -102,7 +100,7 @@ ordenat.
 
 Per exemple, en el vector
 
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 
@@ -115,13 +113,13 @@ Per exemple, en el vector
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$6$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 \noindent
 la primera ronda d'ordenació amb bombolla intercanvia els
 elements com segueix:
 
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -133,11 +131,11 @@ elements com segueix:
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$6$};
 
-\draw[thick,<->] (3,5,-0,25) .. controls (3,25,-1,00) and (2,75,-1,00) .. (2,5,-0,25);
+\draw[thick,<->] (3.5,-0.25) .. controls (3.25,-1.00) and (2.75,-1.00) .. (2.5,-0.25);
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -149,11 +147,11 @@ elements com segueix:
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$6$};
 
-\draw[thick,<->] (5,5,-0,25) .. controls (5,25,-1,00) and (4,75,-1,00) .. (4,5,-0,25);
+\draw[thick,<->] (5.5,-0.25) .. controls (5.25,-1.00) and (4.75,-1.00) .. (4.5,-0.25);
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -165,11 +163,11 @@ elements com segueix:
 \node at (6.5,0.5) {$9$};
 \node at (7.5,0.5) {$6$};
 
-\draw[thick,<->] (6,5,-0,25) .. controls (6,25,-1,00) and (5,75,-1,00) .. (5,5,-0,25);
+\draw[thick,<->] (6.5,-0.25) .. controls (6.25,-1.00) and (5.75,-1.00) .. (5.5,-0.25);
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -181,9 +179,9 @@ elements com segueix:
 \node at (6.5,0.5) {$6$};
 \node at (7.5,0.5) {$9$};
 
-\draw[thick,<->] (7,5,-0,25) .. controls (7,25,-1,00) and (6,75,-1,00) .. (6,5,-0,25);
+\draw[thick,<->] (7.5,-0.25) .. controls (7.25,-1.00) and (6.75,-1.00) .. (6.5,-0.25);
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 \subsubsection{Inversions}
 
@@ -198,13 +196,13 @@ comparacions que es fan. (I, en el pitjor cas, és
 el nombre de swaps).
 
 Un concepte útil a l'hora d'analitzar l'ordenació
-algorismes és el concepte d'\key{inversió}:
-un parell d'elements de vector
-$(\texttt{vector}[a],\texttt{vector}[b])$ tal que
-$a<b$ i $\texttt{vector}[a]>\texttt{vector}[b]$,
-És a dir, un parell d'elements en l'ordre incorrecte.
+algorismes és el concepte d'\key{inversió}, que són
+els parells d'elements situats en l'ordre incorrecte, és
+a dir, els parells
+$(\texttt{v}[a],\texttt{v}[b])$ tal que
+$a<b$ i $\texttt{v}[a]>\texttt{v}[b]$.
 Per exemple, el vector
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -216,7 +214,7 @@ Per exemple, el vector
 \node at (6.5,0.5) {$9$};
 \node at (7.5,0.5) {$8$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 té tres inversions: $(6,3)$, $(6,5)$ i $(9,8)$.
 El nombre d'inversions indica
 quanta feina es necessària per ordenar el vector.
@@ -243,19 +241,19 @@ de l'algorisme és almenys $O(n^2)$.
 en temps $O(n \log n)$ fent servir algorismes
 que no es limiten a intercanviar elements consecutius.
 Un d'aquests algorismes és \key{merge sort}\footnote{Segons \cite{knu983},
-merge sort va ser inventat per J. von Neumann el 1945.},
+el merge sort va ser inventat per J. von Neumann el 1945.},
 que es basa en la recursivitat.
 
-El merge sort ordena un subvector \texttt{array}$[a \ldots b]$ de la següent manera:
+El merge sort ordena un subvector \texttt{v}$[a \ldots b]$ de la següent manera:
 
 \begin{enumerate}
 \item Si $a=b$, no feu res, perquè el subvector ja està ordenat.
 \item Calcula la posició de l'element central: $k=\lfloor (a+b)/2 \rfloor$.
-\item Ordena recursivament el subvector \texttt{array}$[a \ldots k]$.
-\item Ordena recursivament el subvector \texttt{array}$[k+1 \ldots b]$.
-\item Fusiona (\emph{merge}) els subvectors ordenats \texttt{array}$[a \ldots k]$ i
-\texttt{vector}$[k+1 \ldots b]$
-en un subvector ordenat \texttt{vector}$[a \ldots b]$.
+\item Ordena recursivament el subvector \texttt{v}$[a \ldots k]$.
+\item Ordena recursivament el subvector \texttt{v}$[k+1 \ldots b]$.
+\item Fusiona (\emph{merge}) els subvectors ordenats \texttt{v}$[a \ldots k]$ i
+\texttt{v}$[k+1 \ldots b]$
+en un subvector ordenat \texttt{v}$[a \ldots b]$.
 \end{enumerate}
 
 El merge sort és un algorisme eficient, perquè cada pas
@@ -263,11 +261,11 @@ redueix a la meitat la mida del subvector.
 La recursivitat consisteix en $O(\log n)$ nivells,
 i cada nivell triga temps $O(n)$.
 És possible fusionar i ordenar els subvectors
-\texttt{array}$[a \ldots k]$ i \texttt{array}$[k+1 \ldots b]$ en
+\texttt{v}$[a \ldots k]$ i \texttt{v}$[k+1 \ldots b]$ en
 temps linial perquè ja estan ordenats.
 
 Per exemple, considerem el vector següent:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -279,10 +277,10 @@ Per exemple, considerem el vector següent:
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 Dividim el vector en dos subvectors:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,1);
 \draw (5,0) grid (9,1);
@@ -297,10 +295,10 @@ Dividim el vector en dos subvectors:
 \node at (7.5,0.5) {$5$};
 \node at (8.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 Ordenem els subvectors de manera recursiva:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,1);
 \draw (5,0) grid (9,1);
@@ -315,11 +313,11 @@ Ordenem els subvectors de manera recursiva:
 \node at (7.5,0.5) {$8$};
 \node at (8.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 Finalment, l'algorisme fusiona els subvectors
 ordenats i crea el vector final:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -331,14 +329,14 @@ ordenats i crea el vector final:
 \node at (6.5,0.5) {$8$};
 \node at (7.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 \subsubsection{Límit inferior per l'ordenació}
 
-És possible ordenar més ràpidament que en $O(n \log n)$ temps?
+És possible ordenar més ràpidament que en temps $O(n \log n)$?
 Resulta que això \emph{no} és possible
 quan fem servir algorismes d'ordenació
-que es basen en comparar elements d'un vector.
+que es basen en comparar els elements d'un vector.
 
 Aquest límit inferior $O(n \log n)$ es demostra si hom
 considera l'ordenació com un procés on cada comparació
@@ -383,7 +381,7 @@ contingut del vector original. El procés crea el següent arbre:
 \end{tikzpicture}
 \end{center}
 
-Aquí ''$x<y?$'' significa que comparem alguns elements
+Aquí ``$x<y?$'' significa que comparem alguns elements
 $x$ i $y$. Si $x<y$, el procés continua cap a l'esquerra,
 i en cas contrari cap a la dreta.
 Els resultats d'aquest procés són les $n!$ maneres
@@ -413,13 +411,13 @@ un vector en tempos $O(n)$ assumint que tots els elements del
 vector són enters entre $0 \ldots c$ i $c=O(n)$.
 
 L'algorisme crea un vector addicional de mida $c$, els 
-índexs del qual són els elements del vector original.
+índexos del qual són els elements del vector original.
 L'algoritme itera a través del vector original
 i calcula quantes vegades cada element
 apareix al vector.
 
 Per exemple, el vector
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 \node at (0.5,0.5) {$1$};
@@ -431,9 +429,9 @@ Per exemple, el vector
 \node at (6.5,0.5) {$5$};
 \node at (7.5,0.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 li correspon el seg\"uent vector de comptatge:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (9,1);
 \node at (0.5,0.5) {$1$};
@@ -458,7 +456,7 @@ li correspon el seg\"uent vector de comptatge:
 \node at (7.5,1.5) {$8$};
 \node at (8.5,1.5) {$9$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 
 Per exemple, el valor a la posició 3
 del vector de comptatge és 2,
@@ -473,8 +471,8 @@ Per tant, la complexitat temporal total és $O(n)$.
 
 L'ordenació per comptatge és un algorisme molt eficient
 però només es pot fer servir quan el valor $c$
-és prou petit, de manera que els elements del vector es
-puguin fer servir com a índexs al vector de comptatge.
+és prou petit, ja que en cas contrari no podem fer servir els
+elements del vector com a índexos del vector de comptatge.
 
 \section{Ordenació en C++}
 
@@ -483,7 +481,7 @@ puguin fer servir com a índexs al vector de comptatge.
 Gairebé mai és bona idea fer servir
 algorismes d'ordenació casolans
 en un concurs, perquè els llenguatges de programació
-ja tenen bones implementacions.
+ja venen amb molt bones implementacions.
 Per exemple, la biblioteca estàndard de C++ conté
 la funció \texttt{sort} que es pot fer servir per a ordenar
 vectors i altres estructures de dades.
@@ -491,7 +489,7 @@ vectors i altres estructures de dades.
 Hi ha molts avantatges en fer servir les funcions de les biblioteques.
 Primer, estalvia temps perquè no cal implementar la funció.
 Segon, la implementació de la biblioteca és
-certament correcte i eficient: no és probable
+certament correcta i eficient: no és probable
 que la teva funció de classificació casolana sigui millor.
 
 En aquesta secció veurem com fer servir la
@@ -524,7 +522,7 @@ sort(s.begin(), s.end());
 \end{lstlisting}
 Ordenar una cadena significa que ordenem tots
 els seus caràcters.
-Per exemple, la cadena ''monkey'' es converteix en ''ekmnoy''.
+Per exemple, la cadena ``monkey'' es converteix en ``ekmnoy''.
 
 \subsubsection{Operadors de comparació}
 
@@ -554,7 +552,7 @@ v.push_back({2,3});
 v.push_back({1,2});
 sort(v.begin(), v.end());
 \end{lstlisting}
-Després d'això, l'ordre dels parelles és
+Després d'això, l'ordre de les parelles és
 $(1,2)$, $(1,5)$ i $(2,3)$.
 
 \index{tupla@\texttt{tuple}}
@@ -588,7 +586,7 @@ a dintre de la estructura de dades com a funció
 el paràmetre del qual és un altre element del mateix tipus.
 L'operador hauria de retornar \texttt{true}
 si l'element és més petit que el paràmetre,
-i \texttt{fals} en cas contrari.
+i \texttt{false} en cas contrari.
 
 Per exemple, l'estructura \texttt{P} següent
 conté les coordenades $x$ i $y$ d'un punt.
@@ -617,8 +615,8 @@ Per exemple, la següent funció de comparació \texttt{comp}
 ordena les cadenes primer per longitud i segon per ordre alfabètic:
 
 \begin{lstlisting}
-bool comp(string a, string b) {
-    if (a.size() != b.size()) retorna a.size() < b.size();
+bool comp(const string& a, const string& b) {
+    if (a.size() != b.size()) return a.size() < b.size();
     return a < b;
 }
 \end{lstlisting}
@@ -627,13 +625,20 @@ Ara podem ordenar un vector de cadenes així:
 sort(v.begin(), v.end(), comp);
 \end{lstlisting}
 
+N. del T.: També podem fer servir expressions lambda:
+\begin{lstlisting}
+sort(v.begin(), v.end(), [](const string& a, const string& b) {
+    return (a.size() != b.size()) ? (a.size() < b.size()) : (a < b);
+});
+\end{lstlisting}
+
 \section{Cerca binària}
 
 \index{cerca binària}
 
 Un mètode general per cercar un element
 en una vector és fer servir un bucle \texttt{for}
-que iteri pels elements del vector.
+que iteri els elements del vector.
 Per exemple, el codi següent cerca
 un element $x$ en el vector $v$:
 
@@ -786,18 +791,18 @@ que és una solució vàlida per a un problema.
 Ens donen una funció $\texttt{ok}(x)$
 que retorna \texttt{true} si $x$ és vàlida
 i \texttt{false} en cas contrari.
-A més, sabem que $\texttt{ok}(x)$ és \texttt{fals}
+A més, sabem que $\texttt{ok}(x)$ és \texttt{false}
 quan $x<k$ i \texttt{true} quan $x \ge k$.
 És a dir:
 
-\begin{centre}
+\begin{center}
 \begin{tabular}{r|rrrrrrrr}
 $x$ & 0 & 1 & $\cdots$ & $k-1$ & $k$ & $k+1$ & $\cdots$ \\
 \hline
 $\texttt{ok}(x)$ & \texttt{f} & \texttt{f}
 & $\cdots$ & \texttt{f} & \texttt{t} & \texttt{t} & $\cdots$ \\
 \end{tabular}
-\end{centre}
+\end{center}
 
 \noindent
 Ara, el valor de $k$ es pot trobar mitjançant la cerca binària:

@@ -180,7 +180,7 @@ amb el paràmetre $n$.
 La taula següent mostra el nombre de crides
 produït per aquesta crida original:
 
-\begin{centre}
+\begin{center}
 \begin{tabular}{rr}
 crida de funció & nombre de crides \\
 \hline
@@ -190,7 +190,7 @@ $g(n-2)$ & 4 \\
 $\cdots$ & $\cdots$ \\
 $g(1)$ & $2^{n-1}$ \\
 \end{tabular}
-\end{centre}
+\end{center}
 
 En base a això, la complexitat temporal és
 \[1+2+4+\cdots+2^{n-1} = 2^n-1 = O(2^n).\]
@@ -323,7 +323,7 @@ suposant un límit de temps d'un segon. \footnote{No totes les operacions
 costen el mateix: per exemple, les operacions d'entrada i sortida
 són més costoses que les operacions aritmètiques.}
 
-\begin{centre}
+\begin{center}
 \begin{tabular}{ll}
 mida d'entrada & complexitat esperada \\
 \hline
@@ -334,7 +334,7 @@ $n \le 5000$ & $O(n^2)$ \\
 $n \le 10^6$ & $O(n \log n)$ o $O(n)$ \\
 $n$ és gran & $O(1)$ o $O(\log n)$ \\
 \end{tabular}
-\end{centre}
+\end{center}
 
 Per exemple, si la mida de l'entrada és $n=10^5$,
 segurament la solució del problema sigui un
@@ -375,7 +375,7 @@ del vector\footnote{El llibre \emph{Programming Pearls} \cite{ben86} de J. Bentl
 El problema és interessant quan hi ha valors
 negatius en el vector.
 Per exemple, en el vector
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
 
@@ -388,10 +388,10 @@ Per exemple, en el vector
 \node at (6.5,0.5) {$-5$};
 \node at (7.5,0.5) {$2$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 \begin{samepage}
 el subvector següent té suma màxima $10$:
-\begin{centre}
+\begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (1,0) rectangle (6,1);
 \draw (0,0) grid (8,1);
@@ -405,7 +405,7 @@ el subvector següent té suma màxima $10$:
 \node at (6.5,0.5) {$-5$};
 \node at (7.5,0.5) {$2$};
 \end{tikzpicture}
-\end{centre}
+\end{center}
 \end{samepage}
 
 Suposem que es permet triar un subvector buit,
@@ -521,7 +521,7 @@ valors de $n$ en un ordinador modern.
 En cada prova, vam generar l'entrada aleatòriament, i
 no vam mesurar el temps necessari per llegir l'entrada.
 
-\begin{centre}
+\begin{center}
 \begin{tabular}{rrrr}
 mida del vector $n$ & algorisme 1 & algorisme 2 & algorisme 3 \\
 \hline
@@ -532,7 +532,7 @@ $10^5$ & > $10.0$ s & $5.3$ s & $0.0$ s \\
 $10^6$ & > $10.0$ s & > $10.0$ s & $0.0$ s \\
 $10^7$ & > $10.0$ s & > $10.0$ s & $0.0$ s \\
 \end{tabular}
-\end{centre}
+\end{center}
 
 La comparació mostra que tots els algorismes
 són eficients quan la mida de l'entrada és petita,
