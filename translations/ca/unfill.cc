@@ -12,9 +12,11 @@ int main() {
   int count = 0;
   while (getline(cin, s)) {
     if (s.substr(0,7) == "\\begin{" and
-        s.back()=='}' && s.size() < 20) {
-      string end = "\\end{" + s.substr(7);
+        s.find('}') != string::npos) {
+      int pos = s.find('}');
+      string end = "\\end{" + s.substr(7, pos - 7 + 1);
       cerr << "Found block " << s << "\n";
+      cerr << "End: " << end << "\n";
       cout << line << "\n";
       line.clear();
       line = s + "\n";
