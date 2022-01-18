@@ -1,0 +1,1373 @@
+\chapter{Fluxos i talls}
+
+En aquest capítol considerem els dos problemes següents:
+
+\begin{itemize}
+\item \key{Trobar un flux màxim}: Quina és la quantitat màxima de
+  flux que podem enviar d'un node a un altre node?
+\item \key{Trobar un tall mínim}: Què és el pes mínim d'un conjunt de arestes
+  que separa dos nodes del graf?
+\end{itemize}
+
+
+L'entrada d'aquests dos problemes és un graf dirigit i amb pesos que
+conté dos nodes especials: el node origen (font, \emph{source}) és un
+node sense arestes entrants, i el node destí (aigüera,
+\emph{sink}) és un node sense arestes sortints.
+
+Com a exemple, utilitzarem el graf següent on el node 1 és el node origen i
+el node 6 és el node destí:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (7,2) {$6$};
+\node[draw, circle] (5) at (3,1) {$4$};
+\node[draw, circle] (6) at (5,1) {$5$};
+\path[draw,thick,->] (1) -- node[font=\small,label=5] {} (2);
+\path[draw,thick,->] (2) -- node[font=\small,label=6] {} (3);
+\path[draw,thick,->] (3) -- node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (1) -- node[font=\small,label=below:4] {} (5);
+\path[draw,thick,->] (5) -- node[font=\small,label=below:1] {} (6);
+\path[draw,thick,->] (6) -- node[font=\small,label=below:2] {} (4);
+\path[draw,thick,<-] (2) -- node[font=\small,label=left:3] {} (5);
+\path[draw,thick,->] (3) -- node[font=\small,label=left:8] {} (6);
+\end{tikzpicture}
+\end{center}
+
+
+\subsubsection{Flux màxim}
+
+\index{flux} \index{flux màxim}
+
+En el problema del \key{flux màxim}, la nostra tasca és enviar el
+màxim flux possible des del node origen al destí. El pes de cada
+aresta és la màxima capacitat de flux pot passar per l'aresta. Per
+cada node intermedi s'ha de complir que el flux entrant i sortint és
+igual.
+
+Per exemple, el flux màxim del graf d'exemple és 7. La imatge següent
+mostra com podem dirigir el flux:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (7,2) {$6$};
+\node[draw, circle] (5) at (3,1) {$4$};
+\node[draw, circle] (6) at (5,1) {$5$};
+\path[draw,thick,->] (1) -- node[font=\small,label=3/5] {} (2);
+\path[draw,thick,->] (2) -- node[font=\small,label=6/6] {} (3);
+\path[draw,thick,->] (3) -- node[font=\small,label=5/5] {} (4);
+\path[draw,thick,->] (1) -- node[font=\small,label=below:4/4] {} (5);
+\path[draw,thick,->] (5) -- node[font=\small,label=below:1/1] {} (6);
+\path[draw,thick,->] (6) -- node[font=\small,label=below:2/2] {} (4);
+\path[draw,thick,<-] (2) -- node[font=\small,label=left:3/3] {} (5);
+\path[draw,thick,->] (3) -- node[font=\small,label=left:1/8] {} (6);
+\end{tikzpicture}
+\end{center}
+
+
+La notació $v/k$ significa que un flux de $v$ unitats s'encamina a
+través d'una aresta la capacitat de la qual és de $k$ unitats. La mida
+del flux és de $7$, perquè l'origen envia $3+4$ unitats de flux i el
+destí rep $5+2$ unitats de flux. És fàcil veure que aquest flux és
+màxim, perquè la capacitat total de les arestes que condueixen al
+destí és $7$.
+
+\subsubsection{Tall mínim}
+
+\index{tall} \index{tall mínima}
+
+En el problema del \key{tall mínim}, la nostra tasca és eliminar un
+conjunt d'arestes del graf de manera que no hi hagi cap camí des de
+l'origen fins al destí, i que el pes total (o mida) de les arestes
+eliminades sigui mínim.
+
+La mida mínima d'un tall al graf d'exemple és 7. N'hi ha prou amb
+eliminar les arestes $2 \rightarrow 3$ i $4 \rightarrow 5$:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (7,2) {$6$};
+\node[draw, circle] (5) at (3,1) {$4$};
+\node[draw, circle] (6) at (5,1) {$5$};
+\path[draw,thick,->] (1) -- node[font=\small,label=5] {} (2);
+\path[draw,thick,->] (2) -- node[font=\small,label=6] {} (3);
+\path[draw,thick,->] (3) -- node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (1) -- node[font=\small,label=below:4] {} (5);
+\path[draw,thick,->] (5) -- node[font=\small,label=below:1] {} (6);
+\path[draw,thick,->] (6) -- node[font=\small,label=below:2] {} (4);
+\path[draw,thick,<-] (2) -- node[font=\small,label=left:3] {} (5);
+\path[draw,thick,->] (3) -- node[font=\small,label=left:8] {} (6);
+
+\path[draw=red,thick,-,line width=2pt] (4-.3,3-.3) -- (4+.3,3+.3);
+\path[draw=red,thick,-,line width=2pt] (4-.3,3+.3) -- (4+.3,3-.3);
+\path[draw=red,thick,-,line width=2pt] (4-.3,1-.3) -- (4+.3,1+.3);
+\path[draw=red,thick,-,line width=2pt] (4-.3,1+.3) -- (4+.3,1-.3);
+\end{tikzpicture}
+\end{center}
+
+
+Després d'eliminar les arestes, no hi haurà camí des de l'origen al
+destí. La mida del tall és $7$, perquè els pesos de les arestes
+eliminades són $6$ i $1$. El tall és mínim, perquè no hi ha cap manera
+vàlida d'eliminar arestes del graf de manera que el seu pes total
+sigui inferior a $7$. \\\\ En l'exemple anterior la mida màxima d'un
+flux i la mida mínima d'un tall són iguals, però no és cap
+coincidència. Resulta que un flux màxim i un tall mínim són
+\emph{sempre} iguals, de manera que els conceptes són dues cares de la
+mateixa moneda.
+
+A continuació, parlarem de l'algorisme Ford-Fulkerson que es pot
+utilitzar per trobar el flux màxim i el tall mínim d'un
+graf. L'algorisme també ens ajuda a entendre \emph{per què} són
+igualment grans.
+
+\section{Algorisme de Ford–Fulkerson}
+
+\index{Algorisme de Ford–Fulkerson}
+
+L'algorisme de \key{Ford–Fulkerson} \cite{for56} troba el flux màxim
+d'un graf. L'algorisme comença amb un flux buit, i a cada pas troba un
+camí des de l'origen fins al destí que genera més flux. Finalment,
+quan l'algorisme ja no pot augmentar el flux, ha trobat el flux
+màxim.
+
+L'algorisme utilitza una representació especial del graf on cada
+aresta original té una aresta inversa en l'altra direcció. El pes de
+cada aresta indica quant més flux podríem afegir-hi. Al principi de
+l'algorisme, el pes de cada aresta original és igual a la capacitat de
+la aresta i el pes de cada aresta inversa és zero.
+
+\begin{samepage}
+La nova representació del graf d'exemple és la següent:
+\begin{samepage}
+The new representation for the example graph is as follows:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=5] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=6] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:0] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=4] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=1] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:0] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=2] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:0] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:8] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:0] {} (3);
+\end{tikzpicture}
+\end{center}
+\end{samepage}
+\end{samepage}
+
+
+\subsubsection{Descripció de l'algorisme}
+
+L'algorisme de Ford-Fulkerson consta de diverses rondes. A cada ronda,
+l'algorisme troba un camí des de l'origen fins al destí de manera que
+cada aresta del camí tingui un pes positiu. Si hi ha més d'un camí
+possible disponible, triem un qualsevol.
+
+Per exemple, suposem que hem triat el camí següent:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=5] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=6] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:0] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=4] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=1] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:0] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=2] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:0] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:8] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:0] {} (3);
+
+\path[draw=red,thick,->,line width=2pt] (1) edge [bend left=10] (2);
+\path[draw=red,thick,->,line width=2pt] (2) edge [bend left=10] (3);
+\path[draw=red,thick,->,line width=2pt] (3) edge [bend left=10] (6);
+\path[draw=red,thick,->,line width=2pt] (6) edge [bend left=10] (4);
+\end{tikzpicture}
+\end{center}
+
+
+Després de triar el camí, el flux augmenta en $x$ unitats, on $x$ és
+el pes de l'aresta més petita del camí. A més, el pes de cada aresta del
+camí disminueix en $x$ i el pes de cada aresta inversa augmenta en
+$x$.
+
+En el camí anterior, els pesos de les arestes són 5, 6, 8 i 2. El pes
+més petit és 2, de manera que el flux augmenta en 2 i el nou graf és
+el següent:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:2] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=4] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:2] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=4] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=1] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:0] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:2] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:0] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:6] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:2] {} (3);
+\end{tikzpicture}
+\end{center}
+
+
+La idea és que augmentar el flux disminueix la quantitat de flux que
+pot passar per les arestes en el futur. D'altra banda, és possible
+cancel·lar l'augment fent servir les arestes inverses del graf si
+resulta que seria beneficiós dirigir el flux d'una altra manera.
+
+L'algorisme augmenta el flux sempre que hi hagi un camí des de
+l'origen fins al destí a través de arestes de pes positiu. En el
+nostre exemple, considerem el següent camí:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:2] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=4] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:2] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=5] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:0] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=4] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:0] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=1] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:0] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:2] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:0] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:6] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:2] {} (3);
+
+\path[draw=red,thick,->,line width=2pt] (1) edge [bend left=10] (5);
+\path[draw=red,thick,->,line width=2pt] (5) edge [bend left=10] (2);
+\path[draw=red,thick,->,line width=2pt] (2) edge [bend left=10] (3);
+\path[draw=red,thick,->,line width=2pt] (3) edge [bend left=10] (4);
+\end{tikzpicture}
+\end{center}
+
+
+El pes mínim de la aresta d'aquest camí és 3, de manera que el camí
+augmenta el flux en 3 i el flux total després de processar el camí és
+de 5.
+
+\begin{samepage}
+El nou graf és:
+\begin{samepage}
+The new graph will be as follows:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=3] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:2] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=1] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:5] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=2] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:3] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=1] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:3] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=1] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:0] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:2] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:0] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:3] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:6] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:2] {} (3);
+\end{tikzpicture}
+\end{center}
+\end{samepage}
+\end{samepage}
+
+
+Encara necessitem dues rondes més abans d'arribar al flux màxim. Per
+exemple, podem triar els camins $1 \rightarrow 2 \rightarrow 3
+\rightarrow 6$ i $1 \rightarrow 4 \rightarrow 5 \rightarrow 3
+\rightarrow 6$. Ambdós camins augmenten el flux en 1, i el graf final
+és el següent:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle] (1) at (1,1.3) {$1$};
+\node[draw, circle] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=2] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:3] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=0] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:6] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:5] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=0] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:4] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=0] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:1] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:2] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:0] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:3] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:7] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:1] {} (3);
+\end{tikzpicture}
+\end{center}
+
+
+Ja no és possible augmentar el flux, perquè no hi ha cap camí des de
+l'origen fins al destí amb pesos positus. Per tant, l'algorisme
+s'acaba i el flux màxim és 7.
+
+\subsubsection{Trobar els camins}
+
+L'algorisme de Ford-Fulkerson no especifica com hem de triar els
+camins que augmenten el flux. En qualsevol cas, l'algorisme acabarà
+tard o d'hora i trobarà correctament el flux màxim. No obstant això,
+l'eficiència de l'algorisme depèn de la manera com s'escullen els
+camins.
+
+Una manera senzilla de trobar els camins és fer servir la cerca en
+profunditat. Normalment, això funciona bé, però en el pitjor dels
+casos cada camí només augmenta el flux en 1 i l'algorisme és
+lent. Afortunadament, podem evitar aquesta situació utilitzant una de
+les tècniques següents:
+
+\index{Algorisme d'Edmonds–Karp}
+
+L'algorisme d'\key{Edmonds–Karp} \cite{edm72} tria cada camí de manera
+que el nombre d'arestes del camí sigui el més petit possible. Això és
+fàcil de fer amb la cerca en amplada. Es pot demostrar que això
+garanteix que el flux augmenta ràpidament, i la complexitat temporal
+de l'algorisme és $O(m^2 n)$.
+
+\index{algorisme de reescalat}
+
+L'\key{algorisme de reescalat} (\emph{scaling algorithm}) \cite{ahu91}
+utilitza la cerca en profunditat per trobar camins on cada pes de la
+aresta sigui almenys un valor llindar. Inicialment, el valor llindar
+és un nombre gran, per exemple, la suma de tots els pesos de les
+arestes del graf. Sempre que no es pot trobar un camí, el valor
+llindar es divideix per 2. La complexitat temporal de l'algorisme és
+$O(m^2 \log c)$, on $c$ és el valor llindar inicial.
+
+A la pràctica, l'algorisme de reescalat és més fàcil d'implementar,
+perquè la cerca en profunditat es pot fer servir per trobar
+camins. Tots dos algorismes són prou eficients per als problemes que
+solen aparèixer als concursos de programació.
+
+\subsubsection{Talls mínims}
+
+\index{tall mínim}
+
+Resulta que un cop l'algorisme Ford-Fulkerson ha trobat un flux màxim,
+també ha determinat un tall mínim. Sigui $A$ el conjunt de nodes als
+quals es pot arribar des del node origen fent servir arestes de pes
+positiu, i $B$ el conjunt restant. Al graf d'exemple, $A$ conté els
+nodes 1, 2 i 4:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,label distance=-2mm]
+\node[draw, circle,fill=lightgray] (1) at (1,1.3) {$1$};
+\node[draw, circle,fill=lightgray] (2) at (3,2.6) {$2$};
+\node[draw, circle] (3) at (5,2.6) {$3$};
+\node[draw, circle] (4) at (7,1.3) {$6$};
+\node[draw, circle,fill=lightgray] (5) at (3,0) {$4$};
+\node[draw, circle] (6) at (5,0) {$5$};
+
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=2] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=below:3] {} (1);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=0] {} (3);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=below:6] {} (2);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:5] {} (3);
+\path[draw,thick,->] (1) edge [bend left=10] node[font=\small,label=0] {} (5);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=below:4] {} (1);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=0] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=below:1] {} (5);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=0] {} (4);
+\path[draw,thick,->] (4) edge [bend left=10] node[font=\small,label=below:2] {} (6);
+\path[draw,thick,->] (5) edge [bend left=10] node[font=\small,label=left:0] {} (2);
+\path[draw,thick,->] (2) edge [bend left=10] node[font=\small,label=right:3] {} (5);
+\path[draw,thick,->] (3) edge [bend left=10] node[font=\small,label=right:7] {} (6);
+\path[draw,thick,->] (6) edge [bend left=10] node[font=\small,label=left:1] {} (3);
+\end{tikzpicture}
+\end{center}
+
+
+Ara el tall mínim consisteix en les arestes del graf original que
+comencen en algun node a $A$, acaben en algun node de $B$, i la seva
+capacitat s'utilitza plenament en el flux màxim. Al graf anterior,
+aquestes arestes són $2 \rightarrow 3$ i $4 \rightarrow 5$, que
+corresponen al tall mínim $6+1=7$.
+
+Per què el flux produït per l'algorisme és màxim i per què el tall és
+mínim? El motiu és que un graf no pot contenir un flux la mida del
+qual sigui més gran que el pes de qualsevol tall del graf. Per tant,
+sempre que un flux i un tall són igualment grans, són un flux màxim i
+un tall mínim.
+
+Considerem ara qualsevol tall del graf de manera que l'origen pertanyi
+a $A$, el destí pertany a $B$ i hi hagi algunes arestes entre els
+conjunts:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[dashed] (-2,0) circle (1.5);
+\draw[dashed] (2,0) circle (1.5);
+
+\node at (-2,-1) {$A$};
+\node at (2,-1) {$B$};
+
+\node[draw, circle] (1) at (-1,0.5) {};
+\node[draw, circle] (2) at (-1,0) {};
+\node[draw, circle] (3) at (-1,-0.5) {};
+\node[draw, circle] (4) at (1,0.5) {};
+\node[draw, circle] (5) at (1,0) {};
+\node[draw, circle] (6) at (1,-0.5) {};
+
+\path[draw,thick,->] (1) -- (4);
+\path[draw,thick,->] (5) -- (2);
+\path[draw,thick,->] (3) -- (6);
+
+\end{tikzpicture}
+\end{center}
+
+
+La mida del tall és la suma de les arestes que van de $A$ a
+$B$. Aquest és un límit superior per al flux del graf, perquè el flux
+ha de procedir de $A$ a $B$. Així, la mida d'un flux màxim és menor o
+igual a la mida de qualsevol tall del graf.
+
+D'altra banda, l'algorisme de Ford-Fulkerson produeix un flux la mida
+del qual és \emph{exactament} tan gran com la mida d'un tall al
+graf. Així, el flux ha de ser un flux màxim i el tall ha de ser un
+tall mínim.
+
+\section{Camins discontinus}
+
+Molts problemes de grafs es poden resoldre reduint-los al problema del
+flux màxim. Per exemple, considerem el següent problema: donat un graf
+dirigit amb un origen i un destí, troba el nombre màxim de camins
+disjunts des de l'origen fins al destí.
+
+\subsubsection{Camins aresta-disjunts}
+
+Primer tractem el cas de \key{camins aresta-disjunts} des de l'origen
+al destí. Això vol dir que hem de construir conjunts de camins de
+manera que cada aresta aparegui com a màxim un cop.
+
+Per exemple, considereu el graf següent:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (3,1) {$4$};
+\node[draw, circle] (5) at (5,1) {$5$};
+\node[draw, circle] (6) at (7,2) {$6$};
+\path[draw,thick,->] (1) -- (2);
+\path[draw,thick,->] (1) -- (4);
+\path[draw,thick,->] (2) -- (4);
+\path[draw,thick,->] (3) -- (2);
+\path[draw,thick,->] (3) -- (5);
+\path[draw,thick,->] (3) -- (6);
+\path[draw,thick,->] (4) -- (3);
+\path[draw,thick,->] (4) -- (5);
+\path[draw,thick,->] (5) -- (6);
+\end{tikzpicture}
+\end{center}
+
+
+En aquest graf, el nombre màxim de camins aresta-disjunts és 2. Podem
+triar els camins $1 \rightarrow 2 \rightarrow 4 \rightarrow 3
+\rightarrow 6$ i $1 \rightarrow 4 \rightarrow 5 \rightarrow 6$ de la
+següent manera:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (3,1) {$4$};
+\node[draw, circle] (5) at (5,1) {$5$};
+\node[draw, circle] (6) at (7,2) {$6$};
+\path[draw,thick,->] (1) -- (2);
+\path[draw,thick,->] (1) -- (4);
+\path[draw,thick,->] (2) -- (4);
+\path[draw,thick,->] (3) -- (2);
+\path[draw,thick,->] (3) -- (5);
+\path[draw,thick,->] (3) -- (6);
+\path[draw,thick,->] (4) -- (3);
+\path[draw,thick,->] (4) -- (5);
+\path[draw,thick,->] (5) -- (6);
+
+\path[draw=green,thick,->,line width=2pt] (1) -- (2);
+\path[draw=green,thick,->,line width=2pt] (2) -- (4);
+\path[draw=green,thick,->,line width=2pt] (4) -- (3);
+\path[draw=green,thick,->,line width=2pt] (3) -- (6);
+
+\path[draw=blue,thick,->,line width=2pt] (1) -- (4);
+\path[draw=blue,thick,->,line width=2pt] (4) -- (5);
+\path[draw=blue,thick,->,line width=2pt] (5) -- (6);
+\end{tikzpicture}
+\end{center}
+
+
+Resulta que el nombre màxim de camins aresta-disjunts és igual al flux
+màxim del graf, suposant que la capacitat de cada aresta és 1.  Un cop
+trobat el flux màxim, els camins disjunts de aresta es poden trobar de
+manera \emph{greedy} buscant camins des de l'origen fins al destí.
+
+\subsubsection{Camins node-disjunts}
+
+Considerem ara un altre problema: trobar el nombre màxim de
+\key{camins node-disjunts} des de l'origen fins al destí. En aquest
+problema, tots els nodes, excepte l'origen i el destí, poden aparèixer
+com a màxim un cop al camí. El nombre de camins disjunts entre nodes
+és menor o igual al nombre de camins aresta-disjunts.
+
+Per exemple, al graf anterior, el nombre màxim de camins node-disjunts
+és 1:
+
+
+\begin{center}
+\begin{tikzpicture}
+\node[draw, circle] (1) at (1,2) {$1$};
+\node[draw, circle] (2) at (3,3) {$2$};
+\node[draw, circle] (3) at (5,3) {$3$};
+\node[draw, circle] (4) at (3,1) {$4$};
+\node[draw, circle] (5) at (5,1) {$5$};
+\node[draw, circle] (6) at (7,2) {$6$};
+\path[draw,thick,->] (1) -- (2);
+\path[draw,thick,->] (1) -- (4);
+\path[draw,thick,->] (2) -- (4);
+\path[draw,thick,->] (3) -- (2);
+\path[draw,thick,->] (3) -- (5);
+\path[draw,thick,->] (3) -- (6);
+\path[draw,thick,->] (4) -- (3);
+\path[draw,thick,->] (4) -- (5);
+\path[draw,thick,->] (5) -- (6);
+
+\path[draw=green,thick,->,line width=2pt] (1) -- (2);
+\path[draw=green,thick,->,line width=2pt] (2) -- (4);
+\path[draw=green,thick,->,line width=2pt] (4) -- (3);
+\path[draw=green,thick,->,line width=2pt] (3) -- (6);
+\end{tikzpicture}
+\end{center}
+
+
+També podem reduir aquest problema al problema de flux màxim. Com que
+cada node pot aparèixer com a màxim un cop en els camins, hem de
+limitar el flux que passa pels nodes. Un mètode estàndard és dividir
+cada node en dos nodes de manera que el primer node rebi les arestes
+d'entrada del node original, el segon node tingui les arestes de
+sortida del node original i hi hagi una nova aresta des del primer
+node fins al segon node.
+
+En el nostre exemple, el graf esdevé:
+\begin{center}
+\begin{tikzpicture}
+\node[draw, circle] (1) at (1,2) {$1$};
+
+\node[draw, circle] (2a) at (3,3) {$2$};
+\node[draw, circle] (3a) at (6,3) {$3$};
+\node[draw, circle] (4a) at (3,1) {$4$};
+\node[draw, circle] (5a) at (6,1) {$5$};
+
+\node[draw, circle] (2b) at (4,3) {$2$};
+\node[draw, circle] (3b) at (7,3) {$3$};
+\node[draw, circle] (4b) at (4,1) {$4$};
+\node[draw, circle] (5b) at (7,1) {$5$};
+
+\node[draw, circle] (6) at (9,2) {$6$};
+
+\path[draw,thick,->] (2a) -- (2b);
+\path[draw,thick,->] (3a) -- (3b);
+\path[draw,thick,->] (4a) -- (4b);
+\path[draw,thick,->] (5a) -- (5b);
+
+\path[draw,thick,->] (1) -- (2a);
+\path[draw,thick,->] (1) -- (4a);
+\path[draw,thick,->] (2b) -- (4a);
+\path[draw,thick,->] (3b) edge [bend right=30] (2a);
+\path[draw,thick,->] (3b) -- (5a);
+\path[draw,thick,->] (3b) -- (6);
+\path[draw,thick,->] (4b) -- (3a);
+\path[draw,thick,->] (4b) -- (5a);
+\path[draw,thick,->] (5b) -- (6);
+\end{tikzpicture}
+\end{center}
+
+
+El flux màxim per al graf és:
+\begin{center}
+\begin{tikzpicture}
+\node[draw, circle] (1) at (1,2) {$1$};
+
+\node[draw, circle] (2a) at (3,3) {$2$};
+\node[draw, circle] (3a) at (6,3) {$3$};
+\node[draw, circle] (4a) at (3,1) {$4$};
+\node[draw, circle] (5a) at (6,1) {$5$};
+
+\node[draw, circle] (2b) at (4,3) {$2$};
+\node[draw, circle] (3b) at (7,3) {$3$};
+\node[draw, circle] (4b) at (4,1) {$4$};
+\node[draw, circle] (5b) at (7,1) {$5$};
+
+\node[draw, circle] (6) at (9,2) {$6$};
+
+\path[draw,thick,->] (2a) -- (2b);
+\path[draw,thick,->] (3a) -- (3b);
+\path[draw,thick,->] (4a) -- (4b);
+\path[draw,thick,->] (5a) -- (5b);
+
+\path[draw,thick,->] (1) -- (2a);
+\path[draw,thick,->] (1) -- (4a);
+\path[draw,thick,->] (2b) -- (4a);
+\path[draw,thick,->] (3b) edge [bend right=30] (2a);
+\path[draw,thick,->] (3b) -- (5a);
+\path[draw,thick,->] (3b) -- (6);
+\path[draw,thick,->] (4b) -- (3a);
+\path[draw,thick,->] (4b) -- (5a);
+\path[draw,thick,->] (5b) -- (6);
+
+\path[draw=red,thick,->,line width=2pt] (1) -- (2a);
+\path[draw=red,thick,->,line width=2pt] (2a) -- (2b);
+\path[draw=red,thick,->,line width=2pt] (2b) -- (4a);
+\path[draw=red,thick,->,line width=2pt] (4a) -- (4b);
+\path[draw=red,thick,->,line width=2pt] (4b) -- (3a);
+\path[draw=red,thick,->,line width=2pt] (3a) -- (3b);
+\path[draw=red,thick,->,line width=2pt] (3b) -- (6);
+\end{tikzpicture}
+\end{center}
+
+
+Així, el nombre màxim de camins disjunts entre nodes des de l'origen al
+destí és 1.
+
+\section{Emparellaments màxims}
+
+\index{matching} \index{Emparellaments màxims}
+
+El problema dels \key{emparellaments màxims} (\emph{maximum
+matchings}) consisteix en trobar un conjunt de mida màxima de parelles de
+nodes en un graf no dirigit de manera que cada parella estigui
+connectada amb una aresta i cada node pertanyi com a molt a un parella.
+
+Hi ha algorismes polinomials per trobar emparellaments màxims en grafs
+generals \cite{edm65}, però aquests algorismes són complexos i
+rarament es veuen en concursos de programació. Tanmateix, en els grafs
+bipartits, el problema d'emparellaments màxims és molt més fàcil de
+resoldre, perquè es redueix a trobar un flux màxim.
+
+\subsubsection{Trobar emparellaments màxims}
+
+Els nodes d'un graf bipartit sempre es poden dividir en dos grups de
+manera que totes les arestes del graf van del grup esquerre al grup
+dret. Per exemple, al graf bipartit següent, els grups són
+$\{1,2,3,4\}$ i $\{5,6,7,8\}$.
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+\end{tikzpicture}
+\end{center}
+La mida d'un emparellament màxim és 3:
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+
+\path[draw=red,thick,-,line width=2pt] (1) -- (5);
+\path[draw=red,thick,-,line width=2pt] (2) -- (7);
+\path[draw=red,thick,-,line width=2pt] (3) -- (8);
+\end{tikzpicture}
+\end{center}
+
+
+El problema de l'emparellament màxim bipartit és redueix al problema
+del flux màxim afegint dos nodes nous al graf: un d'origen i un de
+destí. També afegim arestes de l'origen a cada node esquerre i de cada
+node dret al destí. Amb això, la mida d'un flux màxim al graf és igual
+a la mida d'un emparellament màxim al graf original.
+
+Per exemple, la reducció del graf anterior és:
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\node[draw, circle] (a) at (-2,2.25) {\phantom{0}};
+\node[draw, circle] (b) at (12,2.25) {\phantom{0}};
+
+\path[draw,thick,->] (1) -- (5);
+\path[draw,thick,->] (2) -- (7);
+\path[draw,thick,->] (3) -- (5);
+\path[draw,thick,->] (3) -- (6);
+\path[draw,thick,->] (3) -- (8);
+\path[draw,thick,->] (4) -- (7);
+
+\path[draw,thick,->] (a) -- (1);
+\path[draw,thick,->] (a) -- (2);
+\path[draw,thick,->] (a) -- (3);
+\path[draw,thick,->] (a) -- (4);
+\path[draw,thick,->] (5) -- (b);
+\path[draw,thick,->] (6) -- (b);
+\path[draw,thick,->] (7) -- (b);
+\path[draw,thick,->] (8) -- (b);
+\end{tikzpicture}
+\end{center}
+
+
+El flux màxim d'aquest graf és:
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\node[draw, circle] (a) at (-2,2.25) {\phantom{0}};
+\node[draw, circle] (b) at (12,2.25) {\phantom{0}};
+
+\path[draw,thick,->] (3) -- (5);
+\path[draw,thick,->] (3) -- (6);
+\path[draw,thick,->] (4) -- (7);
+
+\path[draw,thick,->] (a) -- (1);
+\path[draw,thick,->] (a) -- (2);
+\path[draw,thick,->] (a) -- (3);
+\path[draw,thick,->] (a) -- (4);
+\path[draw,thick,->] (5) -- (b);
+\path[draw,thick,->] (6) -- (b);
+\path[draw,thick,->] (7) -- (b);
+\path[draw,thick,->] (8) -- (b);
+
+\path[draw=red,thick,->,line width=2pt] (1) -- (5);
+\path[draw=red,thick,->,line width=2pt] (2) -- (7);
+\path[draw=red,thick,->,line width=2pt] (3) -- (8);
+
+\path[draw=red,thick,->,line width=2pt] (a) -- (1);
+\path[draw=red,thick,->,line width=2pt] (a) -- (2);
+\path[draw=red,thick,->,line width=2pt] (a) -- (3);
+
+\path[draw=red,thick,->,line width=2pt] (5) -- (b);
+\path[draw=red,thick,->,line width=2pt] (7) -- (b);
+\path[draw=red,thick,->,line width=2pt] (8) -- (b);
+
+\end{tikzpicture}
+\end{center}
+
+
+\subsubsection{Teorema de Hall}
+
+\index{Teorema de Hall} \index{emparellament perfecte}
+
+\key{Teorema de Hall} es pot fer servir per esbrinar si un graf
+bipartit té una concordança que conté tots els nodes esquerre o
+dret. Si el nombre de nodes esquerres i drets és el mateix, el teorema
+de Hall ens diu si és possible construir un \key{emparellament perfecte} que
+contingui tots els nodes del graf.
+
+Suposem que volem trobar un emparellament que contingui tots els nodes
+esquerre. Sigui $X$ qualsevol conjunt de nodes esquerre i sigui $f(X)$
+el conjunt dels seus veïns. Segons el teorema de Hall, un
+emparellament que conté tots els nodes esquerre existeix si i només si
+quan, per a cada $X$, es compleix la condició $|X| \le |f(X)|$.
+
+Veiem el teorema de Hall al graf d'exemple. Per a $X=\{1,3\}$ es compleix $f(X)=\{5,6,8\}$:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle, fill=lightgray] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle, fill=lightgray] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle, fill=lightgray] (5) at (8,4.5) {5};
+\node[draw, circle, fill=lightgray] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle, fill=lightgray] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+La condició del teorema de Hall es compleix, perquè $|X|=2$ i
+$|f(X)|=3$. Per a $X=\{2,4\}$, en canvi, es compleix $f(X)=\{7\}$:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle, fill=lightgray] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle, fill=lightgray] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle, fill=lightgray] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+En aquest cas, $|X|=2$ i $|f(X)|=1$, de manera que la condició del
+teorema de Hall no es compleix. Això vol dir que no és possible formar
+un emparellament perfecte per al graf. Aquest resultat no és
+sorprenent, perquè ja sabíem que l'emparellament màxim del graf era 3
+i no 4.
+
+Si la condició del teorema de Hall no es compleix, el conjunt $X$
+proporciona una explicació de \emph{per què} no podem formar aquest
+emparellament. Com que $X$ conté més nodes que $f(X)$, no hi ha prou
+parelles per a tots els nodes de $X$. Per exemple, al graf anterior,
+els dos nodes 2 i 4 haurien d'estar connectats amb el node 7, cosa que
+no és possible.
+
+\subsubsection{Teorema de Kőnig}
+
+\index{Teorema de Kőnig} \index{cobertura de nodes} \index{cobertura de nodes mínima}
+
+Una \key{cobertura de nodes mínim} d'un graf és un conjunt mínim de
+nodes de manera que cada aresta del graf té almenys un extrem al
+conjunt. En un graf general, trobar una cobertura de nodes mínim és
+un problema NP-difícil. Tanmateix, si el graf és bipartit, el
+\key{teorema de Kőnig} ens diu que la mida d'una cobertura de nodes
+mínim i la mida d'un emparellament màxim sempre coincideixen. Així,
+podem calcular la mida d'una cobertura de nodes mínim trobant un flux
+màxim.
+
+Considerem el graf següent amb un emparellament màxim de mida 3:
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+
+\path[draw=red,thick,-,line width=2pt] (1) -- (5);
+\path[draw=red,thick,-,line width=2pt] (2) -- (7);
+\path[draw=red,thick,-,line width=2pt] (3) -- (6);
+\end{tikzpicture}
+\end{center}
+El teorema de Kőnig ens diu que la mida d'una cobertura de nodes
+mínim també és 3. Aquesta cobertura es pot construir com segueix:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle, fill=lightgray] (1) at (2,4.5) {1};
+\node[draw, circle] (2) at (2,3) {2};
+\node[draw, circle, fill=lightgray] (3) at (2,1.5) {3};
+\node[draw, circle] (4) at (2,0) {4};
+\node[draw, circle] (5) at (8,4.5) {5};
+\node[draw, circle] (6) at (8,3) {6};
+\node[draw, circle, fill=lightgray] (7) at (8,1.5) {7};
+\node[draw, circle] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+\index{conjunt independent} \index{conjunt independent màxim}
+
+Els nodes que \emph{no} pertanyen a una cobertura de nodes mínim
+formen un \key{conjunt independent màxim}. Aquest és el conjunt de
+nodes més gran possible de manera que no hi ha dos nodes del conjunt
+connectats amb una aresta. Una vegada més, trobar un conjunt màxim
+independent en un graf general és un problema NP-difícil, però en un
+graf bipartit podem utilitzar el teorema de Kőnig per resoldre el
+problema de manera eficient. En el graf d'exemple, el conjunt
+independent màxim és el següent:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.60]
+\node[draw, circle] (1) at (2,4.5) {1};
+\node[draw, circle, fill=lightgray] (2) at (2,3) {2};
+\node[draw, circle] (3) at (2,1.5) {3};
+\node[draw, circle, fill=lightgray] (4) at (2,0) {4};
+\node[draw, circle, fill=lightgray] (5) at (8,4.5) {5};
+\node[draw, circle, fill=lightgray] (6) at (8,3) {6};
+\node[draw, circle] (7) at (8,1.5) {7};
+\node[draw, circle, fill=lightgray] (8) at (8,0) {8};
+
+\path[draw,thick,-] (1) -- (5);
+\path[draw,thick,-] (2) -- (7);
+\path[draw,thick,-] (3) -- (5);
+\path[draw,thick,-] (3) -- (6);
+\path[draw,thick,-] (3) -- (8);
+\path[draw,thick,-] (4) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+\section{Cobertura de camins}
+
+\index{cobertura del camins}
+
+Una \key{cobertura de camins} és un conjunt de camins en un graf de
+manera que cada node del graf pertany a almenys un camí. Resulta que,
+en els grafs acíclics dirigits, podem reduir el problema de trobar una
+cobertura de camins mínima al problema de trobar un flux màxim en un
+altre graf.
+
+\subsubsection{Cobertura de camins node-disjunts}
+
+En una \key{cobertura de camins node-disjunts}, cada node pertany exactament a
+un camí. Per exemple, considereu el graf següent:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle] (7) at (4,-2) {7};
+
+\path[draw,thick,->,>=latex] (1) -- (5);
+\path[draw,thick,->,>=latex] (2) -- (6);
+\path[draw,thick,->,>=latex] (3) -- (4);
+\path[draw,thick,->,>=latex] (5) -- (6);
+\path[draw,thick,->,>=latex] (6) -- (3);
+\path[draw,thick,->,>=latex] (6) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+Una cobertura de camins mínima en aquest graf consta de tres
+camins. Per exemple, podem triar els camins següents:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle] (7) at (4,-2) {7};
+
+\path[draw=red,thick,->,line width=2pt] (1) -- (5);
+\path[draw=red,thick,->,line width=2pt] (5) -- (6);
+\path[draw=red,thick,->,line width=2pt] (6) -- (7);
+\path[draw=red,thick,->,line width=2pt] (3) -- (4);
+\end{tikzpicture}
+\end{center}
+
+
+Tingueu en compte que un dels camins només conté el node 2, perquè
+acceptem que un camí no contingui cap aresta.
+
+Podem trobar una cobertura mínima de camins node-disjunt construint un
+\emph{graf d'emparellaments} on cada node del graf original està
+representat per dos nodes: un node esquerre i un node dret. Hi ha una
+aresta des d'un node esquerre fins a un node dret si existeix aquesta
+aresta al graf original. A més, el graf d'emparellaments conté un
+origen i un destí, i hi ha arestes des de l'origen fins a tots els
+nodes esquerres i des de tots els nodes drets fins al destí.
+
+Un emparellament màxim en el graf resultant correspon a una cobertura
+mínima de camins node-disjunts en el graf original. Per exemple, el
+graf d'emparellaments següent conté un emparellament màxim de mida 4:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1a) at (0,6) {1};
+\node[draw, circle] (2a) at (0,5) {2};
+\node[draw, circle] (3a) at (0,4) {3};
+\node[draw, circle] (4a) at (0,3) {4};
+\node[draw, circle] (5a) at (0,2) {5};
+\node[draw, circle] (6a) at (0,1) {6};
+\node[draw, circle] (7a) at (0,0) {7};
+
+\node[draw, circle] (1b) at (4,6) {1};
+\node[draw, circle] (2b) at (4,5) {2};
+\node[draw, circle] (3b) at (4,4) {3};
+\node[draw, circle] (4b) at (4,3) {4};
+\node[draw, circle] (5b) at (4,2) {5};
+\node[draw, circle] (6b) at (4,1) {6};
+\node[draw, circle] (7b) at (4,0) {7};
+
+\node[draw, circle] (a) at (-3,3) {\phantom{0}};
+\node[draw, circle] (b) at (7,3) {\phantom{0}};
+
+%\path[draw,thick,->,>=latex] (1a) -- (5b);
+\path[draw,thick,->,>=latex] (2a) -- (6b);
+%\path[draw,thick,->,>=latex] (3a) -- (4b);
+%\path[draw,thick,->,>=latex] (5a) -- (6b);
+\path[draw,thick,->,>=latex] (6a) -- (3b);
+%\path[draw,thick,->,>=latex] (6a) -- (7b);
+
+\path[draw,thick,->,>=latex] (a) -- (1a);
+\path[draw,thick,->,>=latex] (a) -- (2a);
+\path[draw,thick,->,>=latex] (a) -- (3a);
+\path[draw,thick,->,>=latex] (a) -- (4a);
+\path[draw,thick,->,>=latex] (a) -- (5a);
+\path[draw,thick,->,>=latex] (a) -- (6a);
+\path[draw,thick,->,>=latex] (a) -- (7a);
+
+\path[draw,thick,->,>=latex] (1b) -- (b);
+\path[draw,thick,->,>=latex] (2b) -- (b);
+\path[draw,thick,->,>=latex] (3b) -- (b);
+\path[draw,thick,->,>=latex] (4b) -- (b);
+\path[draw,thick,->,>=latex] (5b) -- (b);
+\path[draw,thick,->,>=latex] (6b) -- (b);
+\path[draw,thick,->,>=latex] (7b) -- (b);
+
+\path[draw=red,thick,->,line width=2pt] (1a) -- (5b);
+\path[draw=red,thick,->,line width=2pt] (5a) -- (6b);
+\path[draw=red,thick,->,line width=2pt] (6a) -- (7b);
+\path[draw=red,thick,->,line width=2pt] (3a) -- (4b);
+
+\end{tikzpicture}
+\end{center}
+
+
+Cada aresta de l'emparellament màxim es correspon amb una aresta en la
+cobertura mínima de camins node-disjunts entre nodes del graf
+original.  Així, la mida de la cobertura mínima de camins node-disjunt
+és $n-c$, on $n$ és el nombre de nodes del graf original i $c$ és la
+mida de l'emparellament màxim.
+
+\subsubsection{Cobertura general de camins}
+
+Una \key{cobertura general de camins} és una cobertura de camins on un
+node pot pertànyer a més d'un camí. Una cobertura general de camins
+mínima pot ser més petita que una covertura de camins node-disjunts
+mínima, perquè un node es pot fer servir diverses vegades en
+els camins. Considereu de nou el graf següent:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle] (7) at (4,-2) {7};
+
+\path[draw,thick,->,>=latex] (1) -- (5);
+\path[draw,thick,->,>=latex] (2) -- (6);
+\path[draw,thick,->,>=latex] (3) -- (4);
+\path[draw,thick,->,>=latex] (5) -- (6);
+\path[draw,thick,->,>=latex] (6) -- (3);
+\path[draw,thick,->,>=latex] (6) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+La cobertura general de camins mínima d'aquest graf consta de dos
+camins. Per exemple, el primer camí pot ser el següent:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle] (7) at (4,-2) {7};
+
+\path[draw=red,thick,->,line width=2pt] (1) -- (5);
+\path[draw=red,thick,->,line width=2pt] (5) -- (6);
+\path[draw=red,thick,->,line width=2pt] (6) -- (3);
+\path[draw=red,thick,->,line width=2pt] (3) -- (4);
+\end{tikzpicture}
+\end{center}
+I el segon camí pot ser aquest:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle] (7) at (4,-2) {7};
+
+\path[draw=red,thick,->,line width=2pt] (2) -- (6);
+\path[draw=red,thick,->,line width=2pt] (6) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+Una cobertura general de camins mínima es pot trobar gairebé com una
+cobertura de camins node-disjunts mínima. N'hi ha prou amb afegir
+algunes arestes noves al graf d'emparellaments perquè hi hagi una
+aresta $a \rightarrow b$ sempre quan hi hagi un camí de $a$ a $b$ al
+graf original (possiblement a través de diverses arestes).
+
+El graf d'emparellaments pel graf anterior és el següent:
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1a) at (0,6) {1};
+\node[draw, circle] (2a) at (0,5) {2};
+\node[draw, circle] (3a) at (0,4) {3};
+\node[draw, circle] (4a) at (0,3) {4};
+\node[draw, circle] (5a) at (0,2) {5};
+\node[draw, circle] (6a) at (0,1) {6};
+\node[draw, circle] (7a) at (0,0) {7};
+
+\node[draw, circle] (1b) at (4,6) {1};
+\node[draw, circle] (2b) at (4,5) {2};
+\node[draw, circle] (3b) at (4,4) {3};
+\node[draw, circle] (4b) at (4,3) {4};
+\node[draw, circle] (5b) at (4,2) {5};
+\node[draw, circle] (6b) at (4,1) {6};
+\node[draw, circle] (7b) at (4,0) {7};
+
+\node[draw, circle] (a) at (-3,3) {\phantom{0}};
+\node[draw, circle] (b) at (7,3) {\phantom{0}};
+
+
+%\path[draw,thick,->,>=latex] (1a) -- (5b);
+\path[draw,thick,->,>=latex] (1a) -- (6b);
+\path[draw,thick,->,>=latex] (1a) -- (7b);
+\path[draw,thick,->,>=latex] (1a) -- (3b);
+\path[draw,thick,->,>=latex] (1a) -- (4b);
+\path[draw,thick,->,>=latex] (5a) -- (6b);
+\path[draw,thick,->,>=latex] (5a) -- (7b);
+%\path[draw,thick,->,>=latex] (5a) -- (3b);
+\path[draw,thick,->,>=latex] (5a) -- (4b);
+\path[draw,thick,->,>=latex] (6a) -- (7b);
+%\path[draw,thick,->,>=latex] (6a) -- (7b);
+\path[draw,thick,->,>=latex] (6a) -- (3b);
+%\path[draw,thick,->,>=latex] (3a) -- (4b);
+%\path[draw,thick,->,>=latex] (2a) -- (6b);
+\path[draw,thick,->,>=latex] (2a) -- (7b);
+\path[draw,thick,->,>=latex] (2a) -- (3b);
+\path[draw,thick,->,>=latex] (2a) -- (4b);
+
+
+\path[draw,thick,->,>=latex] (a) -- (1a);
+\path[draw,thick,->,>=latex] (a) -- (2a);
+\path[draw,thick,->,>=latex] (a) -- (3a);
+\path[draw,thick,->,>=latex] (a) -- (4a);
+\path[draw,thick,->,>=latex] (a) -- (5a);
+\path[draw,thick,->,>=latex] (a) -- (6a);
+\path[draw,thick,->,>=latex] (a) -- (7a);
+
+\path[draw,thick,->,>=latex] (1b) -- (b);
+\path[draw,thick,->,>=latex] (2b) -- (b);
+\path[draw,thick,->,>=latex] (3b) -- (b);
+\path[draw,thick,->,>=latex] (4b) -- (b);
+\path[draw,thick,->,>=latex] (5b) -- (b);
+\path[draw,thick,->,>=latex] (6b) -- (b);
+\path[draw,thick,->,>=latex] (7b) -- (b);
+
+\path[draw=red,thick,->,line width=2pt] (1a) -- (5b);
+\path[draw=red,thick,->,line width=2pt] (5a) -- (3b);
+\path[draw=red,thick,->,line width=2pt] (3a) -- (4b);
+\path[draw=red,thick,->,line width=2pt] (2a) -- (6b);
+\path[draw=red,thick,->,line width=2pt] (6a) -- (7b);
+
+
+% \path[draw=red,thick,->,line width=2pt] (1a) -- (6b);
+% \path[draw=red,thick,->,line width=2pt] (1a) -- (7b);
+% \path[draw=red,thick,->,line width=2pt] (1a) -- (3b);
+% \path[draw=red,thick,->,line width=2pt] (1a) -- (4b);
+% \path[draw=red,thick,->,line width=2pt] (5a) -- (6b);
+% \path[draw=red,thick,->,line width=2pt] (5a) -- (7b);
+% \path[draw=red,thick,->,line width=2pt] (5a) -- (3b);
+% \path[draw=red,thick,->,line width=2pt] (5a) -- (4b);
+% \path[draw=red,thick,->,line width=2pt] (6a) -- (7b);
+% \path[draw=red,thick,->,line width=2pt] (6a) -- (7b);
+% \path[draw=red,thick,->,line width=2pt] (6a) -- (3b);
+% \path[draw=red,thick,->,line width=2pt] (3a) -- (4b);
+% \path[draw=red,thick,->,line width=2pt] (2a) -- (6b);
+% \path[draw=red,thick,->,line width=2pt] (2a) -- (7b);
+% \path[draw=red,thick,->,line width=2pt] (2a) -- (3b);
+% \path[draw=red,thick,->,line width=2pt] (2a) -- (4b);
+
+\end{tikzpicture}
+\end{center}
+
+
+\subsubsection{Teorema de Dilworth}
+
+\index{Teorema de Dilworth} \index{anticadena}
+
+Una \key{anticadena} és un conjunt de nodes d'un graf de manera que no
+hi ha cap camí des de cap node a un altre node fent servir les arestes
+del graf. El \key{teorema de Dilworth} estableix que en un graf
+acíclic dirigit, la mida d'una cobertura general de camins mínima és
+igual a la mida d'una anticadena màxima.
+
+Per exemple, els nodes 3 i 7 formen una anticadena al graf següent:
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw, circle] (1) at (0,0) {1};
+\node[draw, circle] (2) at (2,0) {2};
+\node[draw, circle, fill=lightgray] (3) at (4,0) {3};
+\node[draw, circle] (4) at (6,0) {4};
+\node[draw, circle] (5) at (0,-2) {5};
+\node[draw, circle] (6) at (2,-2) {6};
+\node[draw, circle, fill=lightgray] (7) at (4,-2) {7};
+
+\path[draw,thick,->,>=latex] (1) -- (5);
+\path[draw,thick,->,>=latex] (2) -- (6);
+\path[draw,thick,->,>=latex] (3) -- (4);
+\path[draw,thick,->,>=latex] (5) -- (6);
+\path[draw,thick,->,>=latex] (6) -- (3);
+\path[draw,thick,->,>=latex] (6) -- (7);
+\end{tikzpicture}
+\end{center}
+
+
+Aquesta és una anticadena màxima, perquè no és possible construir cap
+anticadena que contingui tres nodes. Hem vist abans que la mida d'una
+cobertura general de camins mínima d'aquest graf consta de dos camins.
+
+
+
