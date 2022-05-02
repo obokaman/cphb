@@ -13,7 +13,7 @@ i la dificultat consisteix sovint
 sobre inventar un algorisme eficient.
 
 Els coneixements teòrics d'algorismes
-s\'on important per als programadors competitius.
+són important per als programadors competitius.
 Normalment, una solució a un problema és
 una combinació de tècniques conegudes i
 noves idees.
@@ -27,10 +27,10 @@ En la programació competitiva, les solucions
 es classifiquen provant un algorisme implementat
 fent servir un conjunt de casos de prova.
 Per tant, no n'hi ha prou que la idea del
-l'algoritme sigui correcte, la implementació també
+l'algorisme sigui correcte, la implementació també
 ha de ser correcte.
 
-L'estil correcte de programaci\'o en els concursos és
+L'estil correcte de programació en els concursos és
 ser directe i concís.
 Els programes s'han d'escriure ràpidament,
 perquè no hi ha gaire temps disponible.
@@ -41,10 +41,10 @@ codi un cop acabat el concurs.
 
 \section{Llenguatges de programació}
 
-\index{llenguatge de programacio}
+\index{llenguatge de programació}
 
-En l'actualitat, els llenguatges de programaci\'o que
-es fan servir més als concursos s\'on
+En l'actualitat, els llenguatges de programació que
+es fan servir més als concursos són
 el C++, el Python i el Java.
 Per exemple, a Google Code Jam 2017,
 entre els 3.000 millors participants,
@@ -58,12 +58,12 @@ per a un programador competitiu,
 i el C++ gairebé sempre està disponible en els
 sistemes de concurs.
 Els avantatges d'utilitzar C++ són que
-és un llenguatge de programaci\'o molt eficient i
+és un llenguatge de programació molt eficient i
 que la seva biblioteca estàndard conté un
 gran col·lecció d'estructures de dades i algorismes.
 
 D'altra banda, és bo
-dominar diversos llenguatges de programaci\'o i comprendre
+dominar diversos llenguatges de programació i comprendre
 els seus punts forts.
 Per exemple, si es necessiten nombres enters grans
 en el problema,
@@ -86,7 +86,7 @@ ara és un bon moment per començar a aprendre.
 
 \subsubsection{plantilla de codi C++}
 
-Aquesta \'es una plantilla de codi C++ típica per a la
+Aquesta és una plantilla de codi C++ típica per a la
 programació competitiva:
 
 \begin{lstlisting}
@@ -95,7 +95,7 @@ programació competitiva:
 using namespace std;
 
 int main() {
-  // Aqu\'i va el codi.
+  // Aqui va el codi.
 }
 \end{lstlisting}
 
@@ -136,12 +136,12 @@ A la majoria de concursos es fan servir els canals estàndard
 per a la lectura d'entrada i l'escriptura de sortida.
 En C++, els canals estàndard són
 \texttt{cin} per a l'entrada i \texttt{cout} per a la sortida.
-Tamb\'e es poden fer servir les funcions de C
+També es poden fer servir les funcions de C
 \texttt{scanf} i \texttt{printf}.
 
 L'entrada per al programa normalment consisteix en
 nombres i cadenes de text que es separen amb
-espais i salts de l\'inia.
+espais i salts de línia.
 Es poden llegir des del canal \texttt{cin}
 com segueix:
 
@@ -205,7 +205,7 @@ printf("%d %d\n", a, b);
 De vegades, el programa hauria de llegir una línia sencera
 de l'entrada, possiblement amb espais.
 Això es pot aconseguir mitjançant l'ús de
-la funci\'o \texttt{getline}:
+la funció \texttt{getline}:
 
 \begin{lstlisting}
 string s;
@@ -279,7 +279,7 @@ Per això, la variable \texttt{b} tindrà
 un resultat incorrecte.
 El problema es pot resoldre fent que el tipus
 de \texttt{a} sigui \texttt{long long} o
-canviant l'expressi\'o a \texttt{(long long)a*a}.
+canviant l'expressió a \texttt{(long long)a*a}.
 
 Normalment els problemes de concurs es plantegen de manera que
 amb el tipus \texttt{long long} n'hi ha prou.
@@ -301,7 +301,7 @@ perquè $17 = 3 \cdot 5 + 2$.
 
 De vegades, la resposta a un problema és a
 nombre molt gran però es demana que s'escrigui
-la soluci\'o ``mòdul $m$'', és a dir,
+la solució ``mòdul $m$'', és a dir,
 el residu quan es divideix la resposta per $m$
 (per exemple, ``mòdul $10^9+7$'').
 D'aquesta manera, encara que la resposta real
@@ -394,7 +394,7 @@ als errors d'arrodoniment, quan el valor correcte seria 1.
 És arriscat comparar nombres de coma flotant
 amb l'operador \texttt{==},
 perquè és possible que, encara els valors haurien de
-ser iguals, en realitat no ho s\'on degut
+ser iguals, en realitat no ho són degut
 a errors de precisió.
 Una millor manera de comparar nombres de coma flotant
 és suposar que dos nombres són iguals
@@ -481,7 +481,7 @@ v.push_back(make_pair(y1,x1));
 v.push_back(make_pair(y2,x2));
 int d = v[i].primer+v[i].segon;
 \end{lstlisting}
-esdev\'e:
+esdevé:
 \begin{lstlisting}
 v.PB(MP(y1,x1));
 v.PB(MP(y2,x2));
@@ -501,7 +501,7 @@ for (int i = 1; i <= n; i++) {
     cerca(i);
 }
 \end{lstlisting}
-esdev\'e:
+esdevé:
 \begin{lstlisting}
 REP(i,1,n) {
     cerca(i);
@@ -545,7 +545,7 @@ programació, i no és possible arribar a ser
 un programador competitiu exitós sense
 tenir bones habilitats matemàtiques.
 En aquesta secció es discuteixen alguns conceptes
-i fórmules matemàtiques que són necess\`aries
+i fórmules matemàtiques que són necessàries
 més endavant al llibre.
 
 \subsubsection{Fórmules de suma}
@@ -651,28 +651,28 @@ Per exemple, en el conjunt anterior
 Es poden construir nous conjunts mitjançant operacions de conjunts:
 \begin{itemize}
 \index{intersecció}
-\item La \key{intersecció} $A \cap B$ \'es el conjunt dels
+\item La \key{intersecció} $A \cap B$ és el conjunt dels
 elements que estan tant en $A$ i en $B$.
 Per exemple, si $A=\{1,2,5\}$ i $B=\{2,4\}$,
 llavors $A \cap B = \{2\}$.
 \index{unió}
-\item La \key{union} $A \cup B$ \'es el conjunt dels
+\item La \key{union} $A \cup B$ és el conjunt dels
 elements que estan en $A$ o en $B$ o en tots dos.
 Per exemple, si $A=\{3,7\}$ i $B=\{2,3,8\}$,
 llavors $A \cup B = \{2,3,7,8\}$.
 \index{complement}
 \index{conjunt universal}
-\item El \key{complement} $\bar A$ \'es el conjunt dels
+\item El \key{complement} $\bar A$ és el conjunt dels
 elements que no estan en $A$.
 \index{conjunt universal}
 La interpretació d'un complement depèn de
-el \key{conjunt universal}, que \'es el conjunt que conté
+el \key{conjunt universal}, que és el conjunt que conté
 tots els elements possibles.
 Per exemple, si $A=\{1,2,5,7\}$ i el conjunt universal és
 $\{1,2,\ldots,10\}$, aleshores $\bar A = \{3,4,6,8,9,10\}$.
 \index{diferència}
 \item La \key{diferència} $A \setminus B = A \cap \bar B$
-\'es el conjunt dels elements que estan en $A$ però no en $B$.
+és el conjunt dels elements que estan en $A$ però no en $B$.
 Tingueu en compte que $B$ pot contenir elements que no es troben a $A$.
 Per exemple, si $A=\{2,3,7,8\}$ i $B=\{3,5,8\}$,
 aleshores $A \setminus B = \{2,7\}$.
@@ -702,7 +702,7 @@ la situació:
 o $\mathbb{N}=\{0,1,2,\ldots\}$
 o $\mathbb{N}=\{1,2,3,...\}$.
 
-També podem construir un conjunt utilitzant una expressi\'o de la forma
+També podem construir un conjunt utilitzant una expressió de la forma
 \[\{f(n): n \in S\},\]
 on $f(n)$ és una funció.
 Aquest conjunt conté tots els elements de la forma $f(n)$,
@@ -781,7 +781,7 @@ Per exemple,
 significa que si un nombre $x$ és més gran que 1
 i no és un nombre primer,
 aleshores hi ha els nombres $a$ i $b$
-que s\'on més grans que $1$ i el producte dels quals \'es $x$.
+que són més grans que $1$ i el producte dels quals és $x$.
 Aquesta proposició és certa en el conjunt dels nombres enters.
 
 \subsubsection{Funcions}
@@ -894,7 +894,7 @@ de 80 països.
 
 L'IOI consta de dos concursos de cinc hores de durada.
 En ambdós concursos, es demana als participants
-resoldre tres tasques algor\'ismiques de diferent dificultat.
+resoldre tres tasques algorísmiques de diferent dificultat.
 Les tasques es divideixen en subtasques,
 cadascuna dels quals té una puntuació assignada.
 Encara que els concursants estiguin dividits en equips,
@@ -928,7 +928,7 @@ Cada equip del concurs està format per tres estudiants,
 i a diferència de l'IOI, els alumnes treballen conjuntament;
 només hi ha un ordinador disponible per a cada equip.
 
-L'ICPC consta de diverses fases, i nom\'es els millors
+L'ICPC consta de diverses fases, i només els millors
 equips estan convidats a la fase final (World Finals).
 Tot i que hi ha desenes de milers de participants
 al concurs, només hi ha un petit nombre\footnote{El nombre exacte d'equips
@@ -937,11 +937,11 @@ a la fase final varia d'un any a un altre; el 2017, hi havia
 la final ja és un gran èxit en algunes regions.
 
 En cada concurs de l'ICPC, els equips disposen de cinc hores de temps
-per a resoldre uns deu problemes algor\'ismics.
+per a resoldre uns deu problemes algorísmics.
 La solució d'un problema només s'accepta si es resolen
 tots els casos de prova de manera eficient.
 Durant el concurs, els competidors poden veure els resultats d'altres equips,
-però durant l'última hora el marcador està congelat i no \'es
+però durant l'última hora el marcador està congelat i no és
 possible veure els resultats dels últims enviaments.
 
 Els temes que poden aparèixer a l'ICPC no estan tan bé
@@ -952,7 +952,7 @@ a l'ICPC, sobretot més habilitats matemàtiques.
 \subsubsection{Concursos on-line}
 
 També hi ha molts concursos on-line oberts a tothom.
-En l'actualitat, la p\`agina web amb més concursos actius és Codeforces,
+En l'actualitat, la pàgina web amb més concursos actius és Codeforces,
 que organitza concursos de forma setmanal.
 A Codeforces, els participants es divideixen en dues divisions:
 els principiants competeixen a la Div2 i els programadors més experimentats a

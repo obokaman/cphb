@@ -2,7 +2,7 @@
 \index{ordenació}
 
 El problema de l'\key{ordenació}
-és un problema fonamental del disseny d'algoritmes.
+és un problema fonamental del disseny d'algorismes.
 Molts algorismes eficients
 fan servir l'ordenació com a subrutina,
 perquè sovint és més fàcil de processar
@@ -17,7 +17,7 @@ manera.
 
 Hi ha molts algorismes per ordenar, i aquests són
 també bons exemples de com aplicar
-diferents tècniques del disseny d'algoritmes.
+diferents tècniques del disseny d'algorismes.
 Els algorismes d'ordenació general eficients
 treballar en temps $O(n \log n)$,
 i molts algorismes que utilitzen l'ordenació
@@ -75,11 +75,11 @@ on els elements del vector es mouen
 com si fossin ``bombolles''.
 
 L'ordenació amb bombolla consta de $n$ rondes.
-A cada ronda, l'algoritme itera
+A cada ronda, l'algorisme itera
 els elements del vector.
 Sempre que es troben dos elements consecutius
 que no estan en ordre correcte,
-l'algoritme els intercanvia.
+l'algorisme els intercanvia.
 L'algorisme es pot implementar de la següent manera:
 \begin{lstlisting}
 for (int i = 0; i < n; i++) {
@@ -217,7 +217,7 @@ Per exemple, el vector
 \end{center}
 té tres inversions: $(6,3)$, $(6,5)$ i $(9,8)$.
 El nombre d'inversions indica
-quanta feina es necessària per ordenar el vector.
+quanta feina és necessària per a ordenar el vector.
 Un vector està completament ordenat quan
 no hi ha inversions.
 D'altra banda, si tots els elements del vector
@@ -237,7 +237,7 @@ de l'algorisme és almenys $O(n^2)$.
 
 \index{merge sort}
 
-És possible ordenar una vector de manera eficient
+És possible ordenar un vector de manera eficient
 en temps $O(n \log n)$ fent servir algorismes
 que no es limiten a intercanviar elements consecutius.
 Un d'aquests algorismes és \key{merge sort}\footnote{Segons \cite{knu983},
@@ -262,7 +262,7 @@ La recursivitat consisteix en $O(\log n)$ nivells,
 i cada nivell triga temps $O(n)$.
 És possible fusionar i ordenar els subvectors
 \texttt{v}$[a \ldots k]$ i \texttt{v}$[k+1 \ldots b]$ en
-temps linial perquè ja estan ordenats.
+temps lineal perquè ja estan ordenats.
 
 Per exemple, considerem el vector següent:
 \begin{center}
@@ -385,7 +385,7 @@ Aquí ``$x<y?$'' significa que comparem alguns elements
 $x$ i $y$. Si $x<y$, el procés continua cap a l'esquerra,
 i en cas contrari cap a la dreta.
 Els resultats d'aquest procés són les $n!$ maneres
-en que els $n$ elements poden aparéixer en el vector.
+en que els $n$ elements poden aparèixer en el vector.
 Per aquest motiu, l'alçada de l'arbre
 ha de ser almenys
 \[ \log_2(n!) = \log_2(1)+\log_2(2)+\cdots+\log_2(n).\]
@@ -411,8 +411,8 @@ un vector en tempos $O(n)$ assumint que tots els elements del
 vector són enters entre $0 \ldots c$ i $c=O(n)$.
 
 L'algorisme crea un vector addicional de mida $c$, els 
-índexos del qual són els elements del vector original.
-L'algoritme itera a través del vector original
+índexs del qual són els elements del vector original.
+L'algorisme itera a través del vector original
 i calcula quantes vegades cada element
 apareix al vector.
 
@@ -472,7 +472,7 @@ Per tant, la complexitat temporal total és $O(n)$.
 L'ordenació per comptatge és un algorisme molt eficient
 però només es pot fer servir quan el valor $c$
 és prou petit, ja que en cas contrari no podem fer servir els
-elements del vector com a índexos del vector de comptatge.
+elements del vector com a índexs del vector de comptatge.
 
 \section{Ordenació en C++}
 
@@ -503,7 +503,7 @@ sort(v.begin(),v.end());
 Després de l'ordenació, el contingut del
 vector és
 $[2,3,3,4,5,5,8]$.
-Els elements s'ordenen per defecte en order creixent,
+Els elements s'ordenen per defecte en ordre creixent,
 però també és possible ordenar-los en ordre invers:
 \begin{lstlisting}
 sort(v.rbegin(),v.rend());
@@ -573,7 +573,7 @@ sort(v.begin(), v.end());
 Després d'això, l'ordre de les tuples és
 $(1,5,3)$, $(2,1,3)$ i $(2,1,4)$.
 
-Aquesta idea de les tuples també s'extén als vectors.
+Aquesta idea de les tuples també s'estén als vectors.
 
 \subsubsection{Estructures definides per l'usuari}
 
@@ -637,7 +637,7 @@ sort(v.begin(), v.end(), [](const string& a, const string& b) {
 \index{cerca binària}
 
 Un mètode general per cercar un element
-en una vector és fer servir un bucle \texttt{for}
+en un vector és fer servir un bucle \texttt{for}
 que iteri els elements del vector.
 Per exemple, el codi següent cerca
 un element $x$ en el vector $v$:
@@ -658,7 +658,7 @@ aquesta és també la millor solució, perquè
 no tenim informació addicional per saber en quin
 lloc del vector hem de cercar l'element $x$.
 
-Tanmateix, si la vector està \emph{ordenat},
+Tanmateix, si el vector està \emph{ordenat},
 la situació és diferent.
 En aquest cas és possible realitzar el
 cerca molt més ràpid, perquè l'ordre dels
@@ -707,11 +707,11 @@ per tant, la complexitat temporal és $O(\log n)$.
 
 Un mètode alternatiu per implementar la cerca binària
 es basa en una manera eficient d'iterar
-els elements de la vector.
+els elements del vector.
 La idea és fer salts i reduir la velocitat
 quan ens acostem a l'element objectiu.
 
-La cerca passa per la vector d'esquerra a
+La cerca passa per el vector d'esquerra a
 dreta, i la longitud inicial del salt és $n/2$.
 A cada pas, la longitud del salt es reduirà a la meitat:
 primer $n/4$, després $n/8$, $n/16$, etc., fins que

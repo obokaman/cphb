@@ -102,7 +102,7 @@ vector<int> v(10, 5);
 La implementació interna d'un vector
 fa servir un array ordinari.
 Si la mida del vector augmenta i
-l'espai reservat es massa petit,
+l'espai reservat és massa petit,
 es crea un nou array i tot
 els elements es mouen al nou espai
 Però això no passa sovint, i la
@@ -255,8 +255,8 @@ on $n$ és la mida del vector,
 les claus d'un mapa poden ser de qualsevol tipus de dades i
 no tenen perquè ser consecutius.
 
-La biblioteca estàndard de C++ conté dos implementacions
-de mapa que es corresponen amb les implmentacions de
+La biblioteca estàndard de C++ conté dues implementacions
+de mapa que es corresponen amb les implementacions de
 conjunts: l'estructura
 \texttt{map} es basa en un arbre binari
 equilibrat i accedir als elements triga $O(\log n)$,
@@ -309,7 +309,7 @@ for (auto x : m) {
 Moltes funcions de la biblioteca estàndard de C++
 operen amb iteradors.
 Un \key{iterador} (\texttt{iterator}) és una variable que
-apunta a un element d'una estructura de dades.
+apunta a (assenyala) un element d'una estructura de dades.
 
 Els iteradors \texttt{begin}
 i \texttt{end} defineixen un interval que conté
@@ -427,10 +427,10 @@ el valor del qual és \emph{almenys} $x$, i
 la funció $\texttt{upper\_bound}(x)$
 retorna un iterador al primer element del conjunt
 el valor del qual és \emph{més gran que} $x$.
-En ambdos casos, si aquest primer element del conjunt
+En ambdós casos, si aquest primer element del conjunt
 no existeix, retornen \texttt{end}.\footnote{N. del T.: És a dir,
 $[\texttt{lower\_bound}(x), \texttt{upper\_bound}(x))$ és l'interval
-semi-obert que assenyala als elements amb valor $x$.}
+semiobert que assenyala els elements amb valor $x$.}
 Aquestes funcions no són compatibles amb
 l'estructura \texttt{unordered\_set} perquè aquesta
 no manté l'ordre dels elements.
@@ -529,13 +529,13 @@ cout << (a^b) << "\n"; // 1001101110
 Una \key{deque} és un vector dinàmic
 la mida del qual es pot canviar eficientment
 a ambdós extrems del vector.
-Al igual que els vectors, un deque proporciona les funcions
+Al igual que els vectors, una deque proporciona les funcions
 \texttt{push\_back} i \texttt{pop\_back}, però
 també inclou les funcions
 \texttt{push\_front} i \texttt{pop\_front}
 que no estan disponibles en un vector normal.
 
-Un deque es pot fer servir de la manera següent:
+Una deque es pot fer servir de la manera següent:
 \begin{lstlisting}
 deque<int> d;
 d.push_back(5); // [5]
@@ -545,9 +545,9 @@ d.pop_back(); // [3,5]
 d.pop_front(); // [5]
 \end{lstlisting}
 
-La implementació interna d'un deque
+La implementació interna d'una deque
 és més complexa que el d'un vector,
-i per aquest motiu, un deque és més lent que un vector.
+i per aquest motiu, una deque és més lenta que un vector.
 Tot i així, afegir o eliminar
 elements per qualsevol dels dos extrems triga $O(1)$ de mitjana.
 

@@ -2,7 +2,7 @@
 
 \key{Cerca completa}
 és un mètode general que es pot fer servir
-per a resoldre gairebé qualsevol problema d'algorísmic.
+per a resoldre gairebé qualsevol problema algorísmic.
 La idea és generar totes les possibles
 solucions del problema amb força bruta
 i, a continuació, seleccionar la millor solució, o comptar
@@ -151,7 +151,7 @@ for (int b = 0; b < (1<<n); b++) {
 \end{lstlisting}
 
 El codi següent mostra com trobar el subconjunt que conté
-els elements corresponents a una seqüencia de bits.
+els elements corresponents a una seqüència de bits.
 Quan tractem cada subconjunt $b$, el codi construeix el vector
 $v$ amb els elements del subconjunt.
 
@@ -166,7 +166,7 @@ for (int b = 0; b < (1<<n); b++) {
 
 \section{Generar permutacions}
 
-\index{permutacio}
+\index{permutació}
 
 A continuació considerem el problema de generar
 totes les permutacions d'un conjunt de $n$ elements.
@@ -175,7 +175,7 @@ $(0,1,2)$, $(0,2,1)$, $(1,0,2)$, $(1,2,0)$,
 $(2,0,1)$ i $(2,1,0)$.
 De nou, hi ha dos enfocaments:
 fer servir la recursivitat o recórrer les permutacions
-iterativement.
+iterativament.
 
 \subsubsection{Mètode 1}
 
@@ -235,7 +235,7 @@ per (int i = 0; i < n; i++) {
 }
 do {
     // tractar la permutacio perm
-} while (next__permutation(perm.begin(),perm.end()));
+} while (next_permutation(perm.begin(),perm.end()));
 \end{lstlisting}
 
 \section{Backtracking}
