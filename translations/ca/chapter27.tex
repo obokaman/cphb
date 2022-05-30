@@ -359,10 +359,14 @@ conté $n$ elements: l'element $k$ és 1 si es pot formar la suma $k$ i
 0 en cas contrari. Per processar un grup de pesos, escanegem el vector
 d'esquerra a dreta i registrem les noves sumes de pesos que es poden
 formar utilitzant aquest grup i els grups anteriors\footnote{(N. del
-T.) Per cada grup, necessitem fer l'actualizació en temps $O(N)$,
-sense importar el nombre d'elements en el grup. Això s'aconsegueix amb
-una nova programació dinàmica, on l'element $k$ és el nombre mínim
-d'elements del nou grup que són necessaris per formar la suma $k$.}
+T.)  Suposem que tenim un nou grup de $t$ pesos de pes $x$. Creem
+un vector $v$ de $n$ elements, l'element $v[k]$ del qual és $m$ si es
+pot formar la suma $k$ amb els pesos anteriors, $m$ pesos del
+nou grup, i no és possible fer-ho amb $m-1$ pesos, i $v[k]=\infty$ si no
+es pot formar la suma $k$ de cap manera.  En particular, $v[k] = 0$ si
+$k$ es podia formar abans, i $v[k]=v[k-x]+1$ altrament. Amb aixó podem
+omplir aquest vector d'esquerra a dreta en temps $O(n)$. Les sumes $k$ que
+ens interessen són aquelles que compleixen $v[k]\le t$.}
 
 \subsubsection{Construcció de cadenes}
 
