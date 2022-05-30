@@ -145,7 +145,7 @@ distàncies més curtes des del node inicial fins a tots els nodes del
 graf.
 
 Per exemple, la distància més curta del node 1 al node 5 és 3 i es
-correspon amb al camí següent:
+correspon amb el camí següent:
 
 
 \begin{center}
@@ -211,8 +211,8 @@ finals després de $n-1$ rondes, perquè els camins mínims no poden
 repetir nodes, i per tant contenen com a molt $n-1$ arestes.
 
 A la pràctica, sovint no és necessari fer $n-1$ rondes per a trobar
-les distàncies definitives. Podem fer l'algorsime més eficent si
-l'aturem quan no reduim cap distància durant una ronda.
+les distàncies definitives. Podem fer l'algorisme més eficient si
+l'aturem quan no reduïm cap distància durant una ronda.
 
 \subsubsection{Cicles negatius}
 
@@ -244,7 +244,7 @@ qualsevol camí que contingui el cicle repetint el cicle una i altra
 vegada. Per tant, el concepte de camí més curt no té sentit en aquesta
 situació.
 
-Podem detectar ciclces negatius executant l'algorisme de Bellman-Ford
+Podem detectar cicles negatius executant l'algorisme de Bellman-Ford
 exactament $n$ rondes. Si l'última ronda redueix alguna distància, el
 graf conté un cicle negatiu. Observeu que aquest algorisme es pot fer
 servir per cercar un cicle negatiu a tot el graf independentment del
@@ -255,7 +255,7 @@ node inicial.
 \index{Algorisme SPFA}
 
 L'algorisme \key{SPFA} (''Shortest Path Faster Algorithm'')
-\cite{fan94} és una variant de l'algorisme de Bellman–Ford, que sovint
+\cite{fan94} és una variant de l'algorisme de Bellman–Ford que sovint
 és més eficient que l'algorisme original. L'algoritme SPFA no passa
 per totes les arestes a cada ronda, sinó que tria les arestes que
 s'han d'examinar d'una manera més intel·ligent.
@@ -474,14 +474,14 @@ el pes $-5$ serveix per compensar el pes $6$.
 La següent implementació de l'algorisme de Dijkstra calcula les
 distàncies mínimes des d'un node $x$ a els altres nodes del graf. El graf
 s'emmagatzema com a llistes d'adjacència de manera que
-\texttt{adj[$a$]} conte un parell $(b,w)$ quan hi ha una
+\texttt{adj[$a$]} conté un parell $(b,w)$ quan hi ha una
 aresta del node $a$ fins al node $b$ amb pes $w$ .
 
 Una implementació eficient de l'algorisme de Dijkstra requereix trobar
 de manera eficient el node de distància mínima que no s'ha processat
 encara. L'estructura de dades adequada és una cua de prioritats que
 conté els nodes ordenats per distància. Amb una cua de prioritats
-trobem el següent node a processar en temps logaritmic.
+trobem el següent node a processar en temps logarítmic.
 
 Al codi següent, la cua de prioritat \texttt{q} conté els parells de
 la forma $(-d,x)$ per a indicar que la distància al node $x$ és
@@ -515,8 +515,8 @@ Tingueu en compte que la cua de prioritat conté distàncies
 predeterminada de la cua de prioritats C++ troba els elements màxims,
 mentre que volem trobar els elements mínims. Mitjançant l'ús de
 distàncies negatives, podem utilitzar directament la cua de prioritat
-per defecte\footnote{Per descomptat, també podríem declarar la cua de
-prioritat com al capítol 4.5 i fer servir distàncies positives, però
+per defecte\footnote{Per descomptat, també podem declarar la cua de
+prioritats com al capítol 4.5 i fer servir distàncies positives, però
 la implementació seria una mica més llarga.}. Tingueu en compte també
 que pot haver-hi diverses instàncies del mateix node a la cua de
 prioritats; tanmateix, només processarem la instància amb distància
@@ -723,4 +723,6 @@ aquest algoritme pot ser una bona opció encara que només sigui
 necessari trobar un únic camí mínim del graf. Tanmateix, l'algorisme
 només pot fer-se servir quan el graf és tan petit que la complexitat
 cúbica resultant és acceptable.
+
+
 

@@ -120,7 +120,7 @@ i també manté un vector
 \begin{lstlisting}
 bool visited[N];
 \end{lstlisting}
-per conéixer els nodes visitats. Inicialment, cada valor del vector és
+per conèixer els nodes visitats. Inicialment, cada valor del vector és
 \texttt{false}, i quan la cerca arriba al node $s$, el valor de
 \texttt{visited}[$s$] es converteix en \texttt{true}. La funció es pot
 implementar de la següent manera:
@@ -375,8 +375,8 @@ nodes següents:
 Com que la cerca no ha visitat tots els nodes, en concloguem que el
 graf no és connex. De manera semblant, podem trobar totes les
 components connexes d'un graf iterant pels nodes i començant una nova
-cerca en profunditat cada cop que trobem un node que no pertanyi a cap
-component connexa..
+cerca en profunditat cada cop que trobem un node que no pertany a cap
+component connexa.
 
 \subsubsection{Trobar cicles}
 
@@ -433,7 +433,7 @@ conté $c$ nodes i cap cicle, ha de contenir exactament $c-1$ arestes
 (ha de ser un arbre). Si hi ha $c$ o més arestes, la component
 sens dubte conté un cicle.
 
-\subsubsection{Comprovació de bipartitisme}
+\subsubsection{Comprovar si un graf és bipartit}
 
 \index{graf bipartit}
 
@@ -499,3 +499,5 @@ Tingueu en compte que en el cas general, és difícil esbrinar si els
 nodes d'un graf es poden acolorir amb $k$ colors de manera que cap
 node adjacent tingui el mateix color. Fins i tot quan $k=3$, és sap
 que el problema és NP-difícil i no es coneix cap algorisme eficient.
+
+

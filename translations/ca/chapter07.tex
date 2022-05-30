@@ -5,7 +5,7 @@
 La \key{programació dinàmica} (\emph{dynamic programming} o \emph{DP})
 és una tècnica que combina la correcció
 de la cerca completa amb l'eficiència
-dels algoritmes greedy.
+dels algorismes greedy.
 La programació dinàmica es pot aplicar si el
 el problema es pot dividir en subproblemes superposats
 però que es poden resoldre independentment.
@@ -140,7 +140,7 @@ monedes necessàries per obtenir una suma $x$:
 \end{equation*}
 
 Primer, si $x<0$, el valor és $\infty$,
-perquè és impossible formar una quanitat negativa
+perquè és impossible formar una quantitat negativa
 de diners.
 Després, si $x=0$, el valor és $0$,
 perquè no fan falta monedes per obtenir una suma buida.
@@ -192,7 +192,7 @@ on $\texttt{valor}[x]$
 indica el valor de $\texttt{resol}(x)$ o $0$
 si encara no l'hem calculat.
 La constant $N$ ha estat triada per a que tots els valors
-necessaris capiguins als vectors.
+necessaris càpiguen als vectors.
 
 Ara podem implementar la funció eficientment
 de la manera següent:
@@ -222,13 +222,13 @@ l'emmagatzema en $\texttt{valor}[x]$.
 Aquest codi és eficient perquè la resposta
 per a cada entrada $x$
 només es calcula una vegada.
-Un cop emmagatzemem el valor $\texttt{resol}(x)$ a $\texttt{value}[x]$
+Un cop emmagatzemat el valor $\texttt{resol}(x)$ a $\texttt{value}[x]$
 el podem recuperar eficientment quan la
 funció es torna a cridar amb el paràmetre $x$.
 La complexitat de l'algorisme és $O(nk)$,
 on $n$ és la suma objectiu i $k$ és el nombre de monedes.
 
-Tingueu en compte que també podem contruir el
+Tingueu en compte que també podem construir el
 vector \texttt{valor} de manera \emph{iterativa} amb un
 bucle que calculi tots els valors
 de $\texttt{resol}$ per als paràmetres $0 \ldots n$:
@@ -513,10 +513,10 @@ Pots trobar una manera de fer-ho?
 
 \section{Camins en una quadrícula}
 
-El problam següent és trobar un camí
+El problema següent és trobar un camí
 que vagi de la cantonada superior esquerra a
 la cantonada inferior dreta
-d'una quadrícula $n \times n$, moguent-nos únicament
+d'una quadrícula $n \times n$, movent-nos únicament
 cap avall i cap a la dreta.
 Cada quadrat conté un nombre enter positiu,
 i el camí s'ha de construir de tal manera
@@ -675,14 +675,14 @@ trobar la suma $x-w_k$ fent servir els primers $k-1$ pesos,
 i si no fem servir $w_k$,
 la tasca restant és formar la suma $x$
 fent servir els primers pesos $k-1$.
-Els casos bàsics sónCom a casos bàsics,
+Els casos base són
 \begin{equation*}
     \texttt{possible}(x,0) = \begin{cases}
                \textrm{true}    & x = 0\\
                \textrm{false}   & x \neq 0 \\
            \end{cases}
 \end{equation*}
-perquè si no fem servir pesos, només podem formar la suma 0.
+ja que sense pesos només podem formar la suma 0.
 
 La taula següent mostra tots els valors de la funció
 per als pesos $[1,3,3,5]$ (el símbol ``X''
@@ -737,7 +737,7 @@ for (int k = 1; k <= n; k++) {
 Tingueu en compte que la idea presentada aquí es pot fer servir per
 molts problemes de motxilla.
 Per exemple, si ens donen objectes amb pesos i valors,
-podríem determinar quin subconjunt d'objectes ens donarien valor màxim
+podem determinar quin subconjunt d'objectes donaria valor màxim
 per a cadascun dels pesos possibles.
 
 \section{Distància d'edició}
@@ -979,7 +979,7 @@ $\sqsubset \sqsupset \sqsubset \sqsupset \sqsubset \sqsupset \sqcup$
 
 Sigui $\texttt{count}(k,x)$ el nombre de maneres de construir
 una solució per a les files $1 \ldots k$
-de la graella de manera que la cadena $x$ correspon a la fila $k$.
+de la graella de manera que la cadena $x$ correspon amb la fila $k$.
 Aquí és possible utilitzar la programació dinàmica,
 perquè l'estat d'una fila està restringit
 només per l'estat de la fila anterior.
@@ -1015,7 +1015,7 @@ de les columnes de la fila anterior contenen el quadrat superior
 d'una rajola vertical.
 Així, podem representar una fila utilitzant només caràcters
 $\sqcap$ i $\Box$, on $\Box$ és una combinació
-de caràcers
+de caràcters
 $\sqcup$, $\sqsubset$ i $\sqsupset$.
 Fent servir aquesta representació, només n'hi ha
 $2^m$ files diferents, i la complexitat temporal és

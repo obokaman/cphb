@@ -178,8 +178,7 @@ l'algorisme, l'algorisme funciona en el temps $O(n)$.
 Un altre problema que es pot resoldre mitjançant el mètode dels dos
 punters és el següent problema, també conegut com a \key{problema 2SUMA}:
 donat un vector de $n$ nombres i una suma objectiu $x$,
-trobeu dos valors del vector de manera que suma és $x$, o informeu que
-no existeixen aquests valors.
+trobeu, si existeixen, dos valors del vector de manera que suma és $x$.
 
 Per resoldre el problema, primer ordenem els valors del vector en
 ordre creixent. Després d'això, iterem el vector fent servir dos
@@ -297,7 +296,7 @@ $O(\log n)$.
 on es demana trobar \emph{tres} valors del vector la suma dels quals és $x$.
 Utilitzant la idea de l'algorisme anterior, aquest problema es pot resoldre
 en temps $O(n^2)$\footnote{Durant molt de temps, es va pensar que resoldre el
-problema 3SUMA de manera més eficient que en temps $O(n^2) $ no seria
+problema 3SUMA de manera més eficient que en temps $O(n^2)$ no seria
 possible. Tanmateix, el 2014, es va veure en \cite{gro14} que no era així.}.
 Veus com?
 
@@ -510,7 +509,7 @@ $O(1)$ operacions de pila, i l'algorisme funciona en temps $O(n)$.
 
 Una finestra lliscant (\key{sliding window}) és un subvector de mida
 constant que es mou d'esquerra a dreta a través del vector. A cada
-posici de la finestra, volem calcular una certa informació sobre els
+posició de la finestra, volem calcular una certa informació sobre els
 elements dins de la finestra. En aquesta secció, ens centrem en el
 problema de mantenir el \key{mínim de la finestra}, és a dir, el valor
 més petit dins de cada finestra.
@@ -686,3 +685,5 @@ segueix sent 1.
 Com que cada element del vector s'afegeix a la cua exactament una
 vegada i s'elimina de la cua com a màxim una vegada, l'algorisme
 funciona en temps $O(n)$.
+
+

@@ -98,7 +98,7 @@ cicles a l'arbre i no és possible arribar a un node des de múltiples
 direccions.
 
 La manera típica de recórrer un arbre és iniciar una cerca en
-profunditat en un node arbitrari. Es pot utilitzar la funció recursiva
+profunditat en un node arbitrari. Es pot fer servir la funció recursiva
 següent:
 
 
@@ -199,7 +199,7 @@ El diàmetre d'aquest arbre és 4, i es correspon al següent camí:
 \end{tikzpicture}
 \end{center}
 Tingueu en compte que poden haver-hi diversos camins de longitud
-màxima. Al camí anterior, podríem substituir el node 6 pel node 5 per
+màxima. Al camí anterior, podem substituir el node 6 pel node 5 per
 obtenir un altre camí de longitud 4.
 
 A continuació mostrem dos algorismes de temps $O(n)$ que calculen el
@@ -343,8 +343,8 @@ final del camí que es correspon al diàmetre.
 
 El problema següent és calcular per a cada node de l'arbre la longitud
 màxima d'un camí que comença al node. Això és una generalització del
-problema del diàmetre de l'arbre, perquè la major d'aquestes longituds
-és el diàmetre de l'arbre. Aquest problema tambéq es pot resoldre en
+problema del diàmetre de l'arbre, perquè la longitud màxima
+és el diàmetre de l'arbre. Aquest problema també es pot resoldre en
 temps $O(n)$.
 
 Com a exemple, considereu l'arbre següent:
@@ -552,7 +552,7 @@ arbre.
 
 Tanmateix, la situació és diferent si només coneixem l'ordenació en
 pre-ordre i post-ordre d'un arbre. En aquest cas, pot haver-hi més
-d'un arbre que coincideixi amb les ordenacions. Per exemple, els dos
+d'un arbre que coincideix amb les ordenacions. Per exemple, els dos
 arbres
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -567,4 +567,6 @@ arbres
 \end{center}
 tenen pre-ordre $[1,2]$ i post-ordre $[2,1]$, però les estructures
 dels arbres són diferents.
+
+
 

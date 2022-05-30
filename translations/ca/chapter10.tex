@@ -2,30 +2,30 @@
 
 Totes les dades dels programes informàtics s'emmagatzemen internament
 com a bits, és a dir, com a números 0 i 1. En aquest capítol es parla
-de la representació de bits dels nombres enters i mostra exemples de
+de la representació binària dels nombres enters i mostra exemples de
 com utilitzar operacions de bits. Resulta que hi ha molts usos per a
-la manipulació de bits en la programació d'algoritmes.
+la manipulació de bits en la programació d'algorismes.
 
-\section{Representació de bits}
+\section{Representació binària}
 
-\index{representació de bits}
+\index{representació binària}
 
 Quan programem, els enters de $n$ bits s'emmagatzemen internament com
 a nombres binaris de $n$ bits. Per exemple, el tipus C++ \texttt{int}
 és un tipus de 32 bits, i cada nombre \texttt{int} es representa amb
 32 bits.
 
-Aquí teniu la representació de bits del nombre de tipus \texttt{int} 43:
+Aquí teniu la representació binària del nombre de tipus \texttt{int} 43:
 \[00000000000000000000000000101011\]
 Els bits de la representació s'indexen de dreta a esquerra. Per
-convertir una representació de bits $b_k \cdots b_2 b_1 b_0$ en un
+convertir una representació binària $b_k \cdots b_2 b_1 b_0$ en un
 nombre, podem fer servir la fórmula
 \[b_k 2^k + \ldots + b_2 2^2 + b_1 2^1 + b_0 2^0.\]
 Per exemple,
 \[1 \cdot 2^5 + 1 \cdot 2^3 + 1 \cdot 2^1 + 1 \cdot 2^0 = 43.\]
 
 
-La representació de bits d'un nombre és \key{amb signe}
+La representació binària d'un nombre és \key{amb signe}
 (\emph{signed}) o \key{sense signe} (\emph{unsigned}). Normalment
 s'utilitza una representació amb signe, el que significa que es poden
 representar tant nombres negatius com positius. Una variable amb signe
@@ -41,7 +41,7 @@ restants contenen la magnitud del nombre. S'utilitza \key{Complement
 invertint primer tots els bits del nombre i després augmentant el
 nombre en un.
 
-Per exemple, la representació de bits del nombre \texttt{int} $-43$ és
+Per exemple, la representació binària del nombre \texttt{int} $-43$ és
 \[11111111111111111111111111010101.\]
 
 
@@ -67,12 +67,12 @@ Si un nombre és més gran que el límit superior de la representació de
 bits, el nombre es desbordarà. En una representació amb signe, el
 nombre que segueix $2^{n-1}-1$ és $-2^{n-1}$, i en una representació
 sense signe, el nombre que segueix $2^n-1$ és $0$\footnote{(N. del T.)
-En C++, està permés fer operacions aritmétiques que causin
+En C++, està permès fer operacions aritmètiques que causin
 \emph{overflow} en tipus sense signe, però fer-ho amb tipus amb signe
 és comportament no definit (\emph{undefined behavior}). No és un
 problema dels processadors, que poden fer \emph{overflow} de nombres
 amb signe sense problema, sinó dels compiladors de C++, que optimitzen
-el codi agressivament sota el suposit que el vostre programa mai comet
+el codi agressivament sota el supòsit que el vostre programa mai comet
 \emph{undefined behavior}. No ho feu.}. Per exemple, considereu el
 codi següent:
 \begin{lstlisting}
@@ -162,8 +162,8 @@ L'operació \key{\emph{not}} \textasciitilde$x$ produeix un nombre on tots els
 bits de $x$ s'han invertit. En complement a 2 es compleix que
 \textasciitilde$x = -x-1$. Per exemple, \textasciitilde$29 = -30$.
 
-El resultat de l'operació \emph{not} a nivell de bits depen de la
-longitud de la representació de bits, perquè l'operació inverteix tots
+El resultat de l'operació \emph{not} a nivell de bits depèn de la
+longitud de la representació binària, perquè l'operació inverteix tots
 els bits. Per exemple, si els nombres són \emph{int}s de 32 bits, el
 resultat és el següent:
 
@@ -182,9 +182,9 @@ $x$ & = & 29 &   00000000000000000000000000011101 \\
 
 El desplaçament de bits (\emph{bit shift}) a l'esquerra $x < < k$
 afegeix $k$ bits zero al nombre, i el desplaçament de bits a la dreta
-$x > > k$ elimina els $k$ últims bits del nombre. Per exemple, $14 < <
-2 = 56$, perquè $14$ i $56$ corresponen a 1110 i 111000. De la mateixa
-manera, $49 > > 3 = 6$, perquè $49$ i $6$ corresponen a 110001 i 110.
+$x > > k$ elimina els darrers $k$ bits del nombre. Per exemple, $14 < <
+2 = 56$, perquè $14$ i $56$ són 1110 i 111000 en binari. De la mateixa
+manera, $49 > > 3 = 6$, perquè $49$ i $6$ són 110001 i 110.
 
 Tingueu en compte que $x < < k$ correspon a multiplicar $x$ per $2^k$,
 i $x > > k$ correspon a dividir $x$ per $2^k$ arrodonint a un nombre
@@ -195,8 +195,8 @@ enter.
 Un nombre de la forma $1 < < k$ té un bit a la posició $k$ i tots els
 altres bits són zero, de manera que podem fem servir aquests nombres
 per accedir als bits individuals d'un nombre donat. En particular, el
-$k$-èssim bit d'un nombre és 1 exactament quan $x$ \& $(1 < < k)$ no
-és zero. El codi següent imprimeix la representació de bits d'un
+$k$-èsim bit d'un nombre és 1 exactament quan $x$ \& $(1 < < k)$ no
+és zero. El codi següent imprimeix la representació binària d'un
 nombre $x$ de tipus \texttt{int}:
 
 
@@ -209,10 +209,10 @@ for (int i = 31; i >= 0; i--) {
 
 
 També és possible modificar bits individuals fent servir idees
-similars. Per exemple, la fórmula $x$ | $(1 < < k)$ posa el $k$-èssim
+similars. Per exemple, la fórmula $x$ | $(1 < < k)$ posa el $k$-èsim
 bit de $x$ a 1, la fórmula $x$ \& \textasciitilde $(1 < < k)$ posa el
-$k$-èssim bit de $x$ a 0, i la fórmula $x$ $\XOR$ $(1 < < k)$
-inverteix el $k$-èssim bit de $x$.
+$k$-èsim bit de $x$ a 0, i la fórmula $x$ $\XOR$ $(1 < < k)$
+inverteix el $k$-èsim bit de $x$.
 
 La fórmula $x$ \& $(x-1)$ posa l'últim bit de $x$ a zero, i la fórmula
 $x$ \& $-x$ posa tots els bits a zero, excepte l'últim. La
@@ -268,7 +268,7 @@ operacions de bits.
 
 Per exemple, com que \texttt{int} és un tipus de 32 bits, un nombre
 \texttt{int} pot representar qualsevol subconjunt del conjunt
-$\{0,1,2,\ldots,31\}$. La representació de bits del conjunt
+$\{0,1,2,\ldots,31\}$. La representació binària del conjunt
 $\{1,3,4,8\}$ és
 \[00000000000000000000000100011010,\]
 que correspon al nombre $2^8+2^4+2^3+2^1=282$.
@@ -396,7 +396,7 @@ int hamming(string a, string b) {
 
 
 Tanmateix, si $k$ és petit, podem optimitzar el codi emmagatzemant les
-cadenes de bits com a nombres enters i calculant les distàncies de
+cadenes binàries com a nombres enters i calculant les distàncies de
 Hamming mitjançant operacions de bits. En particular, si $k \le 32$,
 podem simplement emmagatzemar les cadenes com a valors \texttt{int} i
 utilitzar la funció següent per calcular distàncies:
@@ -405,12 +405,12 @@ int hamming(int a, int b) {
     return __builtin_popcount(a^b);
 }
 \end{lstlisting}
-A la funció anterior, l'operació \emph{xor} construeix una cadena de bits que
+A la funció anterior, l'operació \emph{xor} construeix una cadena binària que
 té un bit en posicions on $a$ i $b$ difereixen, i a continuació calculem
 el nombre de bits mitjançant la funció \texttt{\_\_builtin\_popcount}.
 
 Per a comparar les implementacions, generem una llista de 10.000
-cadenes de bits aleatoris de longitud 30. Amb el primer enfocament, la
+cadenes binàries aleatòries de longitud 30. Amb el primer enfocament, la
 cerca triga $13.5$ segons, però si fem servir l'optimització de bits,
 només triga $0.5$ segons. El codi optimitzat per bits és gairebé 30
 vegades més ràpid que el codi original.
@@ -786,5 +786,6 @@ $k=0 \ldots n-1$ al vector \texttt{sum}. Com que
 $\texttt{partial}(S,k)$ sempre es basa en $\texttt{partial}(S,k-1)$,
 podem reutilitzar el vector \texttt{sum}, la qual cosa dóna una
 implementació molt eficient.
+
 
 

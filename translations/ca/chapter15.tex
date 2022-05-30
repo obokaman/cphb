@@ -4,9 +4,9 @@
 
 Un \key{arbre d'expansió} (\emph{spanning tree}) d'un graf és un arbre
 que conté tots els nodes del graf i algunes de les arestes. Com que és
-un arbre, els arbres d'expansió són connexos, acíclics i existeix un
-sol camí entre dos nodes qualsevol. Normalment hi ha diverses maneres
-de construir un arbre d'expansió.
+un arbre, els arbres d'expansió són connexos, sense cicles
+i existeix un sol camí entre dos nodes qualsevol.
+Normalment hi ha diverses maneres de construir un arbre d'expansió.
 
 Per exemple, considereu el graf següent:
 \begin{center}
@@ -119,7 +119,7 @@ les arestes ja seleccionades.
 L'algorisme manté les components connexes de l'arbre d'expansió que
 estem omplint. Inicialment, cadascun dels $n$ nodes del graf pertany a
 una component connexa distinta. Només afegim arestes quan unim dues
-components distintes, ja que altrament tindríem un cicle. L'algorisme
+components distintes, ja que altrament tindrem un cicle. L'algorisme
 acaba quan, després d'afegir $n-1$ arestes, tenim una sola component
 connexa resultant. Quan això passa hem trobat un arbre d'expansió
 mínim.
@@ -153,13 +153,12 @@ following graph:
 
 
 \begin{samepage}
-The first step of the algorithm is to sort the
-edges in increasing order of their weights.
-The result is the following list:
+El primer pas de l’algorisme és ordenar les arestes
+en ordre creixent dels seus pesos. El resultat és el següent:
 
 \begin{tabular}{ll}
 \\
-edge & weight \\
+aresta & pes \\
 \hline
 5--6 & 2 \\
 1--2 & 3 \\
@@ -253,9 +252,7 @@ L'aresta següent de la llista és l'aresta 2--3, però no s'inclou a
 l'arbre perquè els nodes 2 i 3 ja estan a la mateixa component. El
 mateix passa amb l'aresta 2--5.
 
-
-\begin{samepage}
-Finally, the edge 4--6 will be included in the tree:
+Finalment, l’aresta 4--6 s’afegeix a l’arbre:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -276,17 +273,15 @@ Finally, the edge 4--6 will be included in the tree:
 \path[draw,thick,-] (3) -- node[font=\small,label=left:3] {} (6);
 \end{tikzpicture}
 \end{center}
-\end{samepage}
-
 
 Després d'això, l'algorisme no afegeix cap aresta nova, perquè el graf
 està connectat i hi ha un camí entre dos nodes qualsevol. El graf
-resultant és un arbre d'expansióq mínim amb pes $2+3+3+5+7=20$.
+resultant és un arbre d'expansió mínim amb pes $2+3+3+5+7=20$.
 
 \subsubsection{Per què funciona això?}
 
-Es bó preguntar-se per què funciona l'algorisme de Kruskal. Com és que
-aquesta estratègia greedy sempre funciona?
+És bo demanar-se per què l’estratègia greedy de l'algorisme de Kruskal sempre
+funciona.
 
 Vegem què passa si l'aresta de mínim pes del graf \emph{no}
 s'inclogués a l'arbre d'expansió. Per exemple, suposem que l'arbre
@@ -313,10 +308,10 @@ sens dubte contindrà algunes arestes. Imaginem-nos un arbre com aquest:
 \end{center}
 
 
-Però no és possible que l'arbre anterior sigui un arbre d'expansió
+No és possible que l'arbre anterior sigui un arbre d'expansió
 mínim.  La raó d'això és que si afegim a aquest arbre l'aresta de pes
-mínim 5--6 estem creant un cicle, i per tant podríem qualsevol altra
-aresta del cicle i trobaríem un nou arbre d'expansió amb pes
+mínim 5--6 estem creant un cicle. Si treiem qualsevol altra
+aresta del cicle trobarem un nou arbre d'expansió amb pes
 \emph{menor}:
 
 
@@ -360,7 +355,7 @@ for (...) {
 \end{lstlisting}
 
 
-El bucle passa per les arestes de la llista i processa arestes de la
+El bucle passa per les arestes de la llista i considera arestes de la
 forma $a$--$b$. Es necessiten dues funcions: la funció \texttt{same}
 determina si $a$ i $b$ estan en la mateixa component connexa, i la
 funció \texttt{unite} uneix les components connexes que contenen $a$ i
@@ -376,9 +371,11 @@ graf.
 
 Resoldrem el problema fent servir una estructura \emph{union-find} (o
 també coneguda com \emph{merge-find-set} o \emph{MF set}) que
-implementa ambdues funcions en temps $O(\log n)$. Així, la complexitat
-temporal de l'algorisme de Kruskal és $O(m \log n)$ després d'ordenar
-la llista de arestes.
+implementa ambdues funcions en temps $O(\log n)$\footnote{(N. del T.): De
+fet, s’implementa en temps $O(\alpha(n))$, on $\alpha(n)$ és la funció inversa d’Ackermann. Aquesta funció creix encara més lentament que el logaritme, i
+a efectes pràctics es pot considerar simplement una constant petita.}.
+Així, la complexitat temporal de l'algorisme de Kruskal és
+$O(m \log n)$ després d'ordenar la llista de arestes.
 
 \section{Estructura \emph{union-find}}
 \label{union-find}
@@ -644,7 +641,7 @@ afegir el node 3 o el node 5 a l'arbre. Afegim primer el node 3:
 
 
 \begin{samepage}
-The process continues until all nodes have been included in the tree:
+El procés continua fins que tots els nodes s’han inclós en l’arbre:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1.5,2) {$1$};
@@ -670,7 +667,7 @@ The process continues until all nodes have been included in the tree:
 
 A l'igual que l'algorisme de Dijkstra, l'algorisme de Prim
 s'implementa de manera eficient amb una cua de prioritats. La cua de
-prioritat ha de contenir tots els nodes que es poden connectar al
+prioritats ha de contenir tots els nodes que es poden connectar a la
 component actual mitjançant una única aresta, en ordre creixent dels
 pesos de les arestes corresponents.
 
@@ -679,3 +676,5 @@ que és igual a la complexitat temporal de l'algorisme de Dijkstra. A
 la pràctica, els algorismes de Prim i Kruskal són tots dos eficients,
 i l'elecció de l'algorisme és qüestió de gustos. La majoria dels
 programadors competitius fan servir l'algorisme de Kruskal.
+
+

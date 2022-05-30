@@ -435,7 +435,7 @@ actualitzar un valor.
 
 L'avantatge d'un arbre binari indexat és que ens permet actualitzar de
 manera eficient els valors del vector entre les consultes de
-suma. Això no seria possible si fessim servir un vector suma de prefix,
+suma. Això no és possible si fem servir un vector suma de prefix,
 perquè després de cada actualització, caldria tornar a reconstruir tot
 el vector suma de prefix en temps $O(n)$.
 
@@ -1173,7 +1173,8 @@ mínim 1 travessant un camí cap avall des del node superior:
 
 \section{Tècniques addicionals}
 
-\subsubsection{Compressió de l'índex}  \label{compressio-index}
+\subsubsection{Compressió de l'índex}
+\label{compressio-index}
 
 Una limitació de les estructures de dades que es construeixen sobre un
 vector és que els elements s'indexen mitjançant nombres enters
@@ -1212,7 +1213,7 @@ c(10^9) & = & 3 \\
 
 Fins ara, hem implementat estructures de dades que admeten consultes
 d'interval i actualitzacions de valors únics. Considerem ara una
-situació oposada, on hauríem d'actualitzar intervals i recuperar
+situació oposada, on hem d'actualitzar intervals i recuperar
 valors únics. Ens centrem en una operació que augmenta tots els
 elements d'un interval $[a,b]$ en $x$.
 
@@ -1326,3 +1327,5 @@ arbre binari indexat o un arbre de segments.
 Un problema més difícil és donar tant suport a les consultes
 d'interval com a les actualitzacions d'interval. Al capítol 28 veurem
 que fins i tot això és possible.
+
+

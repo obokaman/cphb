@@ -17,8 +17,8 @@ La dificultat de dissenyar algorismes greedy
 que sempre produeixi una solució òptima
 al problema.
 En un algorisme greedy ha de passar que les eleccions
-que són localment òptimes siguin també globalmentment òptimes.
-Sovint no és fàcil d'argumentar perqué un algorisme greedy
+que són localment òptimes siguin també globalment òptimes.
+Sovint no és fàcil d'argumentar perquè un algorisme greedy
 concret funciona.
 
 \section{Problema de les monedes}
@@ -56,7 +56,7 @@ nombre possible de monedes.
 Això es pot argumentar de la manera següent:
 
 En primer lloc, cada moneda 1, 5, 10, 50 i 100
-pot aparéixer com a màxim una vegada en una solució òptima,
+pot aparèixer com a màxim una vegada en una solució òptima,
 perquè si la solució contingués dues d'aquestes monedes,
 podríem canviar-les per una sola moneda i
 obtenir una solució millor.
@@ -64,8 +64,8 @@ Per exemple, si la solució contingués
 les monedes $5+5$, podríem substituir-les per una moneda $10$.
 
 De la mateixa manera, les monedes 2 i 20
-només poden aparéixer com a màxim dues vegades en una
-solució òptima, perquè d'altra forma podriem reemplaçar
+només poden aparèixer com a màxim dues vegades en una
+solució òptima, perquè d'altra forma podrem reemplaçar
 les monedes $2+2+2$ per monedes $5+1$ i
 les monedes $20+20+20$ per monedes $50+10$.
 A més, una solució òptima no pot contenir
@@ -247,24 +247,15 @@ Aquest algorisme selecciona els esdeveniments següents:
 
 Resulta que aquest algorisme
 \emph{sempre} produeix una solució òptima.
-La raó d'això és que triar l'esdeveniment que
-acabi tan aviat com sigui possible sempre és
-una elecció òptima.
-Després d'aquesta tria, també és una elecció òptima
-triar el següent esdeveniment fent servir la
-la mateixa estratègia, etc.,
-fins que no puguem seleccionar-ne més.
 
-% (N. del T.): L'argumentació del manual original no em sembla
-% correcta.
 Perquè l'algorisme funciona?  Sigui $X$ l'esdeveniment que acaba
-primer, i considerem una solució (òptima o no) que no tingui
-$X$. Sigui $Y$ el primer esdeveniment d'aquesta solució. Com que $X$
-acaba abans (o igual) que $Y$, podem reemplaçar $Y$ per $X$ en la
-solució sense causar cap conflicte amb els esdeveniments posterios.
-Així doncs, per a qualsevol solució òptima sense $X$, n'existeix una
-altra solució òptima amb $X$, la qual cosa demostra que triar
-l'esdeveniment que acaba abans mai ens pot portar a error.
+primer, i considerem una solució òptima que no tingui $X$. Com
+que $X$ és l'esdeveniment que acaba primer, podem intercanviar
+el primer element de la solució òptima per $X$ sense
+causar cap conflicte. Per tant, per a qualsevol solució òptima
+sense $X$, n'existeix una altra solució òptima amb $X$. Això demostra
+que la primera tria de l'algorisme no és errònia. El mateix argument
+s'aplica a les següents tries.
 
 \section{Tasques i terminis}
 
@@ -408,7 +399,7 @@ la suma es fa més petita en disminuir $x$.
 Per tant, la solució òptima és que $x$
 sigui la mediana.
 Si $n$ és parell i hi ha dues medianes,
-qualsevol de les mediantes o els valors entre les dues
+qualsevol de les medianes o els valors entre les dues
 són òptimes.
 
 \subsubsection{Cas $c=2$}
@@ -443,7 +434,7 @@ la mitjana dels nombres $a_1,a_2,\ldots,a_n$.
 \index{codificació binària}
 \index{codi}
 
-Un \key{codificació binària} assigna a cada caràcter
+Una \key{codificació binària} assigna a cada caràcter
 d'una cadena un \key{codi} format per bits.
 Podem \emph{comprimir} la cadena fent servir la codificació
 que reemplaça cada caràcter pel
@@ -464,16 +455,14 @@ caràcter & codi \\
 Aquesta codificació té \key{longitud constant}
 perquè cada codi té la mateixa mida.
 Fent servir aquesta codificació, la cadena
-\texttt{AABACDACA} es transforma en
-\[00\,00\,01\,00\,10\,11\,00\,10\,00\]
-i la cadena queda comprimida a 18 bits.
+\texttt{AABACDACA} es transforma en els 18 bits 
+\[00\,00\,01\,00\,10\,11\,00\,10\,00\].
 Tanmateix, podem comprimir encara més la cadena
 si fem servir codificacions de \key{longitud variable}, on
 cada codi pot tenir longituds diferents.
-D'aquesta manera podem fer servir codis curts per
-a caràcters que apareixen sovint
-i codis llargs per a caràcters que apareixen poques vegades.
-Es dóna que la següent codificació és \key{òptima}
+D'aquesta manera podem fer servir codis curts pels caràcters que
+apareixen sovint i codis llargs pels caràcters infreqüents.
+Resulta que la següent codificació és \key{òptima}
 per a la cadena anterior:
 \begin{center}
 \begin{tabular}{rr}
@@ -487,15 +476,14 @@ caràcter & codi \\
 \end{center}
 Una codificació òptima comprimeix la cadena en el mínim
 espai possible.
-En aquest cas, es genera la cadena comprimida
+En aquest cas, la cadena comprimida
 \[0\,0\,110\,0\,10\,111\,0\,10\,0,\]
-i només calen 15 bits en lloc de 18 bits.
-D'aquesta manera, la millor codificació ens permet
-estalviar-nos 3 bits.
+només necessita 15 bits en lloc de 18. Fer servir la millor
+codifcació ens estalvia 3 bits.
 
 Exigim també que no hi hagi cap codi que sigui
 prefix d'un altre codi.
-Per exemple, està prohibit que la coficació
+Per exemple, està prohibit que la codificació
 contingui els codis $10$ i $1011$.
 El motiu es que volem
 poder recuperar la cadena original
@@ -516,11 +504,11 @@ caràcter & codi \\
 Amb aquesta codificació, no sabem si $1011$ és la compressió
 de \texttt{AB} o de \texttt{C}.
 
-\index{Codificació Huffman}
+\index{Codificació de Huffman}
 
-\subsubsection{Codificació Huffman}
+\subsubsection{Codificació de Huffman}
 
-La \key{codificació Huffman}\footnote{D. A. Huffman va descobrir
+La \key{codificació de Huffman}\footnote{D. A. Huffman va descobrir
 aquest mètode en un treball de final de curs a l'universitat
 i va publicar l'algorisme el 1952 \cite{huf52}.} és un algorisme
 greedy que construeix una codificació òptima per
@@ -531,8 +519,8 @@ de la cadena,
 i trobem el codi que assignem a cada caràcter
 recorrent un camí des de l'arrel fins al node
 corresponent.
-Quan cop que ens movem a l'esquerra escribim un bit 0,
-i quan ens movem a la dreta escribim un bit 1.
+Quan cop que ens movem a l'esquerra escrivim un bit 0,
+i quan ens movem a la dreta escrivim un bit 1.
 
 Inicialment, cada caràcter és un node el pes del qual és el
 nombre de vegades que el caràcter apareix a la cadena.
@@ -541,9 +529,9 @@ per a crear un nou node el pes del qual és la suma dels
 pesos dels nodes originals.
 El procés continua fins que combinem tots els nodes.
 
-A continuació mostrem com es crea el codi Huffman
+A continuació mostrem com es crea el codi de Huffman
 per a la cadena \texttt{AABACDACA}.
-Al principi, hi ha quatre nodes, un per cada caràcters
+Al principi, hi ha quatre nodes, un per cada caràcter
 de la cadena:
 
 \begin{center}
@@ -647,7 +635,7 @@ Finalment, combinen els dos nodes restants:
 \end{tikzpicture}
 \end{center}
 
-Ara tenim tots els nodes estan connectats en un arbre, i
+Ara tots els nodes estan connectats en un arbre, i
 podem recuperar la codificació llegint l'arbre:
 \begin{center}
 \begin{tabular}{rr}
@@ -660,20 +648,14 @@ caràcter & codi \\
 \end{tabular}
 \end{center}
 
-%% L'autor no discuteix l'optimalitat de Huffman. Afegeixo una
-%% explicació.
-Mostrem perquè la codificació de Huffman és òptima.  Primer, en tota
-solució òptima passa que com més freqüent és un caràcter més curt és
-el seu codi. Altrament, intercanviaríem els codis corresponents i
-obtindríem una codificació millor.  Per tant, els dos caràcters que
-apareixen amb menor freqüència han de tenir els codis més llargs. A
-més, aquestes dos codis han de ser de la mateixa mida. Si no
-és així, escurcem el codi més llarga fins la mida del codi més curt i
-obtindríem una codificació. Per exemple, si els codis són
-$0110$ i $010101$, reemplacem $010101$ per $0101$. El nou codi no
-és part de la codificació perquè és un prefix d'un codi existent, i
-com que aquests dos són els codis més llargs, el nou codi escurçat no
-és prefix de cap altre. L'algorisme greedy anterior surgeix d'aplicar
-repetidament aquesta propietat, i fer servir l'arbre com a manera de
-trobar una codificació arbitrària que compleix les restriccions de
-llargada.
+\footnote{(N. del T.) Donem una intuïció de perquè la codificació de
+Huffman és òptima.
+Primer, en tota solució òptima passa que com més freqüent és un
+caràcter, més curt és el seu codi. Altrament, intercanviaríem els codis
+de dos caràcters que no complissin aquesta propietat i obtindríem una
+codificació millor.
+Per tant, els dos caràcters menys freqüents són els que tenen codis més llargs.
+Aquests dos codis tenen la mateixa mida. Altrament, eliminaríem l'últim bit
+del codi més llarg i obtindríem una codificació millor. Això és vàlid perquè el
+nou codi escurçat no és part de la codificació perquè era un prefix, i no és
+prefix de cap altre codi perquè els dos codis originals eren els més llargs. L'algorisme greedy descrit sorgeix d'aplicar repetidament aquesta propietat, i de fer servir l'arbre resultant per a generar una codificació òptima.}
