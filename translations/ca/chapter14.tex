@@ -493,15 +493,12 @@ $\texttt{maxLength}_1(p)+1$.
 
 \index{arbre binari}
 
+Un \key{arbre binari} és un arbre arrelat on cada node té
+un subarbre fill esquerre i un subarbre fill dret. 
+Permetem que els subarbres siguin buits. Per tant, cada node
+en un arbre binari té zero, un o dos fills.
 
-\begin{samepage}
-A \key{binary tree} is a rooted tree
-where each node has a left and right subtree.
-It is possible that a subtree of a node is empty.
-Thus, every node in a binary tree has
-zero, one or two children.
-
-For example, the following tree is a binary tree:
+Per exemple, l'arbre següent és un arbre binari:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (0,0) {$1$};
@@ -520,8 +517,6 @@ For example, the following tree is a binary tree:
 \path[draw,thick,-] (3) -- (7);
 \end{tikzpicture}
 \end{center}
-\end{samepage}
-
 
 \index{pre-ordre} \index{in-ordre} \index{post-ordre}
 

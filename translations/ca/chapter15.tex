@@ -128,8 +128,7 @@ mínim.
 
 
 \begin{samepage}
-Let us consider how Kruskal's algorithm processes the
-following graph:
+Considerem ara com l'algorisme de Kruskal processa el graf següent:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1.5,2) {$1$};
@@ -149,8 +148,6 @@ following graph:
 \end{tikzpicture}
 \end{center}
 \end{samepage}
-
-
 
 \begin{samepage}
 El primer pas de l’algorisme és ordenar les arestes
@@ -502,16 +499,11 @@ bool same(int a, int b) {
 }
 \end{lstlisting}
 
-
-
-\begin{samepage}
-The function \texttt{unite} joins the sets
-that contain elements $a$ and $b$
-(the elements have to be in different sets).
-The function first finds the representatives
-of the sets and then connects the smaller
-set to the larger set.
-
+La funció \texttt{unite} uneix els conjunts que contenen els elements
+$a$ and $b$ (els elements han de pertànyer a conjunts distints).  La
+funció primer troba els representants dels conjunts i després connecta
+el conjunt més petit al conjunt més gran.
+  
 \begin{lstlisting}
 void unite(int a, int b) {
     a = find(a);
@@ -521,7 +513,6 @@ void unite(int a, int b) {
     link[b] = a;
 }
 \end{lstlisting}
-\end{samepage}
 
 
 La complexitat temporal de la funció \texttt{find} és $O(\log n)$

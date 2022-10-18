@@ -128,9 +128,7 @@ circuit eulerià, perquè els circuits eulerians tenen tots els nodes de
 grau parell. Allò sorprenent és que aquesta condició també sigui
 suficient.}.
 
-
-\begin{samepage}
-For example, in the graph
+Per exemple, en el graf  
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -147,8 +145,8 @@ For example, in the graph
 \path[draw,thick,-] (4) -- (5);
 \end{tikzpicture}
 \end{center}
-\end{samepage}
-els nodes 1, 3 i 4 tenen grau 2, i els nodes 2 i 5 tenen grau de
+
+els nodes 1, 3 i 4 tenen grau 2, i els nodes 2 i 5 tenen grau
 3. Com que hi ha dos nodes de grau senar, hi ha un camí eulerià entre
 els nodes 2 i 5, però el graf no conté cap circuit eulerià.
 
@@ -246,7 +244,7 @@ circuit eulerià per a un graf no dirigit.
 
 
 \begin{samepage}
-Let us consider the following graph:
+Considerem el graf següent:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (3,5) {$1$};
@@ -272,11 +270,9 @@ Let us consider the following graph:
 \end{samepage}
 
 
-
 \begin{samepage}
-Suppose that the algorithm first creates a circuit
-that begins at node 1.
-A possible circuit is
+Suposem que l'algorisme primer crea un circuit que comença al node 1. Un
+circuit possible és
 $1 \rightarrow 2 \rightarrow 3 \rightarrow 1$:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]

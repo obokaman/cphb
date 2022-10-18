@@ -183,7 +183,7 @@ $y$. La llista resultant és la següent:
 
 \begin{tabular}{ll}
 \\
-node & processing time \\
+node & pas de final de processament \\
 \hline
 4 & 5 \\
 5 & 6 \\
@@ -195,11 +195,11 @@ node & processing time \\
 \\
 \end{tabular}
 
-(N. del T.) La propietat clau d'aquesta llista és que si, es pot anar
+\footnote{(N. del T.) La propietat clau d'aquesta llista és que si, es pot anar
 de $u$ a $v$ però no és pot anar de $v$ a $u$, es té que $v$ apareix
 abans que $u$ en la llista. Dit d'altra manera: la llista ordena els
 nodes en \emph{ordre topològic invers} de les components fortament
-connexes respectives en el graf de components.
+connexes respectives en el graf de components.}
 
 \subsubsection{Cerca 2}
 
@@ -271,11 +271,8 @@ tractar totes aquelles altres components des de les quals es podia
 arribar a la nostra en el graf original. Això garantitza que la segona
 cerca no pot sortir de la component fortament connexa.
 
-
-\begin{samepage}
-The next nodes in the list are nodes 7 and 6,
-but they already belong to a component,
-so the next new component begins at node 1:
+Els nodes següents a la llista són els nodes 7 i 6, però ja pertanyen
+a una component, de manera que la nova component comença al node 1:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -304,13 +301,9 @@ so the next new component begins at node 1:
 %\draw [red,thick,dashed,line width=2pt] (-6.5,0.5) rectangle (-7.5,-0.5);
 \end{tikzpicture}
 \end{center}
-\end{samepage}
 
-
-
-\begin{samepage}
-Finally, the algorithm processes nodes 5 and 4
-that create the remaining strongly connected components:
+Finalment, l'algorisme processa els nodes 5 i 4 que creen les
+components fortament connexes que falten:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -339,11 +332,10 @@ that create the remaining strongly connected components:
 \draw [red,thick,dashed,line width=2pt] (-6.5,0.5) rectangle (-7.5,-0.5);
 \end{tikzpicture}
 \end{center}
-\end{samepage}
 
 
-La complexitat temporal de l'algorisme és $O(n+m)$, perquè l'algorisme realitza
-dues cerques en profunditat.
+La complexitat temporal de l'algorisme és $O(n+m)$, perquè l'algorisme
+realitza dues cerques en profunditat.
 
 \section{Problema 2SAT}
 

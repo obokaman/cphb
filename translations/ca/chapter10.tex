@@ -228,21 +228,20 @@ El compilador g++ proporciona les funcions següents per comptar bits:
 \begin{itemize}
 \item
 $\texttt{\_\_builtin\_clz}(x)$:
-the number of zeros at the beginning of the number
+el nombre de zeros al principi del nombre
 \item
 $\texttt{\_\_builtin\_ctz}(x)$:
-the number of zeros at the end of the number
+el nombre de zeros al final del nombre
 \item
 $\texttt{\_\_builtin\_popcount}(x)$:
-the number of ones in the number
+el nombre d'uns en el nombre
 \item
 $\texttt{\_\_builtin\_parity}(x)$:
-the parity (even or odd) of the number of ones
+la paritat (parell o senar) del nombre d'uns
 \end{itemize}
 
 \begin{samepage}
-
-The functions can be used as follows:
+Aquestes funcions es poden fer servir de la manera següent:
 \begin{lstlisting}
 int x = 5328; // 00000000000000000001010011010000
 cout << __builtin_clz(x) << "\n"; // 19
@@ -251,7 +250,6 @@ cout << __builtin_popcount(x) << "\n"; // 5
 cout << __builtin_parity(x) << "\n"; // 1
 \end{lstlisting}
 \end{samepage}
-
 
 Tot i que les funcions anteriors només admeten nombres de tipus
 \texttt{int}, també hi ha versions \texttt{longlong} de les funcions
